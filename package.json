@@ -1,0 +1,40 @@
+{
+  "name": "pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node node_modules/gulp/bin/gulp",
+    "build": "node node_modules/gulp/bin/gulp deploy",
+    "serve": "node node_modules/gulp/bin/gulp --gulpfile resources/gulp/run.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^6.7.5",
+    "css-mqpacker": "^5.0.1",
+    "csswring": "^5.1.1",
+    "doiuse": "^2.5.0",
+    "fs-extra": "^2.0.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-postcss": "^6.3.0",
+    "gulp-sass": "^3.1.0",
+    "gulp-sourcemaps": "^2.4.1",
+    "gulp-uglify": "^2.0.1",
+    "postcss-reporter": "^3.0.0",
+    "stylelint": "^7.9.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "bootstrap": "3",
+    "cors": "^2.8.1",
+    "express": "^4.15.2",
+    "jquery": "^3.2.1",
+    "morgan": "^1.8.1",
+    "msgpack5": "^3.4.1",
+    "nodemon": "^1.11.0"
+  }
+}

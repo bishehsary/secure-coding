@@ -1,0 +1,51 @@
+<?php
+/** @var \FW\App\View $this */
+$serverCode = $this->get('serverCode');
+$clientCode = $this->get('clientCode');
+$link = $this->get('link');
+$next = $this->get('next');
+$prev = $this->get('prev');
+?>
+<div class="container-fluid">
+    <div class="navigation btn-group">
+        <a class="btn glyphicon glyphicon-barcode" id="toggle" title="Toggle Code"></a>
+        <?php echo $prev ? "<a href='{$prev}' class='btn glyphicon glyphicon-chevron-left' title='Previous'></a>" : '' ?>
+        <a href="?" class="btn glyphicon glyphicon-home" title="Home"></a>
+        <?php echo $next ? "<a href='{$next}' class='btn glyphicon glyphicon-chevron-right' title='Next'></a>" : '' ?>
+    </div>
+    <h1><?php echo $this->get('h1') ?></h1>
+    <h2><?php echo $this->get('h2') ?></h2>
+    <div class="container">
+        <?php if ($link) {
+            echo "<h3>Helpful Links:</h3><ul class='links'>";
+            if (is_array($link)) {
+                foreach ($link as $item) {
+                    echo "<li><a target='_blank' href='{$item[1]}'>{$item[0]}</a></li>";
+                }
+            }
+            echo '</ul>';
+        } ?>
+        <div class="playground">
+            <?php if ($serverCode) echo "<h3>Server</h3><pre><code>$serverCode</code></pre>" ?>
+            <?php if ($clientCode) echo "<h3>Client</h3><pre><code>$clientCode</code></pre>" ?>
+        </div>
+        <div class="result">
+            <h3>Result</h3>
+            <?php echo $this->get('result') ?>
+        </div>
+    </div>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    let toggle = document.getElementById('toggle');
+    let playground = document.querySelector('.playground');
+    toggle.addEventListener('click', () => {
+        let className = 'collapsed';
+        if (playground.classList.contains(className)) {
+            playground.classList.remove(className);
+        } else {
+            playground.classList.add(className);
+        }
+    });
+</script>

@@ -1,0 +1,60 @@
+.page {
+  padding: 0 15px;
+  & > h1, & > h2 {
+    text-shadow: 0 0 4px white;
+  }
+}
+
+.inner-page {
+  width: 90%;
+  margin: auto;
+  border: 1px solid silver;
+  border-radius: 5px;
+  padding: 15px;
+  position: relative;
+}
+
+.navigation {
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 5px;
+  border-bottom-left-radius: 5px;
+  background: rgba(255, 255, 255, .9);
+  z-index: 9;
+  a {
+    cursor: pointer;
+    display: inline-block;
+  }
+}
+
+.playground {
+  border: 0;
+  &.collapsed {
+    transition: all .5s;
+    height: 0;
+    overflow: hidden;
+  }
+}
+
+.inline-code {
+  display: inline-block;
+  background: #f9f9f9;
+  padding: 5px 7px;
+  vertical-align: baseline;
+  border-radius: 2px;
+}
+
+.custom-code {
+  border: 1px solid silver;
+  background: #444;
+  color: #fcfcfc;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+pre > code {
+  line-height: 1.75;
+  border-radius: 5px;
+}

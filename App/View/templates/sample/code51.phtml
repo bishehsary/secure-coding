@@ -1,0 +1,19 @@
+<div class="container">
+    <?php
+    /** @var \FW\App\View $this */
+    $action = $this->get('action');
+    $message = $this->get('message');
+    if ($message) echo "<div class='alert alert-success'>{$message}</div>";
+    ?>
+    <form class="col-sm-4" action="<?php echo $action ?>" method="post">
+<!--        <input type="hidden" name="csrf-token" value="--><?php //echo $this->get('csrf-token') ?><!--">-->
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control">
+        </div>
+        <div class="form-group" style="text-align: center">
+            <button type="submit" class="btn btn-danger">Delete User</button>
+        </div>
+    </form>
+</div>
+<br><br>

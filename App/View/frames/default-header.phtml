@@ -1,0 +1,30 @@
+<?php
+use FW\App\View;
+
+/** @var View $this */
+$user = $this->get('user');
+$title = $this->get('title');
+if (!$title) $title = 'Secure Coding V1.0';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title><?php echo $title ?></title>
+    <link rel="stylesheet" href="asset/css/lib.css">
+    <link rel="stylesheet" href="asset/css/app.css">
+    <script src="asset/js/lib.js"></script>
+</head>
+<body>
+<header>
+    <ul>
+        <?php if ($user): ?>
+            <li><a href="?controller=agent">Agents</a></li>
+            <li><a href="?controller=cmd">Commands</a></li>
+            <li><a href="?controller=result">Results</a></li>
+            <li><a href="?controller=lazagne">LaZagne</a></li>
+            <li><a href="?action=logout">Logout</a></li>
+        <?php endif; ?>
+    </ul>
+</header>

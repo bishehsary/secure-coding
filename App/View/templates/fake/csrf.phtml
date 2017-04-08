@@ -1,0 +1,8 @@
+<div class="container">
+    <p>Cookie of this domain (<span class="inline-code">document.cookie</span>):</p>
+    <pre><code id="placeholder"></code></pre>
+</div>
+<script>
+    hljs.initHighlightingOnLoad();
+    document.getElementById('placeholder').textContent = document.cookie;
+</script>

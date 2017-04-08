@@ -1,0 +1,34 @@
+*, *:after, *:before {
+  box-sizing: border-box;
+  outline: 0;
+}
+
+html, body {
+  //height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-size: cover;
+  background: url("../img/bg-main.jpg") no-repeat center fixed;
+}
+
+body {
+  font-family: "Exo 2", 'Roboto', serif;
+  background: transparent;
+}
+
+a {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@import "page/headings";
+@import "element/code";
+@import "../highlight/styles/rainbow";

@@ -1,0 +1,15 @@
+<div class="container">
+    <p>Server side (<code class="inline-code">session_get_cookie_params()</code>):</p>
+    <pre><code><?php echo str_replace('\/', '/', json_encode(session_get_cookie_params())) ?></code></pre>
+
+    <p>Server side (<code class="inline-code">$_COOKIE</code>):</p>
+    <pre><code><?php echo json_encode($_COOKIE) ?></code></pre>
+
+    <p>Client side (<code class="inline-code">document.cookie</code>):</p>
+    <pre><code id="cookie-value"></code></pre>
+</div>
+
+<script>
+    let placeholder = document.getElementById('cookie-value');
+    placeholder.textContent = document.cookie;
+</script>

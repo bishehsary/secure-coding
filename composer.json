@@ -1,0 +1,11 @@
+{
+  "autoload": {
+    "psr-4": {
+      "FW\\": "FW/",
+      "App\\": "App/"
+    }
+  },
+  "require": {
+    "rybakit/msgpack": "^0.2.1"
+  }
+}
