@@ -57,7 +57,7 @@ class IndexController extends Controller
             "3.11" => "MVC Authorization",
             "4" => "Session Management (DEV541.2, DEV544.2)",
             "4.1" => "Session management techniques",
-            "4.2" => "Session state options in .NET",
+//            "4.2" => "Session state options in .NET",
             "4.3" => "Avoiding session hijacking",
             "4.4" => "Cookie based session management",
             "4.5" => "Cookie information leakage",
@@ -194,8 +194,8 @@ EOT;
     {
         if (isset($_POST['login'])) {
             if ($_POST['password'] == 'tntFx256') {
-                Session::set('user', ['role' => 'admin']);
-                $this->redirect($this->url(isset($_GET['controller']) ? $_GET['controller'] : '', isset($_GET['action']) ? $_GET['action'] : ''));
+                $this->session->set('user', ['role' => 'admin']);
+                $this->response->redirect($this->url($_GET['controller']?? '', $_GET['action']??''));
                 return;
             }
         }
@@ -204,7 +204,7 @@ EOT;
 
     function logoutAction()
     {
-        Session::remove('user');
-        $this->redirect($this->url());
+        $this->session->remove('user');
+        $this->response->redirect($this->url());
     }
 }

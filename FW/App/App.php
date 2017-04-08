@@ -10,10 +10,11 @@ class App
     const MODE_DEVELOPMENT = 1;
     const MODE_PRODUCTION = 2;
     private $config;
+    private $session;
 
     function __construct(Config $config)
     {
-        Session::init();
+        Session::getInstance();
         $this->config = $config;
         if ($this->config->mode == App::MODE_PRODUCTION) {
             error_reporting(0);
@@ -34,7 +35,7 @@ class App
             $controllerName = strtoupper($controllerName[0]) . substr($controllerName, 1);
             $controllerName = "App\\Controller\\{$controllerName}Controller";
             /** @var Controller $controller */
-            $controller = new $controllerName($this->config);
+            $controller = new $controllerName($this->config, $this->session);
             $controller->process($actionName);
             return self::STATUS_OK;
         }

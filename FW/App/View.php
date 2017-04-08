@@ -5,21 +5,15 @@ namespace FW\App;
 
 class View
 {
+    private static $response;
     private $frame = 'default';
-    private $contentHasBeenSent = false;
     private $isHtml = false;
     private $variables = [];
 
     function __construct($frame = 'default')
     {
+        self::$response = Response::getInstance();
         $this->frame = $frame;
-    }
-
-    function header($name, $value)
-    {
-        if ($this->contentHasBeenSent) return false;
-        header("{$name}: $value");
-        return true;
     }
 
     public function get($name)
@@ -36,8 +30,9 @@ class View
     {
         $path = Config::getInstance()->root . "/App/View/frames/{$this->frame}-header.phtml";
         if (is_file($path)) {
-            $this->contentHasBeenSent = true;
+            $this->startBuffering();
             include $path;
+            self::$response->html($this->stopBuffering());
         }
     }
 
@@ -45,7 +40,9 @@ class View
     {
         $path = Config::getInstance()->root . "/App/View/frames/{$this->frame}-footer.phtml";
         if (is_file($path)) {
+            $this->startBuffering();
             include $path;
+            self::$response->html($this->stopBuffering());
         }
     }
 
@@ -72,38 +69,27 @@ class View
 
     public function json($data)
     {
-        if (!$this->contentHasBeenSent) {
-            header('Content-Type: application/json; charset=utf-8');
-            $this->contentHasBeenSent = true;
-        }
-        echo json_encode($data);
+        self::$response->json($data);
     }
 
     public function text($data)
     {
-        if (!$this->contentHasBeenSent) {
-            header('Content-Type: text/plain; charset=utf-8');
-            $this->contentHasBeenSent = true;
-        }
-        echo $data;
+        self::$response->text($data);
     }
 
     public function html($html)
     {
-        if (!$this->contentHasBeenSent) {
-            header('Content-Type: text/html; charset=utf-8');
-            $this->contentHasBeenSent = true;
+        if (!$this->isHtml) {
             $this->flushFrameHeader();
+            $this->isHtml = true;
         }
-        $this->isHtml = true;
-        echo $html;
+        self::$response->html($html);
     }
 
     function __destruct()
     {
-        if ($this->isHtml && $this->contentHasBeenSent) {
+        if ($this->isHtml) {
             $this->flushFrameFooter();
         }
     }
-
 }

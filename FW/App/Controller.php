@@ -8,11 +8,20 @@ abstract class Controller
     protected $view;
     /** @var  Config */
     protected $config;
+    /** @var  Session */
+    protected $session;
+    /** @var  Request */
+    protected $request;
+    /** @var  Response */
+    protected $response;
 
     function __construct($config)
     {
+        $this->session = Session::getInstance();
+        $this->request = Request::getInstance();
+        $this->response = Response::getInstance();
         $this->view = new View();
-        $this->view->set('user', Session::get('user'));
+        $this->view->set('user', $this->session->get('user'));
         $this->config = $config;
     }
 
@@ -40,13 +49,6 @@ abstract class Controller
         if ($controller) $url .= "controller={$controller}";
         if ($action) $url .= ($controller ? '&' : '') . "action={$action}";
         return $url;
-    }
-
-    protected function redirect($url)
-    {
-        if (!$this->view->header('Location', $url)) {
-            $this->view->html("<script>window.location.href='{$url}'</script>");
-        }
     }
 
     protected function notFoundPage($message = null)
