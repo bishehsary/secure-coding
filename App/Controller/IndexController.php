@@ -162,6 +162,20 @@ class IndexController extends Controller
         }
     }
 
+    function readmeAction()
+    {
+        $chapters = Heading::find(['parent' => 0]);
+        $code = '';
+        foreach ($chapters as $index => $chapter) {
+            $code .= "{$index} {$chapter['title']}" . PHP_EOL;
+            $children = Heading::find(['parent' => $chapter['id']]);
+            foreach ($children as $child) {
+                $code .= "\t- {$child['title']}" . PHP_EOL;
+            }
+        }
+        $this->view->text($code);
+    }
+
     function genCodes($chapter, $code)
     {
         $controllerPath = __DIR__ . "/Chapter{$chapter}Controller.php";
