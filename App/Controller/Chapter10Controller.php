@@ -9,8 +9,7 @@ class Chapter10Controller extends Chapter
         $this->getCode(__FILE__, 'code63');
         //<code63>
         //</code63>
-        $html = $this->view->render('sample/code63');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code63'));
     }
 
     protected function code64()// Security in parsing of XML
@@ -18,8 +17,7 @@ class Chapter10Controller extends Chapter
         $this->getCode(__FILE__, 'code64');
         //<code64>
         //</code64>
-        $html = $this->view->render('sample/code64');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code64'));
     }
 
     protected function code65()// XML security
@@ -27,8 +25,7 @@ class Chapter10Controller extends Chapter
         $this->getCode(__FILE__, 'code65');
         //<code65>
         //</code65>
-        $html = $this->view->render('sample/code65');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code65'));
     }
 
     protected function code66()// AJAX technologies overview
@@ -36,8 +33,7 @@ class Chapter10Controller extends Chapter
         $this->getCode(__FILE__, 'code66');
         //<code66>
         //</code66>
-        $html = $this->view->render('sample/code66');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code66'));
     }
 
     protected function code67()// AJAX attack trends and common attacks
@@ -45,8 +41,7 @@ class Chapter10Controller extends Chapter
         $this->getCode(__FILE__, 'code67');
         //<code67>
         //</code67>
-        $html = $this->view->render('sample/code67');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code67'));
     }
 
     protected function code68()// AJAX defense
@@ -54,7 +49,6 @@ class Chapter10Controller extends Chapter
         $this->getCode(__FILE__, 'code68');
         //<code68>
         //</code68>
-        $html = $this->view->render('sample/code68');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code68'));
     }
 }

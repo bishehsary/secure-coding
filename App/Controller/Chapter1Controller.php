@@ -13,8 +13,7 @@ class Chapter1Controller extends Chapter
         //<code13>
         // $this->response->header('X-XSS-Protection', '1; mode=block');
         //</code13>
-        $html = $this->view->render('sample/code13');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code13'));
     }
 
     protected function code14()// Secure Flag
@@ -29,8 +28,7 @@ class Chapter1Controller extends Chapter
         setcookie('cookieName', 'cookieValue', null, null, null, false, false);
         setcookie('secureCookieName', 'secureCookieValue', null, null, null, true, false);
         //</code14>
-        $html = $this->view->render('sample/code14');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code14'));
     }
 
     protected function code15()// Http Only Flag
@@ -45,8 +43,7 @@ class Chapter1Controller extends Chapter
         // session_set_cookie_params(3 * 3600, '/', null, false, true);
         // setcookie('cookieName', 'cookieNewValue', null, null, null, false, true);
         //</code15>
-        $html = $this->view->render('sample/code15');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code15'));
     }
 
     protected function code16()// PHP Header
@@ -63,8 +60,7 @@ class Chapter1Controller extends Chapter
          */
         // header_remove('X-Powered-By');
         //</code16>
-        $html = $this->view->render('sample/code16');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code16'));
     }
 
     protected function code17()// MVC Header
@@ -75,8 +71,7 @@ class Chapter1Controller extends Chapter
         $this->getCode(__FILE__, 'code17');
         //<code17>
         //</code17>
-        $html = $this->view->render('sample/code17');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code17'));
     }
 
     protected function code18()// Server Header
@@ -90,8 +85,7 @@ class Chapter1Controller extends Chapter
          * @directive Header unset "X-Powered-By"
          */
         //</code18>
-        $html = $this->view->render('sample/code18');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code18'));
     }
 
     protected function code19()// Other Security Flags
@@ -111,7 +105,6 @@ class Chapter1Controller extends Chapter
         // $this->response->header('Strict-Transport-Security', 'max-age=31536000');
         // $this->response->header('Content-Security-Policy', "default-src 'self' 'unsafe-inline'");
         //</code19>
-        $html = $this->view->render('sample/code19');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code19'));
     }
 }

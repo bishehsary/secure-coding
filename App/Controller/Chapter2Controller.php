@@ -9,8 +9,7 @@ class Chapter2Controller extends Chapter
         $this->getCode(__FILE__, 'code20');
         //<code20>
         //</code20>
-        $html = $this->view->render('sample/code20');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code20'));
     }
 
     protected function code21()// Implementing form authentication
@@ -80,8 +79,7 @@ class Chapter2Controller extends Chapter
          * }, false);
          * </script>
          */
-        $html = $this->view->render('sample/code21');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code21'));
     }
 
     protected function code22()// Password Control
@@ -89,8 +87,7 @@ class Chapter2Controller extends Chapter
         $this->getCode(__FILE__, 'code22');
         //<code22>
         //</code22>
-        $html = $this->view->render('sample/code22');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code22'));
     }
 
     protected function code23()// CAPTCHA Mechanism
@@ -98,8 +95,7 @@ class Chapter2Controller extends Chapter
         $this->getCode(__FILE__, 'code23');
         //<code23>
         //</code23>
-        $html = $this->view->render('sample/code23');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code23'));
     }
 
     protected function code24()// Mitigating brute force attacks
@@ -107,8 +103,7 @@ class Chapter2Controller extends Chapter
         $this->getCode(__FILE__, 'code24');
         //<code24>
         //</code24>
-        $html = $this->view->render('sample/code24');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code24'));
     }
 
     protected function code25()// Authentication Protocols (OAuth, OpenId, SAML, FIDO)
@@ -116,7 +111,6 @@ class Chapter2Controller extends Chapter
         $this->getCode(__FILE__, 'code25');
         //<code25>
         //</code25>
-        $html = $this->view->render('sample/code25');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code25'));
     }
 }

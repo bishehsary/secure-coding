@@ -155,10 +155,12 @@ class IndexController extends Controller
             $children = Heading::find(['parent' => $chapter['id']]);
             $code = file_get_contents($chapterFile);
             foreach ($children as $child) {
-                $methodCode = "protected function code{$child['id']}()";
-                $code = str_replace($methodCode, "{$methodCode}// ${child['title']}", $code);
+                $methodCode = "\$html = \$this->view->render('sample/code{$child['id']}');\n        \$this->view->set('result', \$html);";
+                $code = str_replace($methodCode, "\$this->view->set('result', \$this->view->render('sample/code{$child['id']}'));", $code);
             }
             file_put_contents($chapterFile, $code);
+//            $this->view->text($code);
+//            exit();
         }
     }
 

@@ -9,8 +9,7 @@ class Chapter6Controller extends Chapter
         $this->getCode(__FILE__, 'code49');
         //<code49>
         //</code49>
-        $html = $this->view->render('sample/code49');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code49'));
     }
 
     protected function code50()// Preventing Cross Site Scripting (XSS)
@@ -18,7 +17,6 @@ class Chapter6Controller extends Chapter
         $this->getCode(__FILE__, 'code50');
         //<code50>
         //</code50>
-        $html = $this->view->render('sample/code50');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code50'));
     }
 }

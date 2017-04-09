@@ -20,8 +20,7 @@ class Chapter7Controller extends Chapter
             $this->view->set('message', "{$username} has been deleted successfully");
         }
         //</code51>
-        $html = $this->view->render('sample/code51');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code51'));
     }
 
     protected function code52()// Anti CSRF token
@@ -30,8 +29,7 @@ class Chapter7Controller extends Chapter
         $this->getCode(__FILE__, 'code52');
         //<code52>
         //</code52>
-        $html = $this->view->render('sample/code52');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code52'));
     }
 
     protected function code53()// CSRF Protection for XHR
@@ -39,8 +37,7 @@ class Chapter7Controller extends Chapter
         $this->getCode(__FILE__, 'code53');
         //<code53>
         //</code53>
-        $html = $this->view->render('sample/code53');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code53'));
     }
 
     protected function code54()// Preventing Open Redirection
@@ -48,8 +45,7 @@ class Chapter7Controller extends Chapter
         $this->getCode(__FILE__, 'code54');
         //<code54>
         //</code54>
-        $html = $this->view->render('sample/code54');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code54'));
     }
 
     protected function code55()// Preventing ClickJacking
@@ -57,7 +53,6 @@ class Chapter7Controller extends Chapter
         $this->getCode(__FILE__, 'code55');
         //<code55>
         //</code55>
-        $html = $this->view->render('sample/code55');
-        $this->view->set('result', $html);
+        $this->view->set('result', $this->view->render('sample/code55'));
     }
 }
