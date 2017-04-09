@@ -148,6 +148,7 @@ class IndexController extends Controller
 
     function updateAction()
     {
+        return;
         $chapters = Heading::find(['parent' => 0]);
         foreach ($chapters as $chapter) {
             $chapterFile = __DIR__ . "/Chapter{$chapter['id']}Controller.php";
@@ -158,7 +159,6 @@ class IndexController extends Controller
                 $code = str_replace($methodCode, "{$methodCode}// ${child['title']}", $code);
             }
             file_put_contents($chapterFile, $code);
-            $this->view->text($code);
         }
     }
 
