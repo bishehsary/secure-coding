@@ -16,9 +16,10 @@ class View
         $this->frame = $frame;
     }
 
-    public function get($name)
+    public function get($name, $defaultValue = null)
     {
-        return isset($this->variables[$name]) ? $this->variables[$name] : null;
+        if (isset($this->variables[$name])) return $this->variables[$name];
+        return $defaultValue??null;
     }
 
     public function set($name, $value)
@@ -84,6 +85,11 @@ class View
             $this->isHtml = true;
         }
         self::$response->html($html);
+    }
+
+    public function write($content)
+    {
+        self::$response->write($content);
     }
 
     function __destruct()

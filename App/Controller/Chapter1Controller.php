@@ -10,8 +10,8 @@ class Chapter1Controller extends Chapter
             ['X-XSS-Protection', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection']
         ]);
         $this->getCode(__FILE__, 'code13');
-        // $this->view->header('X-XSS-Protection', '1; mode=block');
         //<code13>
+        // $this->response->header('X-XSS-Protection', '1; mode=block');
         //</code13>
         $html = $this->view->render('sample/code13');
         $this->view->set('result', $html);
@@ -24,8 +24,8 @@ class Chapter1Controller extends Chapter
             ['session.cookie-secure', 'http://php.net/manual/en/session.configuration.php#ini.session.cookie-secure'],
         ]);
         $this->getCode(__FILE__, 'code14');
-        // session_set_cookie_params(3 * 3600, '/', null, false, false);
         //<code14>
+        // session_set_cookie_params(3 * 3600, '/', null, false, false);
         setcookie('cookieName', 'cookieValue', null, null, null, false, false);
         setcookie('secureCookieName', 'secureCookieValue', null, null, null, true, false);
         //</code14>
@@ -41,9 +41,9 @@ class Chapter1Controller extends Chapter
         ]);
         $this->getCode(__FILE__, 'code15');
         // only for this variable
-        // session_set_cookie_params(3 * 3600, '/', null, false, true);
         //<code15>
-        setcookie('cookieName', 'cookieNewValue', null, null, null, false, true);
+        // session_set_cookie_params(3 * 3600, '/', null, false, true);
+        // setcookie('cookieName', 'cookieNewValue', null, null, null, false, true);
         //</code15>
         $html = $this->view->render('sample/code15');
         $this->view->set('result', $html);
@@ -51,8 +51,17 @@ class Chapter1Controller extends Chapter
 
     protected function code16()
     {
+        $this->view->set('link', [
+            ['function.header-remove', 'http://php.net/manual/en/function.header-remove.php'],
+            ['ini.expose-php', 'http://php.net/manual/en/ini.core.php#ini.expose-php']
+        ]);
         $this->getCode(__FILE__, 'code16');
         //<code16>
+        /**
+         * @file php.ini
+         * @directive expose_php=Off
+         */
+        // header_remove('X-Powered-By');
         //</code16>
         $html = $this->view->render('sample/code16');
         $this->view->set('result', $html);
@@ -60,6 +69,9 @@ class Chapter1Controller extends Chapter
 
     protected function code17()
     {
+        $this->view->set('link', [
+
+        ]);
         $this->getCode(__FILE__, 'code17');
         //<code17>
         //</code17>
@@ -71,6 +83,12 @@ class Chapter1Controller extends Chapter
     {
         $this->getCode(__FILE__, 'code18');
         //<code18>
+        /**
+         * @file C:\xampp\apache\conf\extra\httpd-default.conf
+         * @directive ServerTokens
+         * @directive ServerSignature
+         * @directive Header unset "X-Powered-By"
+         */
         //</code18>
         $html = $this->view->render('sample/code18');
         $this->view->set('result', $html);
@@ -79,11 +97,19 @@ class Chapter1Controller extends Chapter
     protected function code19()
     {
         $this->view->set('link', [
-            ['X-Content-Type-Options', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options']
+            ['X-Content-Type-Options', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options'],
+            ['X-Frame-Options', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options'],
+            ['Strict-Transport-Security', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security'],
+            ['Content-Security-Policy', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP']
         ]);
+        // https://www.developsec.com/2015/09/17/http-strict-transport-security-hsts-overview/
         $this->getCode(__FILE__, 'code19');
         //<code19>
-        $this->view->header('X-Content-Type-Options', 'nosniff');
+        // $this->response->header('X-Content-Type-Options', 'nosniff');
+        // $this->response->header('X-Frame-Options', 'SAMEORIGIN');
+        // $this->view->html('<iframe src="http://sc.io/secode"></iframe>');
+        // $this->response->header('Strict-Transport-Security', 'max-age=31536000');
+        // $this->response->header('Content-Security-Policy', "default-src 'self' 'unsafe-inline'");
         //</code19>
         $html = $this->view->render('sample/code19');
         $this->view->set('result', $html);

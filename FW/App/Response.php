@@ -54,6 +54,12 @@ class Response
         echo $html;
     }
 
+    public function write($content)
+    {
+        $this->contentHasBeenSent = true;
+        echo $content;
+    }
+
     static function getInstance(): Response
     {
         if (!isset(self::$instance)) {

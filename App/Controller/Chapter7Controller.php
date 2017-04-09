@@ -8,9 +8,9 @@ class Chapter7Controller extends Chapter
     {
         $this->getCode(__FILE__, 'code51');
         // $csrfToken = 'generated-random-value';
-        // Session::set('csrf-token', $csrfToken);
+        // $this->session->set('csrf-token', $csrfToken);
         // $this->view->set('csrf-token', $csrfToken);
-        // Session::get('csrf-token') == $_POST['csrf-token'] &&
+        // $this->session->get('csrf-token') == $_POST['csrf-token'] &&
         //<code51>
         setcookie('authorized', 1);
         $this->view->set('action', $this->url('chapter7') . '&code=51');

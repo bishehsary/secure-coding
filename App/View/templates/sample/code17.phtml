@@ -1,3 +1,19 @@
 <div class="container">
-    <h1>code17</h1>
+<h3>As an example let's consider ASP.NET</h3>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-danger">
+            X-Powered-By: ASP.NET <br>
+            X-AspNet-Version: 2.0.50727 <br>
+            X-AspNetMvc-Version: 2.0
+        <li class="list-group-item list-group-item-success">
+            <pre><code>MvcHandler.DisableMvcResponseHeader = true;</code></pre>
+        </li>
+        <li class="list-group-item list-group-item-success">
+            <pre><code>
+                &lt;system.web>
+                    &lt;httpRuntime enableVersionHeader="false" />
+                &lt;/system.web>
+            </code></pre>
+        </li>
+    </ul>
 </div>

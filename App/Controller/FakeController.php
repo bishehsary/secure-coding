@@ -16,4 +16,9 @@ class FakeController extends Chapter
     {
         $this->view->html($this->view->render('fake/csrf'));
     }
+
+    function frameAction()
+    {
+        $this->view->html('<iframe src="http://sc.io/secode"></iframe>');
+    }
 }

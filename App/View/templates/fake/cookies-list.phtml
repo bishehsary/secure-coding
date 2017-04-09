@@ -1,0 +1,28 @@
+<?php
+/** @var \FW\App\View $this */
+
+$cookies = $this->get('cookies', []);
+?>
+<style>
+    .container > table {
+        background: rgba(255, 255, 255, .8);
+    }
+</style>
+<div class="container">
+    <h1>Cookies list</h1>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Date</th>
+            <th>Origin</th>
+            <th>Cookie</th>
+        </tr>
+        <?php foreach ($cookies as $cookie): ?>
+            <tr>
+                <td><?php echo date('Y-m-d H:i:s', $cookie['time']) ?></td>
+                <td><?php echo $cookie['origin'] ?></td>
+                <td><?php echo $cookie['cookie'] ?></td>
+            </tr>
+        <?php endforeach; ?>
+    </table>
+</div>

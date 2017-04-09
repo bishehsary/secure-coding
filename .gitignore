@@ -1,4 +1,5 @@
 .idea
 /asset
 node_modules
+resources/tmp
 /vendor
