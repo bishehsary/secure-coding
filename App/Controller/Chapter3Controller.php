@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter3Controller extends Chapter
 {
-    protected function code26()
+    protected function code26()// Authorization models
     {
         $this->getCode(__FILE__, 'code26');
         //<code26>
@@ -13,7 +13,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code27()
+    protected function code27()// URL authorization
     {
         $this->getCode(__FILE__, 'code27');
         //<code27>
@@ -22,7 +22,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code28()
+    protected function code28()// File authorization
     {
         $this->getCode(__FILE__, 'code28');
         //<code28>
@@ -31,7 +31,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code29()
+    protected function code29()// Role Based Access Control (RBAC)
     {
         $this->getCode(__FILE__, 'code29');
         //<code29>
@@ -40,7 +40,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code30()
+    protected function code30()// Discretionary Access Control (DAC)
     {
         $this->getCode(__FILE__, 'code30');
         //<code30>
@@ -49,7 +49,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code31()
+    protected function code31()// Mandatory Access Control (MAC)
     {
         $this->getCode(__FILE__, 'code31');
         //<code31>
@@ -58,7 +58,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code32()
+    protected function code32()// Permission Based Access Control
     {
         $this->getCode(__FILE__, 'code32');
         //<code32>
@@ -67,7 +67,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code33()
+    protected function code33()// Working with identities
     {
         $this->getCode(__FILE__, 'code33');
         //<code33>
@@ -76,7 +76,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code34()
+    protected function code34()// Claim based authorization
     {
         $this->getCode(__FILE__, 'code34');
         //<code34>
@@ -85,7 +85,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code35()
+    protected function code35()// Role manager
     {
         $this->getCode(__FILE__, 'code35');
         //<code35>
@@ -94,7 +94,7 @@ class Chapter3Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code36()
+    protected function code36()// MVC Authorization
     {
         $this->getCode(__FILE__, 'code36');
         //<code36>

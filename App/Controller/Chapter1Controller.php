@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter1Controller extends Chapter
 {
-    protected function code13()
+    protected function code13()// X-XSS-Protection
     {
         $this->view->set('link', [
             ['X-XSS-Protection', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection']
@@ -17,7 +17,7 @@ class Chapter1Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code14()
+    protected function code14()// Secure Flag
     {
         $this->view->set('link', [
             ['function.setcookie', 'http://php.net/manual/en/function.setcookie.php'],
@@ -33,7 +33,7 @@ class Chapter1Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code15()
+    protected function code15()// Http Only Flag
     {
         $this->view->set('link', [
             ['function.setcookie', 'http://php.net/manual/en/function.setcookie.php'],
@@ -49,7 +49,7 @@ class Chapter1Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code16()
+    protected function code16()// PHP Header
     {
         $this->view->set('link', [
             ['function.header-remove', 'http://php.net/manual/en/function.header-remove.php'],
@@ -67,7 +67,7 @@ class Chapter1Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code17()
+    protected function code17()// MVC Header
     {
         $this->view->set('link', [
 
@@ -79,7 +79,7 @@ class Chapter1Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code18()
+    protected function code18()// Server Header
     {
         $this->getCode(__FILE__, 'code18');
         //<code18>
@@ -94,7 +94,7 @@ class Chapter1Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code19()
+    protected function code19()// Other Security Flags
     {
         $this->view->set('link', [
             ['X-Content-Type-Options', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options'],

@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter12Controller extends Chapter
 {
-    protected function code73()
+    protected function code73()// Event message structure
     {
         $this->getCode(__FILE__, 'code73');
         //<code73>
@@ -13,7 +13,7 @@ class Chapter12Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code74()
+    protected function code74()// Logging best practices
     {
         $this->getCode(__FILE__, 'code74');
         //<code74>

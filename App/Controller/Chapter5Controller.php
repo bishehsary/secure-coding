@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter5Controller extends Chapter
 {
-    protected function code45()
+    protected function code45()// Data Validation Strategies
     {
         $this->getCode(__FILE__, 'code45');
         //<code45>
@@ -13,7 +13,7 @@ class Chapter5Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code46()
+    protected function code46()// Sanitize with Whitelist
     {
         $this->getCode(__FILE__, 'code46');
         //<code46>
@@ -22,7 +22,7 @@ class Chapter5Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code47()
+    protected function code47()// Sanitize with Blacklist
     {
         $this->getCode(__FILE__, 'code47');
         //<code47>
@@ -31,7 +31,7 @@ class Chapter5Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code48()
+    protected function code48()// Implement Validator
     {
         $this->getCode(__FILE__, 'code48');
         //<code48>

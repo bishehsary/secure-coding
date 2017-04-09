@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter10Controller extends Chapter
 {
-    protected function code63()
+    protected function code63()// Web services overview
     {
         $this->getCode(__FILE__, 'code63');
         //<code63>
@@ -13,7 +13,7 @@ class Chapter10Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code64()
+    protected function code64()// Security in parsing of XML
     {
         $this->getCode(__FILE__, 'code64');
         //<code64>
@@ -22,7 +22,7 @@ class Chapter10Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code65()
+    protected function code65()// XML security
     {
         $this->getCode(__FILE__, 'code65');
         //<code65>
@@ -31,7 +31,7 @@ class Chapter10Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code66()
+    protected function code66()// AJAX technologies overview
     {
         $this->getCode(__FILE__, 'code66');
         //<code66>
@@ -40,7 +40,7 @@ class Chapter10Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code67()
+    protected function code67()// AJAX attack trends and common attacks
     {
         $this->getCode(__FILE__, 'code67');
         //<code67>
@@ -49,7 +49,7 @@ class Chapter10Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code68()
+    protected function code68()// AJAX defense
     {
         $this->getCode(__FILE__, 'code68');
         //<code68>

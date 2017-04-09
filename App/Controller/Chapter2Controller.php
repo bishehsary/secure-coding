@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter2Controller extends Chapter
 {
-    protected function code20()
+    protected function code20()// Authentication Scenarios
     {
         $this->getCode(__FILE__, 'code20');
         //<code20>
@@ -13,7 +13,7 @@ class Chapter2Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code21()
+    protected function code21()// Implementing form authentication
     {
         $this->getCode(__FILE__, 'code21');
         //<code21>
@@ -22,7 +22,7 @@ class Chapter2Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code22()
+    protected function code22()// Password Control
     {
         $this->getCode(__FILE__, 'code22');
         //<code22>
@@ -31,7 +31,7 @@ class Chapter2Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code23()
+    protected function code23()// CAPTCHA Mechanism
     {
         $this->getCode(__FILE__, 'code23');
         //<code23>
@@ -40,7 +40,7 @@ class Chapter2Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code24()
+    protected function code24()// Mitigating brute force attacks
     {
         $this->getCode(__FILE__, 'code24');
         //<code24>
@@ -49,7 +49,7 @@ class Chapter2Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code25()
+    protected function code25()// Authentication Protocols (OAuth, OpenId, SAML, FIDO)
     {
         $this->getCode(__FILE__, 'code25');
         //<code25>

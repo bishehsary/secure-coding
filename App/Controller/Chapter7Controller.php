@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class Chapter7Controller extends Chapter
 {
-    protected function code51()
+    protected function code51()// Cross Site Request Forgery (CSRF)
     {
         $this->getCode(__FILE__, 'code51');
         // $csrfToken = 'generated-random-value';
@@ -24,7 +24,7 @@ class Chapter7Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code52()
+    protected function code52()// Anti CSRF token
     {
         return $this->code51();
         $this->getCode(__FILE__, 'code52');
@@ -34,7 +34,7 @@ class Chapter7Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code53()
+    protected function code53()// CSRF Protection for XHR
     {
         $this->getCode(__FILE__, 'code53');
         //<code53>
@@ -43,7 +43,7 @@ class Chapter7Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code54()
+    protected function code54()// Preventing Open Redirection
     {
         $this->getCode(__FILE__, 'code54');
         //<code54>
@@ -52,7 +52,7 @@ class Chapter7Controller extends Chapter
         $this->view->set('result', $html);
     }
 
-    protected function code55()
+    protected function code55()// Preventing ClickJacking
     {
         $this->getCode(__FILE__, 'code55');
         //<code55>
