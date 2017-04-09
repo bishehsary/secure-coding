@@ -17,14 +17,3 @@ if (!$title) $title = 'Secure Coding V1.0';
     <script src="asset/js/lib.js"></script>
 </head>
 <body>
-<header>
-    <ul>
-        <?php if ($user): ?>
-            <li><a href="?controller=agent">Agents</a></li>
-            <li><a href="?controller=cmd">Commands</a></li>
-            <li><a href="?controller=result">Results</a></li>
-            <li><a href="?controller=lazagne">LaZagne</a></li>
-            <li><a href="?action=logout">Logout</a></li>
-        <?php endif; ?>
-    </ul>
-</header>

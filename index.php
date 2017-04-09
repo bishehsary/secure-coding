@@ -9,7 +9,7 @@ require __DIR__ . '/App/config/config.php';
 $app = new App(Config::getInstance());
 
 $user = \FW\App\Session::getInstance()->get('user');
-$role = $user ? $user['role'] : 'agent';
+$role = $user && isset($user['role']) ? $user['role'] : 'agent';
 
 $appStatus = $app->run($role);
 if ($appStatus == App::STATUS_UNAUTHORIZED) {

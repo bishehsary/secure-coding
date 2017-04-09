@@ -38,6 +38,14 @@
   }
 }
 
+.result {
+  border: 1px solid silver;
+  border-radius: 5px;
+  margin: 30px auto 20px auto;
+  padding: 15px;
+  box-shadow: 0 0 5px 1px black;
+}
+
 .inline-code {
   display: inline-block;
   background: #f9f9f9;

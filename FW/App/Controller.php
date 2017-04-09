@@ -21,8 +21,23 @@ abstract class Controller
         $this->request = Request::getInstance();
         $this->response = Response::getInstance();
         $this->view = new View();
-        $this->view->set('user', $this->session->get('user'));
         $this->config = $config;
+        $this->updateUserSession();
+    }
+
+    private function updateUserSession()
+    {
+        $user = $this->session->get('user');
+        if ($user) {
+            $now = time();
+            if ($now - $user['visit'] > $this->config->security['sessionTimeout']) {
+                $this->session->destroy();
+            } else {
+                $user['visit'] = $now;
+                $this->session->set('user', $user);
+                $this->view->set('user', $user);
+            }
+        }
     }
 
     function process($action = '')

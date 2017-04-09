@@ -30,6 +30,13 @@ class Session
     public function destroy()
     {
         session_destroy();
+        session_start();
+        session_regenerate_id(true);
+    }
+
+    public function regenerate()
+    {
+        session_regenerate_id(true);
     }
 
     static function getInstance(): Session

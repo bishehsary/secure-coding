@@ -23,4 +23,7 @@ FW\App\Config::init([
         'dropTables' => false,
         'setupFile' => __DIR__ . '/db-setup.php'
     ],
+    'security' => [
+        'sessionTimeout' => 3600
+    ]
 ]);
