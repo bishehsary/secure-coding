@@ -11,8 +11,12 @@ abstract class Chapter extends Controller
 
     function indexAction()
     {
-        $code = +$_GET['code'];
+        $code = $this->request->get('code', 0);
         $heading = Heading::findById($code);
+        if (!$heading) {
+            $this->notFoundPage("Heading not found");
+            return;
+        }
         $parent = Heading::findById($heading->parent);
         $this->view->set('h1', $parent->title);
         $this->view->set('h2', $heading->title);
@@ -20,13 +24,21 @@ abstract class Chapter extends Controller
         // calling sample code
         $this->{"code${code}"}();
         // generating prev & next links
-        $next = Heading::find(['id' => $heading->id + 1, 'parent' => $parent->id]);
-        if ($next) {
-            $this->view->set('next', "?controller=chapter{$parent->id}&code={$next[0]['id']}");
+        $items = Heading::find(['parent' => $parent->id]);
+        $nextId = $prevId = 0;
+        foreach ($items as $item) {
+            if ($item['id'] < $heading->id) {
+                $prevId = $item['id'];
+            } else if ($item['id'] > $heading->id) {
+                $nextId = $item['id'];
+                break;
+            }
         }
-        $prev = Heading::find(['id' => $heading->id - 1, 'parent' => $parent->id]);
-        if ($prev) {
-            $this->view->set('prev', "?controller=chapter{$parent->id}&code={$prev[0]['id']}");
+        if ($nextId) {
+            $this->view->set('next', "?controller=chapter{$parent->id}&code={$nextId}");
+        }
+        if ($prevId) {
+            $this->view->set('prev', "?controller=chapter{$parent->id}&code={$prevId}");
         }
         // rendering view
         $this->view->html($this->view->render('code'));

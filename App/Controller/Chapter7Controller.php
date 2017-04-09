@@ -10,12 +10,14 @@ class Chapter7Controller extends Chapter
         // $csrfToken = 'generated-random-value';
         // $this->session->set('csrf-token', $csrfToken);
         // $this->view->set('csrf-token', $csrfToken);
-        // $this->session->get('csrf-token') == $_POST['csrf-token'] &&
+        // $this->session->get('csrf-token') == $this->request->post('csrf-token')
         //<code51>
         setcookie('authorized', 1);
         $this->view->set('action', $this->url('chapter7') . '&code=51');
-        if (isset($_POST['username']) && isset($_COOKIE['authorized']) && $_COOKIE['authorized']) {
-            $this->view->set('message', "{$_POST['username']} has been deleted successfully");
+        $username = $this->request->post('username');
+        $authorized = $this->request->cookie('authorized');
+        if ($username && $authorized) {
+            $this->view->set('message', "{$username} has been deleted successfully");
         }
         //</code51>
         $html = $this->view->render('sample/code51');

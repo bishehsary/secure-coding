@@ -51,13 +51,13 @@ abstract class Controller
         return $url;
     }
 
-    protected function notFoundPage($message = null)
+    public function notFoundPage($message = null)
     {
         $this->view->set('message', $message ? $message : '');
         $this->view->html($this->view->render('not-found'));
     }
 
-    protected function errorPage($e = null)
+    public function errorPage($e = null)
     {
         $this->view->set('error', $e ? $e : 'No details available');
         $this->view->html($this->view->render('error'));

@@ -146,6 +146,22 @@ class IndexController extends Controller
         }
     }
 
+    function updateAction()
+    {
+        $chapters = Heading::find(['parent' => 0]);
+        foreach ($chapters as $chapter) {
+            $chapterFile = __DIR__ . "/Chapter{$chapter['id']}Controller.php";
+            $children = Heading::find(['parent' => $chapter['id']]);
+            $code = file_get_contents($chapterFile);
+            foreach ($children as $child) {
+                $methodCode = "protected function code{$child['id']}()";
+                $code = str_replace($methodCode, "{$methodCode}// ${child['title']}", $code);
+            }
+            file_put_contents($chapterFile, $code);
+            $this->view->text($code);
+        }
+    }
+
     function genCodes($chapter, $code)
     {
         $controllerPath = __DIR__ . "/Chapter{$chapter}Controller.php";

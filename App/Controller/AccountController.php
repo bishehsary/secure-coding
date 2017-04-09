@@ -16,10 +16,11 @@ class AccountController extends Controller
 
     function loginAction()
     {
-        if (isset($_POST['login'])) {
-            if ($_POST['password'] == 'tntFx256') {
+        $login = $this->request->post('login');
+        if ($login) {
+            if ($this->request->post('password') == 'adm!nPass') {
                 $this->session->set('user', ['role' => 'admin']);
-                $this->response->redirect($this->url($_GET['controller']?? '', $_GET['action']??''));
+                $this->response->redirect($this->url($this->request->get('controller'), $this->request->get('action')));
                 return;
             }
         }

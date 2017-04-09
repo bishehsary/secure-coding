@@ -11,7 +11,11 @@ $app = new App(Config::getInstance());
 $user = \FW\App\Session::getInstance()->get('user');
 $role = $user ? $user['role'] : 'agent';
 
-if ($app->run($role) == App::STATUS_UNAUTHORIZED) {
+$appStatus = $app->run($role);
+if ($appStatus == App::STATUS_UNAUTHORIZED) {
     $c = new \App\Controller\IndexController(Config::getInstance());
-    $c->loginAction();
+    $c->indexAction();
+} elseif ($appStatus == App::STATUS_NOT_FOUND) {
+    $c = new \App\Controller\IndexController(Config::getInstance());
+    $c->notFoundPage("Controller does not exists: {$_GET['controller']}Controller");
 }
