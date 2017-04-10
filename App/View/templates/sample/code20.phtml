@@ -1,6 +1,43 @@
+<?php
+/** @var \FW\App\View $this */
+$basicAuth = $this->get('basicAuth');
+$digestAuth = $this->get('digestAuth');
+?>
 <div class="container">
-    <ul class="list-group col-sm-4">
-        <li class="list-group-item">HTTP is stateless</li>
-        <li class="list-group-item">Token based</li>
-    </ul>
+    <fieldset class="row">
+        <legend>Authentication Systems</legend>
+        <ul class="list-group col-md-6">
+            <li class="list-group-item">Username|Password (Shared Secret | One Factor)</li>
+            <li class="list-group-item">Two/Multi Factor Authentication (OTP, Location, Past Behaviour)</li>
+            <li class="list-group-item">Single Sign On (SSO)</li>
+        </ul>
+    </fieldset>
+    <fieldset class="row">
+        <legend>Identity Management</legend>
+        <ul class="list-group col-md-6">
+            <li class="list-group-item">Security Assertion Markup Language (SAML) is mostly used for SSO</li>
+            <li class="list-group-item">Fast IDentity Online(FIDO)</li>
+            <li class="list-group-item">Open Identity (OpenId)</li>
+        </ul>
+    </fieldset>
+    <fieldset class="row">
+        <legend>Authenticating over HTTP</legend>
+        <ul class="list-group col-md-6">
+            <li class="list-group-item">HTTP is stateless</li>
+            <li class="list-group-item">Token Based</li>
+        </ul>
+    </fieldset>
+    <fieldset class="row">
+        <legend>HTTP Authentication Method</legend>
+        <ul class="list-group col-md-6">
+            <li class="list-group-item">
+                <a href="?controller=chapter2&code=20&auth=basic">Basic</a>
+                <?php echo $basicAuth ? "<span class='label label-success pull-right'>{$basicAuth}</span>" : '' ?>
+            </li>
+            <li class="list-group-item">
+                <a href="?controller=chapter2&code=20&auth=digest">Digest</a>
+                <?php echo $digestAuth ? "<span class='label label-success pull-right'>{$digestAuth}</span>" : '' ?>
+            </li>
+        </ul>
+    </fieldset>
 </div>

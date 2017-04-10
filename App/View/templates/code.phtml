@@ -6,15 +6,17 @@ $link = $this->get('link');
 $next = $this->get('next');
 $prev = $this->get('prev');
 ?>
+<ol class="breadcrumb main-breadcrumb">
+    <li><?php echo $this->get('h1') ?></li>
+    <li><?php echo $this->get('h2') ?></li>
+</ol>
 <div class="container-fluid">
     <div class="navigation btn-group">
-        <a class="btn glyphicon glyphicon-barcode" id="toggle" title="Toggle Code"></a>
         <?php echo $prev ? "<a href='{$prev}' class='btn glyphicon glyphicon-chevron-left' title='Previous'></a>" : '' ?>
         <a href="?" class="btn glyphicon glyphicon-home" title="Home"></a>
         <?php echo $next ? "<a href='{$next}' class='btn glyphicon glyphicon-chevron-right' title='Next'></a>" : '' ?>
+        <a class="btn glyphicon glyphicon-barcode" id="toggle" title="Toggle Code"></a>
     </div>
-    <h1><?php echo $this->get('h1') ?></h1>
-    <h2><?php echo $this->get('h2') ?></h2>
     <div class="container">
         <?php if ($link) {
             echo "<h3>Helpful Links:</h3><ul class='links'>";

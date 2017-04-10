@@ -1,17 +1,5 @@
-.page {
-  padding: 0 15px;
-  & > h1, & > h2 {
-    text-shadow: 0 0 4px white;
-  }
-}
-
-.inner-page {
-  width: 90%;
-  margin: auto;
-  border: 1px solid silver;
-  border-radius: 5px;
-  padding: 15px;
-  position: relative;
+.main-breadcrumb {
+  border-radius: 0;
 }
 
 .navigation {
@@ -19,9 +7,6 @@
   position: fixed;
   top: 0;
   right: 0;
-  padding: 5px;
-  border-bottom-left-radius: 5px;
-  background: rgba(255, 255, 255, .9);
   z-index: 9;
   a {
     cursor: pointer;

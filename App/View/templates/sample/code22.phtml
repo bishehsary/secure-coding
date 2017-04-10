@@ -1,3 +1,30 @@
 <div class="container">
-    <h1>code22</h1>
+    <fieldset class="col-sm-4">
+        <div class="form-group">
+            <label for="password">Password Strength Check</label>
+            <input type="text" name="password" id="password" class="form-control">
+        </div>
+        <div class="progress" id="progress">
+            <div class="progress-bar" role="progressbar"></div>
+        </div>
+    </fieldset>
 </div>
+
+<script>
+    let progress = document.getElementById('progress').firstElementChild;
+    let passInput = document.getElementById('password');
+    passInput.addEventListener('keyup', event => {
+        let password = passInput.value;
+        let score = 0;
+        // Considering length of password
+        if (/[a-z]/.exec(password)) score += 1;
+        if (/\d/.exec(password)) score += 2;
+        if (/[A-Z]/.exec(password)) score += 3;
+        if (/\W/.exec(password)) score += 4;
+        ['success', 'warning', 'danger'].forEach(theme => progress.classList.remove(`progress-bar-${theme}`));
+        if (score > 7) progress.classList.add('progress-bar-success');
+        else if (score > 5) progress.classList.add('progress-bar-warning');
+        else progress.classList.add('progress-bar-danger');
+        progress.style.width = `${Math.ceil((score * 100) / 10)}%`;
+    }, false);
+</script>

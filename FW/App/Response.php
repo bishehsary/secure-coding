@@ -13,11 +13,16 @@ class Response
     {
     }
 
-    public function header($name, $value)
+    public function header($name, $value = null)
     {
         if ($this->contentHasBeenSent) return false;
-        header("{$name}: $value");
+        $value ? header("{$name}: $value") : header($name);
         return true;
+    }
+
+    public function contentType($contentType)
+    {
+        $this->header('Content-Type', $contentType);
     }
 
     public function redirect($url)

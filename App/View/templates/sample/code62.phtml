@@ -1,3 +1,19 @@
+<?php
+/** @var \FW\App\View $this */
+$pass = $this->get('password');
+$hash = $this->get('hashedPassword');
+?>
 <div class="container">
-    <h1>code62</h1>
+    <fieldset class="col-sm-4">
+        <form action="?controller=chapter9&code=62" method="post">
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="text" name="password" id="password" class="form-control" value="<?php echo $pass ?: '' ?>">
+            </div>
+            <?php echo $hash ? "<p class='alert'>{$hash}</p>" : '' ?>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Hash It!</button>
+            </div>
+        </form>
+    </fieldset>
 </div>

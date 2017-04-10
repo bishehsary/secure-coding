@@ -65,9 +65,7 @@ class Chapter1Controller extends Chapter
 
     protected function code17()// MVC Header
     {
-        $this->view->set('link', [
-
-        ]);
+        $this->view->set('link', []);
         $this->getCode(__FILE__, 'code17');
         //<code17>
         //</code17>

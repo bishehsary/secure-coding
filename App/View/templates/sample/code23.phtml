@@ -1,3 +1,39 @@
+<?php
+/** @var \FW\App\View $this */
+$error = $this->get('error');
+$message = $this->get('message');
+?>
 <div class="container">
-    <h1>code23</h1>
+    <fieldset class="col-sm-4">
+        <form action="?controller=chapter2&code=23" method="post">
+            <?php echo $error ? "<p class='alert alert-danger'>{$error}</p>" : '' ?>
+            <?php echo $message ? "<p class='alert alert-success'>{$message}</p>" : '' ?>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <img src="?controller=chapter2&code=23&capcha=1" alt="Capcha">
+                    </span>
+                    <input type="text" name="capcha" class="form-control" placeholder="Capcha" maxlength="4">
+                </div>
+            </div>
+            <div class="input-group" id="progress">
+                <button class="btn btn-primary" name="submit" value="1">Submit</button>
+            </div>
+        </form>
+    </fieldset>
 </div>
+
+<style>
+    .input-group-addon {
+        position: relative;
+        overflow: hidden;
+        width: 64px;
+    }
+
+    img[alt=Capcha] {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 33px;
+    }
+</style>
