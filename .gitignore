@@ -1,5 +1,8 @@
 .idea
 /asset
 node_modules
+npm-debug.log
+resources/Documents
 resources/tmp
 /vendor
+yarn-error.log

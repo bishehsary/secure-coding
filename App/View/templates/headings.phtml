@@ -1,6 +1,5 @@
 <?php
 /** @var \FW\App\View $this */
-
 $headings = $this->get('headings');
 ?>
 <div class="page">
@@ -8,9 +7,9 @@ $headings = $this->get('headings');
     <div class="page" id="headings-page">
         <ol>
             <?php foreach ($headings as $heading) {
-                echo "<li>{$heading['title']}<ol>";
+                echo "<li id='chapter{$heading['id']}'>{$heading['title']}<ol>";
                 foreach ($heading['children'] as $child) {
-                    $link = "?controller=chapter${heading['id']}&code=${child['id']}";
+                    $link = "/chapter{$heading['id']}?code=${child['id']}";
                     echo "<li><a href='{$link}'>{$child['title']}</a></li>";
                 }
                 echo '</ol></li>';
@@ -19,4 +18,3 @@ $headings = $this->get('headings');
         </ol>
     </div>
 </div>
-

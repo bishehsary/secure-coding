@@ -1,0 +1,14 @@
+<?php
+/** @var \FW\App\View $this */
+$cookiePageUrl = $this->get('cookie');
+$ajaxPageUrl = $this->get('ajax');
+?>
+<br><br><br>
+<div class="container">
+    <div class="row">
+        <div class="col col-md-6 col-md-offset-3 list-group">
+            <div class="list-group-item"><a href="<?php echo $cookiePageUrl ?>">Cookie Based</a></div>
+            <div class="list-group-item"><a href="<?php echo $ajaxPageUrl ?>">Ajax Based</a></div>
+        </div>
+    </div>
+</div>

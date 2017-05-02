@@ -1,6 +1,10 @@
+<?php
+/** @var \FW\App\View $this */
+$formAction = $this->get('form');
+?>
 <div class="container">
     <fieldset class="col-sm-4">
-        <form action="?controller=chapter2&code=24" method="post">
+        <form action="<?php echo $formAction ?>" method="post">
             <div class="form-group">
                 <div class="input-group">
                     <label for="password">Password</label>

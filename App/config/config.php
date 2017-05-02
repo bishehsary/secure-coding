@@ -5,6 +5,7 @@ $root = dirname(dirname(__DIR__));
 
 FW\App\Config::init([
     'mode' => \FW\App\App::MODE_DEVELOPMENT,
+    'seo' => true,
     'root' => $root,
     'server' => [
         'protocol' => 'http',
@@ -24,6 +25,7 @@ FW\App\Config::init([
         'setupFile' => __DIR__ . '/db-setup.php'
     ],
     'security' => [
+        'sessionHost' => '192.168.99.100',
         'sessionTimeout' => 3600
     ],
     'gitHub' => [

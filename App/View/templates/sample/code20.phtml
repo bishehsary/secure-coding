@@ -1,6 +1,8 @@
 <?php
 /** @var \FW\App\View $this */
+$basicAuthUrl = $this->get('basicAuthUrl');
 $basicAuth = $this->get('basicAuth');
+$digestAuthUrl = $this->get('digestAuthUrl');
 $digestAuth = $this->get('digestAuth');
 ?>
 <div class="container">
@@ -31,11 +33,11 @@ $digestAuth = $this->get('digestAuth');
         <legend>HTTP Authentication Method</legend>
         <ul class="list-group col-md-6">
             <li class="list-group-item">
-                <a href="?controller=chapter2&code=20&auth=basic">Basic</a>
+                <a href="<?php echo $basicAuthUrl ?>">Basic</a>
                 <?php echo $basicAuth ? "<span class='label label-success pull-right'>{$basicAuth}</span>" : '' ?>
             </li>
             <li class="list-group-item">
-                <a href="?controller=chapter2&code=20&auth=digest">Digest</a>
+                <a href="<?php echo $digestAuthUrl ?>">Digest</a>
                 <?php echo $digestAuth ? "<span class='label label-success pull-right'>{$digestAuth}</span>" : '' ?>
             </li>
         </ul>

@@ -1,3 +1,45 @@
 <div class="container">
-    <h1>code29</h1>
+    <div class="row">
+        <div class="col-md-6 list-group">
+            <div class="list-group-item">What is ROLE?</div>
+            <div class="list-group-item">What are roles applied to?
+                <a href="#" class="badge" id="view-target">...</a>
+                <br><br>
+                <ul id="target" class="hidden">
+                    <li>User</li>
+                    <li>&lt;Resource, Access></li>
+                </ul>
+            </div>
+            <div class="list-group-item">The best place to check access?</div>
+        </div>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend class="text-success">Advantages:</legend>
+            <div class="list-group">
+                <div class="list-group-item">Roles are assigned based on organizational structure with emphasis on the
+                    organizational security policy
+                </div>
+                <div class="list-group-item">Easy to use</div>
+                <div class="list-group-item">Easy to administer</div>
+                <div class="list-group-item">Built into most frameworks</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend class="text-danger">Disadvantages:</legend>
+            <div class="list-group-item"><code>Acl::allow('user', 'account', 'edit');</code>Which account?
+                <br>(Data Based Access Control)
+            </div>
+            <div class="list-group-item">Assigning/Revoking multiple roles</div>
+        </fieldset>
+    </div>
 </div>
+
+<script>
+    document.getElementById('view-target').addEventListener('click', e => {
+        document.getElementById('target').classList.remove('hidden');
+        e.preventDefault();
+    }, false);
+</script>

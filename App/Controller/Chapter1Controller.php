@@ -10,6 +10,7 @@ class Chapter1Controller extends Chapter
             ['X-XSS-Protection', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-XSS-Protection']
         ]);
         $this->getCode(__FILE__, 'code13');
+        $this->view->set('xss', $this->request->get('xss', ''));
         //<code13>
         // $this->response->header('X-XSS-Protection', '1; mode=block');
         //</code13>
@@ -89,6 +90,7 @@ class Chapter1Controller extends Chapter
     protected function code19()// Other Security Flags
     {
         $this->view->set('link', [
+            ['Secure Web App', 'https://www.smashingmagazine.com/2017/04/secure-web-app-http-headers'],
             ['X-Content-Type-Options', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options'],
             ['X-Frame-Options', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options'],
             ['Strict-Transport-Security', 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security'],

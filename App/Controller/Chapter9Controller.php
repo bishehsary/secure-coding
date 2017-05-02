@@ -7,7 +7,12 @@ class Chapter9Controller extends Chapter
     protected function code60()// Symmetric Encryption
     {
         $this->getCode(__FILE__, 'code60');
+        // If there are repeated sequences in encrypted data, an attacker could assume that the corresponding sequences
+        // in the message were also identical. The IV prevents the appearance of corresponding duplicate character
+        // sequences in the ciphertext
         //<code60>
+        // mcrypt_encrypt is deprecated
+
         //</code60>
         $this->view->set('result', $this->view->render('sample/code60'));
     }

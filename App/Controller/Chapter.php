@@ -5,9 +5,11 @@ namespace App\Controller;
 
 use App\Model\Heading;
 use FW\App\Controller;
+use FW\App\Database;
 
 abstract class Chapter extends Controller
 {
+    private static $db;
 
     function indexAction()
     {
@@ -35,13 +37,31 @@ abstract class Chapter extends Controller
             }
         }
         if ($nextId) {
-            $this->view->set('next', "?controller=chapter{$parent->id}&code={$nextId}");
+            $this->view->set('next', $this->url("chapter{$parent->id}") . "?code={$nextId}");
         }
         if ($prevId) {
-            $this->view->set('prev', "?controller=chapter{$parent->id}&code={$prevId}");
+            $this->view->set('prev', $this->url("chapter{$parent->id}") . "?code={$prevId}");
         }
         // rendering view
         $this->view->html($this->view->render('code'));
+    }
+
+    protected function database()
+    {
+        $key = 'sakila';
+        if (!self::$db) {
+            Database::init([
+                'dbms' => 'mysql',
+                'database' => 'sakila',
+                'host' => 'localhost',
+                'port' => 3306,
+                'username' => 'root',
+                'password' => '',
+                'generateSchema' => false
+            ], $key);
+            self::$db = Database::getInstance($key);
+        }
+        return self::$db;
     }
 
     protected function getCode($file, $tplName)

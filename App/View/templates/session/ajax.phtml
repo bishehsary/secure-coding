@@ -1,0 +1,78 @@
+<?php
+/** @var \FW\App\View $this */
+$pageUrl = $this->get('page');
+$cookiePageUrl = $this->get('cookie');
+?>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-10 col-md-offset-1">
+            <div class="alert alert-link">
+                <h2>Session Management Playground</h2>
+            </div>
+            <br>
+            <div>
+                <h3>Ajax Header Values:</h3>
+                <pre><code id="header"></code></pre>
+                <form action="<?php echo $pageUrl ?>?ajax=1">
+                    <div class="form-group">
+                        <label>Username: <input type="text" name="username" class="form-control"></label>
+                    </div>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" id="token-btn">Get Token</button>
+                        <button type="button" class="btn btn-primary" id="fetch-btn">Fetch Session</button>
+                        <button type="button" class="btn btn-primary" id="update-btn">Update Username</button>
+                        <button type="button" class="btn btn-danger" id="del-btn">Delete Session</button>
+                    </div>
+                </form>
+                <h5>User value from Ajax:</h5>
+                <pre><code id="ajax-session"></code></pre>
+            </div>
+            <br><br>
+            <div class="alert text-center">
+                <a href="<?php echo $cookiePageUrl ?>">Go to Cookie Example</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const api = ApiService.getInstance();
+    const tokenBtn = document.getElementById('token-btn');
+    const fetchBtn = document.getElementById('fetch-btn');
+    let token = localStorage.getItem('token');
+    //
+    if (token) {
+        tokenBtn.setAttribute('disabled', 'disabled');
+    } else {
+        tokenBtn.addEventListener('click', e => {
+            e.preventDefault();
+            fetchBtn.setAttribute('disabled', 'disabled');
+            api.get('session/ajax?ajax=1').then(() => fetchBtn.removeAttribute('disabled'));
+        }, false);
+    }
+    // retrieve session status
+    fetchBtn.addEventListener('click', e => {
+        e.preventDefault();
+        fetchBtn.setAttribute('disabled', 'disabled');
+        api.get('session/ajax?ajax=1').then(content => {
+            fetchBtn.removeAttribute('disabled');
+            document.getElementById('header').innerHTML = `X-AUTH-TOKEN: ${localStorage.getItem('token')}`;
+            document.getElementById('ajax-session').innerHTML = content;
+        });
+    }, false);
+    // updating username
+    document.getElementById('update-btn').addEventListener('click', e => {
+        e.preventDefault();
+        fetchBtn.setAttribute('disabled', 'disabled');
+        let value = document.querySelector('[name=username]').value;
+        api.post('session/ajax?ajax=1', {username: value}).then(() => fetchBtn.removeAttribute('disabled'));
+    }, false);
+    // deleting session
+    document.getElementById('del-btn').addEventListener('click', e => {
+        e.preventDefault();
+        fetchBtn.setAttribute('disabled', 'disabled');
+        api.get('session/ajax?ajax=1&delete=1').then(content => fetchBtn.removeAttribute('disabled'));
+    }, false);
+
+    hljs.initHighlightingOnLoad();
+</script>

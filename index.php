@@ -17,5 +17,5 @@ if ($appStatus == App::STATUS_UNAUTHORIZED) {
     $c->indexAction();
 } elseif ($appStatus == App::STATUS_NOT_FOUND) {
     $c = new \App\Controller\IndexController(Config::getInstance());
-    $c->notFoundPage("Controller does not exists: {$_GET['controller']}Controller");
+    $c->notFoundPage("Controller does not exists: {$app->controller}Controller");
 }

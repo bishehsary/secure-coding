@@ -13,6 +13,8 @@ class App
     private $config;
     private $session;
 
+    public $controller;
+
     function __construct(Config $config)
     {
         Session::getInstance();
@@ -31,11 +33,18 @@ class App
 
     function run($role)
     {
-        $controllerName = isset($_GET['controller']) ? $_GET['controller'] : 'index';
-        $actionName = isset($_GET['action']) ? $_GET['action'] : 'index';
+        $controllerName = $_GET['controller'] ?? '';
+        $actionName = $_GET['action'] ?? '';
+        if ($this->config->seo) {
+            preg_match("/\/?(?P<controller>[a-z0-9]*)(\/?(?P<action>[a-z0-9]*))/", $_SERVER['REQUEST_URI'], $match);
+            $controllerName = isset($match['controller']) && $match['controller'] ? $match['controller'] : $controllerName;
+            $actionName = isset($match['action']) && $match['action'] ? $match['action'] : $actionName;
+        }
+        if (!$controllerName) $controllerName = 'index';
+        if (!$actionName) $actionName = 'index';
         if (Acl::isAllowed($role, $controllerName, $actionName)) {
-            $controllerName = strtoupper($controllerName[0]) . substr($controllerName, 1);
-            $controllerPath = __DIR__ . "/../../App/Controller/{$controllerName}Controller.php";
+            $this->controller = strtoupper($controllerName[0]) . substr($controllerName, 1);
+            $controllerPath = __DIR__ . "/../../App/Controller/{$this->controller}Controller.php";
             if (!file_exists($controllerPath)) {
                 return self::STATUS_NOT_FOUND;
             }

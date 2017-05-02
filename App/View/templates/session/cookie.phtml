@@ -1,0 +1,43 @@
+<?php
+/** @var \FW\App\View $this */
+$pageUrl = $this->get('page');
+$ajaxPageUrl = $this->get('ajax');
+$user = $this->get('user');
+?>
+
+<div class="container">
+    <div class="row">
+        <div class="col col-md-10 col-md-offset-1">
+            <div class="alert alert-link">
+                <h2>Session Management Playground</h2>
+            </div>
+            <br>
+            <div>
+                <h3>Cookie Values:</h3>
+                <pre><code id="cookie"></code></pre>
+                <h5>User value from Session:</h5>
+                <pre><code><?php echo json_encode($user) ?></code></pre>
+                <br><br>
+                <form action="<?php echo $pageUrl ?>" method="post">
+                    <div class="form-group">
+                        <label>Username<input type="text" name="username" class="form-control"></label>
+                    </div>
+                    <div class="btn-group">
+                        <button type="submit" class="btn btn-primary" name="update">Update Username</button>
+                        <button type="submit" class="btn btn-danger" name="delete">Delete Session</button>
+                    </div>
+                </form>
+            </div>
+            <br><br>
+            <div class="alert text-center">
+                <a href="<?php echo $ajaxPageUrl ?>">Go to Ajax Example</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // cookie check
+    document.getElementById('cookie').innerHTML = document.cookie.replace(/\s+/g, '').split(';').join('<br/>');
+
+    hljs.initHighlightingOnLoad();
+</script>

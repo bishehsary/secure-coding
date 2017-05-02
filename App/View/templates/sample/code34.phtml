@@ -1,3 +1,35 @@
 <div class="container">
-    <h1>code34</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="list-group">
+                <div class="list-group-item">Another way to handle SSO</div>
+                <div class="list-group-item">Concepts
+                    <ul>
+                        <li><span class="label label-primary">Claims</span><br>
+                            Contains information about the user, roles or permission
+                        </li>
+                        <li><span class="label label-primary">Tokens</span><br>
+                            Contains one or more claims, It is signed and may contains extra data like expiry date
+                        </li>
+                        <li><span class="label label-primary">Identity</span><br>
+                            User identity is stored and verified in one central place called Identity Provider
+                        </li>
+                        <li><span class="label label-primary">Providers</span><br>
+                            Identity Provider
+                        </li>
+                    </ul>
+                    <img class="center-block img-responsive" src="asset/img/app/Identity-Provider.png"
+                         alt="Identity Provider">
+                    <ul>
+                        <li>Identity Store contains information about user identity (database / AD)</li>
+                        <li>Security Token Service (STS) handles user requests and creates tokens</li>
+                    </ul>
+                </div>
+                <div class="list-group-item">
+                    During communication token is serialized using SAML<br><br>
+                    <img class="img-responsive" src="asset/img/app/Sample-SAML-Token.png" alt="Sample SAML Token">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

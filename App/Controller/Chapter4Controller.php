@@ -7,7 +7,12 @@ class Chapter4Controller extends Chapter
     protected function code37()// Session management techniques
     {
         $this->getCode(__FILE__, 'code37');
+        $this->view->set('link', [
+            ['Session Management Cheat Sheet', 'https://www.owasp.org/index.php/Session_Management_Cheat_Sheet'],
+            ['PHP Session with Redis', 'https://www.digitalocean.com/community/tutorials/how-to-set-up-a-redis-server-as-a-session-handler-for-php-on-ubuntu-14-04'],
+        ]);
         //<code37>
+        $this->view->set('session', $this->url('session'));
         //</code37>
         $this->view->set('result', $this->view->render('sample/code37'));
     }

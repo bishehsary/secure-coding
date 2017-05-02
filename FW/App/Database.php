@@ -8,19 +8,19 @@ use PDOException;
 
 class Database
 {
-    /** @var  PDO */
-    private static $db = null;
+    /** @var  PDO[] */
+    private static $dbs = [];
 
-    static function init($config)
+    static function init($config, $key = 'main')
     {
-        if (self::$db) return true;
+        if (isset(self::$dbs[$key])) return true;
         try {
             $options = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION);
-            static::$db = new PDO("{$config['dbms']}:dbname={$config['database']}; host={$config['host']}; port={$config['port']}; charset=utf8mb4",
+            static::$dbs[$key] = new PDO("{$config['dbms']}:dbname={$config['database']}; host={$config['host']}; port={$config['port']}; charset=utf8mb4",
                 $config['username'], $config['password'], $options);
-            static::$db->exec("SET NAMES 'UTF8'");
+            static::$dbs[$key]->exec("SET NAMES 'UTF8'");
             if ($config['generateSchema']) {
-                return self::generateSchema($config['setupFile']);
+                return self::generateSchema($config['setupFile'], $key);
             }
             return true;
         } catch (PDOException $e) {
@@ -28,12 +28,12 @@ class Database
         }
     }
 
-    static function generateSchema($file)
+    static function generateSchema($file, $key)
     {
         include $file;
         $sql = getSchemaSql();
         try {
-            self::$db->exec($sql);
+            self::$dbs[$key]->exec($sql);
         } catch (PDOException $e) {
             var_dump($e->getMessage());
             return false;
@@ -41,8 +41,8 @@ class Database
         return true;
     }
 
-    static function getInstance()
+    static function getInstance($key = 'main')
     {
-        return self::$db;
+        return self::$dbs[$key] ?? null;
     }
 }

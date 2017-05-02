@@ -14,6 +14,8 @@ abstract class Controller
     protected $request;
     /** @var  Response */
     protected $response;
+    /** @var  string */
+    protected $action;
 
     function __construct($config)
     {
@@ -23,6 +25,10 @@ abstract class Controller
         $this->view = new View();
         $this->config = $config;
         $this->updateUserSession();
+    }
+
+    protected function init()
+    {
     }
 
     private function updateUserSession()
@@ -42,16 +48,15 @@ abstract class Controller
 
     function process($action = '')
     {
+        $this->action = $action ?: 'index';
+        $this->init();
         try {
-            if (!$action) {
-                $this->indexAction();
+            $this->action = $action;
+            $method = "{$action}Action";
+            if (method_exists($this, $method)) {
+                $this->$method();
             } else {
-                $method = "{$action}Action";
-                if (method_exists($this, $method)) {
-                    $this->$method();
-                } else {
-                    $this->notFoundPage("Error at Controller::process({$action}) Method [$method] does not exist");
-                }
+                $this->notFoundPage("Error at Controller::process({$action}) Method [$method] does not exist");
             }
         } catch (\Exception $e) {
             $this->errorPage($e);
@@ -60,20 +65,28 @@ abstract class Controller
 
     protected function url($controller = '', $action = '')
     {
-        $url = '?';
-        if ($controller) $url .= "controller={$controller}";
-        if ($action) $url .= ($controller ? '&' : '') . "action={$action}";
+        if ($this->config->seo) {
+            $url = '';
+            if ($controller) $url .= "/{$controller}";
+            if ($action) $url .= "/{$action}";
+        } else {
+            $url = '?';
+            if ($controller) $url .= "controller={$controller}";
+            if ($action) $url .= ($controller ? '&' : '') . "action={$action}";
+        }
         return $url;
     }
 
     public function notFoundPage($message = null)
     {
+        $this->response->header('HTTP/1.1 404 Not Found');
         $this->view->set('message', $message ? $message : '');
         $this->view->html($this->view->render('not-found'));
     }
 
     public function errorPage($e = null)
     {
+        $this->response->header('HTTP/1.1 500 Internal Server Error');
         $this->view->set('error', $e ? $e : 'No details available');
         $this->view->html($this->view->render('error'));
     }

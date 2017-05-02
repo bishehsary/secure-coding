@@ -2,6 +2,7 @@
 /** @var \FW\App\View $this */
 $error = $this->get('error');
 $message = $this->get('message');
+$formAction = $this->get('form');
 ?>
 <div class="container">
     <fieldset class="col-sm-4">
@@ -11,7 +12,7 @@ $message = $this->get('message');
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <img src="?controller=chapter2&code=23&capcha=1" alt="Capcha">
+                        <img src="<?php echo $formAction ?>" alt="Capcha">
                     </span>
                     <input type="text" name="capcha" class="form-control" placeholder="Capcha" maxlength="4">
                 </div>

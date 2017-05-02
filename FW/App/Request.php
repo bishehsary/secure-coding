@@ -47,7 +47,7 @@ class Request
     function json($name = null, $defaultValue = null)
     {
         if (!isset($this->jsonStorage)) {
-            $this->jsonStorage = json_decode('php://input');
+            $this->jsonStorage = json_decode(file_get_contents('php://input'), true);
         }
         return $this->retrieve($this->jsonStorage, $name, $defaultValue);
     }

@@ -5,21 +5,23 @@
   "main": "index.js",
   "scripts": {
     "test": "php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml Test",
-    "dev": "node node_modules/gulp/bin/gulp",
-    "build": "node node_modules/gulp/bin/gulp deploy",
-    "serve": "node node_modules/gulp/bin/gulp --gulpfile resources/gulp/run.js"
+    "dev": "gulp",
+    "serve": "gulp --gulpfile resources/gulp/run.js",
+    "build": "gulp deploy"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "autoprefixer": "^6.7.5",
+    "browser-sync": "^2.18.8",
     "css-mqpacker": "^5.0.1",
     "csswring": "^5.1.1",
     "doiuse": "^2.5.0",
     "fs-extra": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
+    "gulp-connect-php": "^1.0.0",
     "gulp-postcss": "^6.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.1",

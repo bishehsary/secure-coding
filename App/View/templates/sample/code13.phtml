@@ -1,6 +1,10 @@
+<?php
+/** @var \FW\App\View $this */
+$xss = $this->get('xss');
+?>
 <div class="container">
     <p>
         The value of <code class="inline-code">$_GET['xss']</code>:
-        <?php echo isset($_GET['xss']) ? $_GET['xss'] : '' ?>
+        <?php echo $xss ?>
     </p>
 </div>

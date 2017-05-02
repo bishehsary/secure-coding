@@ -19,6 +19,12 @@ module.exports = function (dir, setting) {
         }
         return stream.pipe(gulp.dest(dir.build + '/js/'));
     });
+    gulp.task('asset:js', function () {
+        return gulp.src([
+            `${dir.src}/scripts/**/*.js`
+        ]).pipe(concat('app.js'))
+            .pipe(gulp.dest(dir.build + '/js'));
+    });
     gulp.task('asset:css', function () {
         return gulp.src([
             `${dir.npm}/bootstrap/dist/css/bootstrap.css`,
@@ -39,25 +45,14 @@ module.exports = function (dir, setting) {
             .pipe(gulp.dest(dir.build + '/img'));
     });
 
-    // gulp.task('asset:image:optimize', function () {
-    //     let stream = gulp.src(dir.src + '/images/**/*');
-    //     if (setting.production) {
-    //         stream = stream.pipe(imageop({
-    //             optimizationLevel: 5,
-    //             progressive: true,
-    //             interlaced: true
-    //         })).on('error', setting.error);
-    //     }
-    //     return stream.pipe(gulp.dest(tmpDirectory));
-    // });
-
     gulp.task('asset:watch', function () {
-        gulp.watch([dir.src + '/images/**/*'], ['asset:image']);
+        gulp.watch([`${dir.src}/images/**/*`], ['asset:image']);
+        gulp.watch([`${dir.src}/scripts/**/*.js`], ['asset:js']);
     });
 
     return {
         watch: ['asset:watch'],
-        tasks: ['asset:lib', 'asset:font', 'asset:image']
+        tasks: ['asset:lib', 'asset:font', 'asset:image', 'asset:js']
     };
 
     function minifyHtml(stream) {
