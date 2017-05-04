@@ -16,22 +16,11 @@ class Request
 
     private function __construct()
     {
-
     }
 
-    function has($name, $storage)
+    function hasGet($name)
     {
-        switch ($storage) {
-            case self::GET:
-                return isset($_GET[$name]);
-            case self::POST:
-                return isset($_POST[$name]);
-            case self::SERVER:
-                return isset($_SERVER[$name]);
-            case self::COOKIE:
-                return isset($_COOKIE[$name]);
-        }
-        return false;
+        return isset($_GET[$name]);
     }
 
     function get($name = null, $defaultValue = null)
@@ -39,9 +28,22 @@ class Request
         return $this->retrieve($_GET, $name, $defaultValue);
     }
 
+    function hasPost($name)
+    {
+        return isset($_POST[$name]);
+    }
+
     function post($name = null, $defaultValue = null)
     {
         return $this->retrieve($_POST, $name, $defaultValue);
+    }
+
+    function hasJson($name)
+    {
+        if (!isset($this->jsonStorage)) {
+            $this->jsonStorage = json_decode(file_get_contents('php://input'), true);
+        }
+        return isset($this->jsonStorage[$name]);
     }
 
     function json($name = null, $defaultValue = null)
@@ -52,14 +54,29 @@ class Request
         return $this->retrieve($this->jsonStorage, $name, $defaultValue);
     }
 
+    function hasServer($name)
+    {
+        return isset($_SERVER[$name]);
+    }
+
     function server($name = null, $defaultValue = null)
     {
         return $this->retrieve($_SERVER, $name, $defaultValue);
     }
 
+    function hasCookie($name)
+    {
+        return isset($_COOKIE[$name]);
+    }
+
     function cookie($name = null, $defaultValue = null)
     {
         return $this->retrieve($_COOKIE, $name, $defaultValue);
+    }
+
+    function has($name)
+    {
+        return isset($_REQUEST[$name]);
     }
 
     private function retrieve($storage, $name, $defaultValue)

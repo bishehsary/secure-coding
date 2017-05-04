@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Util\TokenBasedSession;
 use FW\App\Config;
 use FW\App\Controller;
-use FW\App\Request;
 
 class SessionController extends Controller
 {
@@ -30,7 +29,7 @@ class SessionController extends Controller
             // checking session validation
             if ($token) {
                 $tokenIsValid = $this->tokenSession->init($token);
-                if (!$tokenIsValid) {
+                if ($tokenIsValid !== true) {
                     $this->regenerateSession();
                 }
             } else {
@@ -65,10 +64,10 @@ class SessionController extends Controller
     function cookieAction()
     {
         // checking for delete
-        if ($this->request->has('delete', Request::POST)) {
+        if ($this->request->hasPost('delete')) {
             $this->regenerateSession();
         }
-        if ($this->request->has('update', Request::POST)) {
+        if ($this->request->hasPost('update')) {
             $username = $this->request->post('username', '');
             $this->tokenSession->set('user', ['username' => $username]);
         }

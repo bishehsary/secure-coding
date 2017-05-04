@@ -1,0 +1,24 @@
+<?php
+/** @var \FW\App\View $this */
+$headings = $this->get('headings');
+$headerCount = 1;
+?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <?php foreach ($headings as $heading) {
+                echo '<div class="list-group">';
+                echo "<div class='list-group-item active' id='chapter{$heading['id']}'><h4 class='list-group-item-heading'>{$heading['title']}</h4></div>";
+                $subHeaderCount = 1;
+                foreach ($heading['children'] as $child) {
+                    $link = "/chapter{$heading['id']}?code=${child['id']}";
+                    echo "<div class='list-group-item'><span class='badge'>{$headerCount}-{$subHeaderCount}</span> <a href='{$link}'>{$child['title']}</a></div>";
+                    ++$subHeaderCount;
+                }
+                echo '</div>';
+                ++$headerCount;
+            }
+            ?>
+        </div>
+    </div>
+</div>

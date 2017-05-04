@@ -10,9 +10,14 @@ use Predis\Client;
 
 class TokenBasedSession
 {
+    const Err_TOKEN = 1;
+    const Err_RESTRICTION = 2;
+    const Err_EXPIRY = 3;
+
     private $db;
     private $data = [];
     private $token;
+    private $enforceRestriction = false;
 
     function __construct($server, $port = 6379)
     {
@@ -28,13 +33,20 @@ class TokenBasedSession
         if ($token) {
             $this->token = $token;
             $this->data = json_decode($this->fetch(), true);
+            if (!$this->data) {
+                return self::Err_TOKEN;
+            }
             // key does not exist || last visit time is not set
             if (!$this->data || ($this->data && !isset($this->data['visit']))) {
-                return false;
+                return self::Err_EXPIRY;
             }
             // session timeout
             if (time() - $this->data['visit'] > Config::getInstance()->security['sessionTimeout']) {
-                return false;
+                return self::Err_EXPIRY;
+            }
+            if ($this->enforceRestriction && !$this->checkRestriction()) {
+                // it depends on your business logic
+                return self::Err_RESTRICTION;
             }
         } else {
             $this->generateToken();
@@ -79,6 +91,9 @@ class TokenBasedSession
     private function generateToken()
     {
         $this->token = bin2hex(random_bytes(32));
+        if ($this->enforceRestriction) {
+            $this->data['restriction'] = $this->generateRestriction();
+        }
     }
 
     private function fetch()
@@ -89,5 +104,16 @@ class TokenBasedSession
     private function save()
     {
         return $this->db->set($this->token, json_encode($this->data));
+    }
+
+    private function checkRestriction()
+    {
+        $restriction = $this->generateRestriction();
+        return isset($this->data['restriction']) && $restriction == $this->data['restriction'];
+    }
+
+    private function generateRestriction()
+    {
+        return md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
     }
 }

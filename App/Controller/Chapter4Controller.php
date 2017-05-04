@@ -2,8 +2,14 @@
 
 namespace App\Controller;
 
+use App\Util\TokenBasedSession;
+use FW\App\Config;
+
 class Chapter4Controller extends Chapter
 {
+    /** @var  TokenBasedSession */
+    private $tokenSession;
+
     protected function code37()// Session management techniques
     {
         $this->getCode(__FILE__, 'code37');
@@ -11,26 +17,34 @@ class Chapter4Controller extends Chapter
             ['Session Management Cheat Sheet', 'https://www.owasp.org/index.php/Session_Management_Cheat_Sheet'],
             ['PHP Session with Redis', 'https://www.digitalocean.com/community/tutorials/how-to-set-up-a-redis-server-as-a-session-handler-for-php-on-ubuntu-14-04'],
         ]);
-        //<code37>
         $this->view->set('session', $this->url('session'));
+        //<code37>
         //</code37>
         $this->view->set('result', $this->view->render('sample/code37'));
-    }
-
-    protected function code38()
-    {
-        $this->getCode(__FILE__, 'code38');
-        //<code38>
-        //</code38>
-        $html = $this->view->render('sample/code38');
-        $this->view->set('result', $html);
     }
 
     protected function code39()// Avoiding session hijacking
     {
         $this->getCode(__FILE__, 'code39');
+        $this->view->set('link', [
+            ['Session Hijacking Attack', 'https://www.owasp.org/index.php/Session_hijacking_attack']
+        ]);
+        $config = Config::getInstance();
+        $tokenKeyName = $config->security['sessionKey'];
+        $token = $_COOKIE[$tokenKeyName] ?? null;
         //<code39>
+        // @bootstrap
+        $this->tokenSession = new TokenBasedSession($config->security['sessionHost']);
+        if (($errorCode = $this->tokenSession->init($token)) === true) {
+            if ($this->request->hasPost('update')) {
+                $this->tokenSession->set('user', ['username' => $this->request->post('username')]);
+            }
+            $this->view->set('user', $this->tokenSession->get('user'));
+        } else {
+            $this->view->set('error', "Session initiation failed [{$errorCode}]");
+        }
         //</code39>
+        setcookie($tokenKeyName, $this->tokenSession->getToken());
         $this->view->set('result', $this->view->render('sample/code39'));
     }
 
@@ -53,7 +67,21 @@ class Chapter4Controller extends Chapter
     protected function code42()// Cookie Attribute
     {
         $this->getCode(__FILE__, 'code42');
+        $this->view->set('link', [
+            ['function.setcookie', 'http://php.net/manual/en/function.setcookie.php'],
+            ['Secure Flag', $this->url('chapter1') . '?code=14'],
+            ['Http Only Flag', $this->url('chapter1') . '?code=15']
+        ]);
         //<code42>
+        $this->view->set('cookie', [
+            ['string', '$name', true, null],
+            ['string', '$value', false, '""'],
+            ['int', '$expire', false, '""'],
+            ['string', '$path', false, '""'],
+            ['string', '$domain', false, '""'],
+            ['bool', '$secure', false, 'false'],
+            ['bool', '$httponly', false, 'false'],
+        ]);
         //</code42>
         $this->view->set('result', $this->view->render('sample/code42'));
     }
@@ -62,6 +90,11 @@ class Chapter4Controller extends Chapter
     {
         $this->getCode(__FILE__, 'code43');
         //<code43>
+        if ($this->request->hasPost('renew')) {
+            setcookie('firstCookie', 'firstCookieValue', time() + 6 * 3600);
+        } elseif ($this->request->hasPost('expire')) {
+            setcookie('firstCookie', 'firstCookieValue', time() - 3600);
+        }
         //</code43>
         $this->view->set('result', $this->view->render('sample/code43'));
     }

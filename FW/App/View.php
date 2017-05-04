@@ -47,12 +47,12 @@ class View
         }
     }
 
-    private function startBuffering()
+    public function startBuffering()
     {
         ob_start();
     }
 
-    private function stopBuffering()
+    public function stopBuffering()
     {
         return ob_get_clean();
     }

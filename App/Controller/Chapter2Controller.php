@@ -160,7 +160,7 @@ class Chapter2Controller extends Chapter
             $gitHub = $this->config->gitHub;
             $this->response->redirect("https://github.com/login/oauth/authorize?client_id={$gitHub['client']}&redirect_uri={$gitHub['redirect']}&state={$gitHub['state']}");
             return;
-        } elseif ($this->request->has('clearToken', Request::POST)) {
+        } elseif ($this->request->hasPost('clearToken')) {
             $this->session->remove('gitHubToken');
         } elseif ($this->session->get('gitHubToken')) {
             $token = $this->session->get('gitHubToken');

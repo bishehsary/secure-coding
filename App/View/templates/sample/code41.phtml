@@ -1,3 +1,27 @@
+<?php
+$username = "testUser";
+$userId = 231;
+$combination = "{$username}-{$userId}";
+$base64 = base64_encode($combination);
+?>
 <div class="container">
-    <h1>code41</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="list-group">
+                <div class="list-group-item">Storing sensitive data in Cookie <code class="badge">e.g. password, Banking Information</code></div>
+                <div class="list-group-item">SessionID Structure: <br><br>
+                    <ul>
+                        <li>
+                            <p>Combination of predictable variables</p>
+                            <pre><code>$sessId = "{$userId}-{$username}"; //<?php echo $combination ?></code></pre>
+                        </li>
+                        <li>
+                            <p>Using reversible encoding</p>
+                            <pre><code>$sessId = base64_encode("{$userId}-{$username}"); //<?php echo $base64 ?></code></pre>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

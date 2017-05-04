@@ -2,9 +2,10 @@ let gulp = require('gulp');
 let php = require('gulp-connect-php');
 let browserSync = require('browser-sync');
 let path = require('path');
-let reload = browserSync.reload;
+
 const root = path.join(__dirname, '../..');
 const delay = 1000;
+let reload = browserSync.reload;
 let timer;
 
 gulp.task('php', function () {

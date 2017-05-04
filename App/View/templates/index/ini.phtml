@@ -1,0 +1,31 @@
+<?php
+/** @var \FW\App\View $this */
+$ini = $this->get('ini');
+?>
+<div class="container">
+    <br>
+    <div class="btn-group">
+        <button class="btn btn-default" id="comment">Remove Commented Lines</button>
+    </div>
+    <br><br>
+    <div class="col-md-12">
+        <pre><code id="ini"><?php echo $ini ?></code></pre>
+    </div>
+    <br>
+</div>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    document.getElementById('comment').addEventListener('click', e => {
+        e.preventDefault();
+        e.target.classList.add('hidden');
+        let filter = [];
+        let iniElement = document.getElementById('ini');
+        iniElement.innerText.split('\n').forEach(line => {
+            if (!line.startsWith(';') && !/^\s*$/.exec(line)) {
+                filter.push(line.startsWith('[') ? `<h4 class="text-default">${line}</h4>` : `\t${line}`);
+            }
+        });
+        iniElement.innerHTML = filter.join('\n');
+    }, false);
+</script>

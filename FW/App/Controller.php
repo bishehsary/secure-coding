@@ -34,7 +34,7 @@ abstract class Controller
     private function updateUserSession()
     {
         $user = $this->session->get('user');
-        if ($user) {
+        if ($user && isset($user['visit'])) {
             $now = time();
             if ($now - $user['visit'] > $this->config->security['sessionTimeout']) {
                 $this->session->destroy();

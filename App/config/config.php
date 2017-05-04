@@ -25,6 +25,7 @@ FW\App\Config::init([
         'setupFile' => __DIR__ . '/db-setup.php'
     ],
     'security' => [
+        'sessionKey' => 'X-AUTH-TOKEN',
         'sessionHost' => '192.168.99.100',
         'sessionTimeout' => 3600
     ],

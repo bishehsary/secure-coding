@@ -1,0 +1,21 @@
+.navigation {
+  display: inline-block;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 9;
+  background: rgba(200, 200, 200, .5);
+  border-bottom-left-radius: 5px;
+  a {
+    cursor: pointer;
+    display: inline-block;
+    > span {
+      display: inline-block;
+      vertical-align: middle;
+
+      &.glyphicon {
+        margin: 0 5px;
+      }
+    }
+  }
+}

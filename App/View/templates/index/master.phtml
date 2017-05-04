@@ -1,0 +1,20 @@
+<?php
+/** @var \FW\App\View $this */
+$content = $this->get('content');
+$prev = $this->get('prev');
+$title = $this->get('title');
+$next = $this->get('next');
+?>
+
+<div class="navigation btn-group">
+    <?php echo $prev ? "<a href='{$prev[1]}' id='prev-btn' class='btn' title='Previous'><span  class='glyphicon glyphicon-chevron-left'></span><span>{$prev[0]}</span></a>" : '' ?>
+    <a href="/index/heading" class="btn glyphicon glyphicon-home" title="Home"></a>
+    <?php echo $next ? "<a href='{$next[1]}' id='next-btn' class='btn' title='Next'><span>{$next[0]}</span><span class='glyphicon glyphicon-chevron-right'></span></a>" : '' ?>
+</div>
+
+<div class="container">
+    <div class="row">
+        <h1><?php echo $title ?></h1>
+    </div>
+    <div class="row"><?php echo $content ?></div>
+</div>

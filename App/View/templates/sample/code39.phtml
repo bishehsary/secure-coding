@@ -1,3 +1,62 @@
+<?php
+/** @var \FW\App\View $this */
+$user = $this->get('user');
+$error = $this->get('error');
+?>
 <div class="container">
-    <h1>code39</h1>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Types of Hijacking</legend>
+            <div class="list-group">
+                <div class="list-group-item">Predictable Session Token</div>
+                <div class="list-group-item">Session Sniffing</div>
+                <div class="list-group-item">Client-side Attacks (XSS, malicious JavaScript Codes, Trojans, etc)</div>
+                <div class="list-group-item">Man-In-The-Middle attack</div>
+                <div class="list-group-item">Man-In-The-Browser attack</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Mitigation (as opposed to freedom)</legend>
+            <div class="list-group">
+                <div class="list-group-item">Assigning session ID to specific client
+                    <a href="#" class="label label-default pull-right" id="target-btn">...</a>
+                    <ul id="target" class="hidden">
+                        <li>IP Address</li>
+                        <li>User Agent / IP Address</li>
+                        <li>Location</li>
+                        <li class="label label-danger">Problems any Bypasses of each one</li>
+                    </ul>
+                </div>
+                <div class="list-group-item">Using SSL</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <?php if ($error) { ?>
+                <div class="alert alert-danger"><?php echo $error ?></div>
+            <?php } else { ?>
+                <form action="" method="post">
+                    <div class="form-group">
+                        User from Session: <code><?php echo json_encode($user); ?></code>
+                    </div>
+                    <div class="form-group">
+                        <label>Username: <input type="text" name="username" class="form-control"></label>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" name="update" class="btn btn-primary">Update Username</button>
+                    </div>
+                </form>
+            <?php } ?>
+        </fieldset>
+    </div>
 </div>
+
+<script>
+    document.getElementById('target-btn').addEventListener('click', e => {
+        e.preventDefault();
+        document.getElementById('target').classList.remove('hidden')
+    }, false);
+</script>
