@@ -2,7 +2,8 @@
 /asset
 node_modules
 npm-debug.log
-resources/Documents
+resources/documents
+resources/keys
 resources/tmp
 /vendor
 yarn-error.log

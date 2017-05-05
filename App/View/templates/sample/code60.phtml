@@ -1,12 +1,16 @@
+<?php
+/** @var \FW\App\View $this */
+$ciphers = $this->get('ciphers');
+?>
 <div class="container">
     <div class="row">
         <fieldset class="col-md-6">
             <div class="list-group">
                 <div class="list-group-item">
-                    <pre>PlainText  --> Encryption --> CipherText</pre>
+                    <pre>PlainText  --> Encryption [SharedKey] --> CipherText</pre>
                 </div>
                 <div class="list-group-item">
-                    <pre>CipherText --> Decryption --> PlainText</pre>
+                    <pre>CipherText --> Decryption [SharedKey] --> PlainText</pre>
                 </div>
                 <div class="list-group-item">What is Initiation Vector(IV)?</div>
             </div>
@@ -14,7 +18,7 @@
     </div>
     <div class="row">
         <fieldset class="col-md-6">
-            <legend>Symmetric-key algorithm</legend>
+            <legend>Symmetric Cryptography</legend>
             <div class="list-group">
                 <div class="list-group-item">base on Shared Secret</div>
                 <div class="list-group-item">Algorithms:
@@ -24,9 +28,34 @@
                     </ul>
                 </div>
                 <div class="list-group-item">
-                    Twofish, Serpent, AES (Rijndael), RC4, 3DES, Skipjack, IDEA
+                    <strong>Examples</strong>: <code>Twofish</code>, <code>Serpent</code>, <code>AES (Rijndael)</code>,
+                    <code>RC4</code>, <code>3DES</code>, <code>Skipjack</code>
+                </div>
+                <div class="list-group-item">
+                    <code>mcrypt_*</code> is deprecated, instead we should be using <code>openssl_*</code>
                 </div>
             </div>
         </fieldset>
     </div>
+    <div class="row">
+        <table class="table table-bordered" id="ciphers">
+            <tr>
+                <th>Method</th>
+                <th>IV Length</th>
+                <th>Cipher Text</th>
+                <th>Plain Text</th>
+            </tr>
+            <?php foreach ($ciphers as $method => $cipher) {
+                echo "<tr><td>{$method}</td><td>{$cipher[0]}</td><td>{$cipher[1]}</td><td>{$cipher[2]}</td></tr>";
+            }
+            ?>
+        </table>
+    </div>
 </div>
+
+<style>
+    #ciphers {
+        width: 90%;
+        margin: 10px auto;
+    }
+</style>

@@ -1,3 +1,58 @@
+<?php
+/** @var \FW\App\View $this */
+$commands = $this->get('commands');
+$ciphers = $this->get('ciphers');
+?>
 <div class="container">
-    <h1>code61</h1>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <div class="list-group">
+                <div class="list-group-item">
+                    <pre>PlainText  --> Encryption [PrivateKey/PublicKey] --> CipherText</pre>
+                </div>
+                <div class="list-group-item">
+                    <pre>CipherText --> Decryption [PublicKey/PrivateKey] --> PlainText</pre>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <legend>Asymmetric Cryptography [Public-key Cryptography]</legend>
+            <div class="list-group">
+                <div class="list-group-item"><strong>Public keys</strong>: Which may be disseminated widely</div>
+                <div class="list-group-item"><strong>Private keys</strong>: Which are known only to the owner</div>
+                <div class="list-group-item">
+                    <strong>Examples</strong>: <code>Diffie–Hellman</code>, <code>RSA</code>,
+                    <code>DSS (Digital Signature Standard)</code>, <code>ElGamal</code>, <code>YAK</code>
+                </div>
+                <div class="list-group-item">
+                    <strong>Protocols</strong> which are using this cryptography:
+                    <code>GPG</code>, <code>PGP</code>, <code>SSH</code>, <code>Bitcoin</code>
+                </div>
+                <?php foreach ($commands as $command) {
+                    echo "<div class='list-group-item'><strong>{$command[0]}</strong><br><pre><code>{$command[1]}</code></pre></div>";
+                } ?>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <table class="table table-bordered" id="ciphers">
+            <?php foreach ($ciphers as $cipher) {
+                $code = $cipher[2] ? "<pre><code>{$cipher[1]}</code></pre>" : $cipher[1];
+                echo "<tr><th><strong>{$cipher[0]}</strong></th><td>{$code}</td></tr>";
+            } ?>
+        </table>
+    </div>
 </div>
+
+<style>
+    #ciphers {
+        width: 90%;
+        margin: 10px auto;
+    }
+
+    #ciphers th {
+        white-space: nowrap;
+    }
+</style>
