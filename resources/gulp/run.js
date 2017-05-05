@@ -14,8 +14,10 @@ gulp.task('php', function () {
 
 gulp.task('browser-sync', ['php'], function () {
     browserSync({
-        proxy: '127.0.0.1:8010',
-        port: 8088,
+        proxy: 'sc.io:8010',
+        host: 'sc.io',
+        https: true,
+        port: 443,
         open: true,
         notify: false
     });
@@ -27,5 +29,5 @@ gulp.task('reload', () => {
 });
 
 gulp.task('default', ['browser-sync'], function () {
-    gulp.watch(['../../App/**/*', '../../asset/**/*'], ['reload']);
+    gulp.watch(['../../App/**/*', '!../../App/asset/**/*', '../../asset/**/*'], ['reload']);
 });

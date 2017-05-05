@@ -18,3 +18,22 @@ $next = $this->get('next');
     </div>
     <div class="row"><?php echo $content ?></div>
 </div>
+
+<script>
+    hljs.initHighlightingOnLoad();
+    // next/prev
+    document.addEventListener('keydown', e => {
+        if (e.keyCode === 39) {
+            // right
+            let next = document.getElementById('next-btn');
+            next ? window.location.href = next.getAttribute('href') : goHome();
+        } else if (e.keyCode === 37) {
+            // left
+            let prev = document.getElementById('prev-btn');
+            prev ? window.location.href = prev.getAttribute('href') : goHome();
+        }
+        function goHome() {
+            window.location.href = document.getElementById('home-btn').getAttribute('href');
+        }
+    }, false);
+</script>

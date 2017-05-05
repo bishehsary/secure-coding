@@ -28,6 +28,12 @@ class Heading extends Model
         return $this->id;
     }
 
+    function markAsDone($id)
+    {
+        $statement = self::$db->prepare("UPDATE `{$this->tableName}` SET `done`=1 WHERE `id`=?");
+        return $statement->execute([$id]);
+    }
+
     function getTableSql($dropFirst = false)
     {
         $sql = "

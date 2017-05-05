@@ -9,7 +9,7 @@ FW\App\Config::init([
     'root' => $root,
     'server' => [
         'protocol' => 'http',
-        'host' => 'localhost',
+        'host' => 'sc.io',
         'port' => '80',
         'base' => '/',
     ],

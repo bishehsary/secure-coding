@@ -17,13 +17,13 @@ abstract class Controller
     /** @var  string */
     protected $action;
 
-    function __construct($config)
+    function __construct()
     {
+        $this->config = Config::getInstance();
         $this->session = Session::getInstance();
         $this->request = Request::getInstance();
         $this->response = Response::getInstance();
         $this->view = new View();
-        $this->config = $config;
         $this->updateUserSession();
     }
 
@@ -82,6 +82,13 @@ abstract class Controller
         $this->response->header('HTTP/1.1 404 Not Found');
         $this->view->set('message', $message ? $message : '');
         $this->view->html($this->view->render('not-found'));
+    }
+
+    public function unauthorizedPage($message = null)
+    {
+        $this->response->header('HTTP/1.1 401 Unauthorized');
+        $this->view->set('message', $message ? $message : '');
+        $this->view->html($this->view->render('unauthorized'));
     }
 
     public function errorPage($e = null)

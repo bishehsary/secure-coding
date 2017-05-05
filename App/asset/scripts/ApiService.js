@@ -49,14 +49,14 @@ class ApiService {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     this._onAfterReceive(xhr);
                     if (xhr.status === 200) {
-                        switch (xhr.responseType) {
-                            case 'json':
-                                let data = JSON.parse(xhr.responseText);
-                                data.error ? reject(new Error(data.error)) : resolve(data);
-                                break;
-                            default:
-                                resolve(xhr.responseText);
-                        }
+                        // switch (xhr.responseType) {
+                        //     case 'json':
+                        let data = JSON.parse(xhr.responseText);
+                        data.error ? reject(new Error(data.error)) : resolve(data);
+                        // break;
+                        // default:
+                        //     resolve(xhr.responseText);
+                        // }
                     } else {
                         reject(new Error(xhr.statusText));
                     }

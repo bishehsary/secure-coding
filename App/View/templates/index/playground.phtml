@@ -1,1 +1,27 @@
 <?php
+/** @var \FW\App\View $this */
+$json = $this->get('json');
+?>
+<div class="col-md-7">
+    <div class="list-group">
+        <div class="list-group-item">As you've been told our server side language is <code>PHP@7.1.1</code></div>
+        <div class="list-group-item">The framework is build specifically for this course</div>
+        <div class="list-group-item">
+            The DBMS we are using is <code>MySql@15.1 Distrib 10.1.21-MariaDB</code> [<code>xampp@3.2.2</code>]
+        </div>
+        <div class="list-group-item">
+            For Session Database we will be using <code>Redis@3.2.1</code> [<code>docker@toolbox</code>]
+        </div>
+        <div class="list-group-item">
+            We use NodeJs build tools for live coding and browser reloading <br>
+            <code>package.json</code> content<br><br>
+            <pre><code><?php echo $json ?></code></pre>
+        </div>
+    </div>
+
+    // xampp > mysql
+    // redis > docker
+    // nodejs
+    // gulp > server restart
+    // composer
+</div>

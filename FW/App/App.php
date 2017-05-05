@@ -8,10 +8,11 @@ class App
     const STATUS_UNAUTHORIZED = 1;
     const STATUS_NOT_FOUND = 2;
     const STATUS_OK = 3;
+
     const MODE_DEVELOPMENT = 1;
     const MODE_PRODUCTION = 2;
+
     private $config;
-    private $session;
 
     public $controller;
 
@@ -50,7 +51,7 @@ class App
             }
             $controllerName = "App\\Controller\\{$controllerName}Controller";
             /** @var Controller $controller */
-            $controller = new $controllerName($this->config, $this->session);
+            $controller = new $controllerName();
             $controller->process($actionName);
             return self::STATUS_OK;
         }

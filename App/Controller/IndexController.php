@@ -9,8 +9,7 @@ class IndexController extends Controller
 {
     function indexAction()
     {
-        // splash
-        $this->renderMater($this->view->render('index/index'), 0);
+        $this->renderMater($this->view->render('index/splash'), 0);
     }
 
     function whoamiAction()
@@ -20,24 +19,28 @@ class IndexController extends Controller
 
     function whoruAction()
     {
-        $this->renderMater($this->view->render('index/whoami'), 2);
+        $this->renderMater($this->view->render('index/whoru'), 2);
     }
 
     function playgroundAction()
     {
-        // xampp > mysql
-        // redis > docker
-        // nodejs
-        // gulp > server restart
-        // composer
+        $this->view->set('json', file_get_contents($this->config->root . '/package.json'));
         $this->renderMater($this->view->render('index/playground'), 3);
     }
 
     function frameworkAction()
     {
-        // Config
-        // index.php
-        // App.php, controller, view, session, request, response
+        $root = $this->config->root;
+        $this->view->set('codes', [
+            ['/App/config/config.php', file_get_contents("{$root}/App/config/config.php")],
+            ['/index.index', file_get_contents("{$root}/index.php")],
+            ['\FW\App\Config', file_get_contents("{$root}/FW/App/Config.php")],
+            ['\FW\App\App', file_get_contents("{$root}/FW/App/App.php")],
+            ['\FW\App\Controller', file_get_contents("{$root}/FW/App/Controller.php")],
+            ['\FW\App\View', file_get_contents("{$root}/FW/App/View.php")],
+            ['\FW\App\Request', file_get_contents("{$root}/FW/App/Request.php")],
+            ['\FW\App\Response', file_get_contents("{$root}/FW/App/Response.php")],
+        ]);
         $this->renderMater($this->view->render('index/framework'), 4);
     }
 
@@ -60,8 +63,9 @@ class IndexController extends Controller
     {
         $chapters = Heading::find(['parent' => 0]);
         $grands = [];
+        $this->view->set('total', Heading::find([], ['COUNT(*) AS `cnt`'])[0]['cnt']);
         foreach ($chapters as $index => $chapter) {
-            $children = Heading::find(['parent' => $chapter['id']]);
+            $children = Heading::find(['parent' => $chapter['id'], 'done' => 0]);
             $chapter['children'] = [];
             foreach ($children as $child) {
                 $chapter['children'][] = $child;
@@ -72,10 +76,26 @@ class IndexController extends Controller
         $this->renderMater($this->view->render('index/headings'), 7);
     }
 
+    function progressAction()
+    {
+        $action = $this->request->json('action', '');
+        $response = [];
+        if ($action) {
+            switch ($action) {
+                case 'complete':
+                    $id = +$this->request->json('id');
+                    $heading = new Heading();
+                    $response['result'] = $heading->markAsDone($id);
+                    break;
+            }
+            $this->response->json($response);
+        }
+    }
+
     private function renderMater($content, $index)
     {
         $pages = [
-            ['Splash', 'index/index'],
+            ['', 'index/index'],
             ['Who Am I', 'index/whoami'],
             ['Who R U', 'index/whoru'],
             ['Playground', 'index/playground'],

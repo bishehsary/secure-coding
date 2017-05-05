@@ -1,24 +1,89 @@
 <?php
 /** @var \FW\App\View $this */
 $headings = $this->get('headings');
-$headerCount = 1;
+$totalCount = $this->get('total');
+$topicCount = 0;
+$headerCount = 0;
 ?>
 <div class="container">
+    <div class="progress">
+        <div class="progress-bar" style="width:50%">30%</div>
+    </div>
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-7" id="listing">
+            <br>
             <?php foreach ($headings as $heading) {
+                ++$headerCount;
                 echo '<div class="list-group">';
-                echo "<div class='list-group-item active' id='chapter{$heading['id']}'><h4 class='list-group-item-heading'>{$heading['title']}</h4></div>";
-                $subHeaderCount = 1;
+                echo "<div class='list-group-item disabled' id='chapter{$heading['id']}'><h4 class='list-group-item-heading'>{$heading['title']}</h4></div>";
                 foreach ($heading['children'] as $child) {
+                    ++$topicCount;
                     $link = "/chapter{$heading['id']}?code=${child['id']}";
-                    echo "<div class='list-group-item'><span class='badge'>{$headerCount}-{$subHeaderCount}</span> <a href='{$link}'>{$child['title']}</a></div>";
-                    ++$subHeaderCount;
+                    echo "<div class='list-group-item'><span data-id='{$child['id']}' class='mkp glyphicon glyphicon-unchecked'></span> <a href='{$link}'>{$child['title']}</a></div>";
                 }
                 echo '</div>';
-                ++$headerCount;
             }
             ?>
         </div>
     </div>
 </div>
+
+<script>
+    const totalCount = +'<?php echo $totalCount - $headerCount;?>';
+    let topicCount = +'<?php echo $topicCount;?>';
+    updateProgress();
+    document.getElementById('listing').addEventListener('click', e => {
+        let checkbox = e.target || e.srcElement;
+        let classList = checkbox.classList;
+        if (classList.contains('mkp') && !classList.contains('done')) {
+            let id = checkbox.getAttribute('data-id');
+            ApiService.getInstance().post('index/progress', {action: 'complete', id: +id})
+                .then(res => {
+                    if (res.result) {
+                        classList.remove('glyphicon-unchecked');
+                        classList.add('glyphicon-check');
+                        classList.add('done');
+                        --topicCount;
+                        updateProgress();
+                    }
+                })
+                .catch(console.error.bind(console))
+        }
+    }, false);
+
+    function updateProgress() {
+        let percent = Math.ceil((totalCount - topicCount) * 10000 / totalCount) / 100;
+        let progressbar = document.querySelector('.progress-bar');
+        progressbar.style.width = `${percent}%`;
+        progressbar.innerText = `${percent}%`;
+    }
+</script>
+
+<style>
+    .progress {
+        position: relative;
+        top: -36px;
+        left: 150px;
+        width: 400px;
+    }
+
+    .list-group-item-heading {
+        color: #333 !important;
+    }
+
+    .list-group-item > a {
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+    .mkp {
+        display: inline-block;
+        position: relative;
+        cursor: pointer;
+        color: #8abeb7;
+    }
+
+    .mkp.done {
+        color: green;
+    }
+</style>

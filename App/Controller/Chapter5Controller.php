@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use FW\App\Validator;
-
 class Chapter5Controller extends Chapter
 {
     protected function code45()// Data Validation Strategies
     {
         $this->getCode(__FILE__, 'code45');
+        $this->view->set('link', [
+            ['OWASP Data Validation', 'https://www.owasp.org/index.php/Data_Validation']
+        ]);
         //<code45>
         //</code45>
         $this->view->set('result', $this->view->render('sample/code45'));

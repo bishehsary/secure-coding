@@ -1,42 +1,28 @@
 {
-  "name": "pdf",
+  "name": "secure-coding",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Secure Coding",
   "scripts": {
-    "test": "php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml Test",
     "dev": "gulp",
+    "build": "gulp deploy",
     "serve": "gulp --gulpfile resources/gulp/run.js",
-    "build": "gulp deploy"
+    "test": "php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml Test"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "HBTB <bishehsary@gmail.com>",
+  "private": true,
+  "license": "UNLISENCED",
+  "dependencies": {
+    "bootstrap": "3",
+    "jquery": "^3.2.1"
+  },
   "devDependencies": {
-    "autoprefixer": "^6.7.5",
     "browser-sync": "^2.18.8",
-    "css-mqpacker": "^5.0.1",
-    "csswring": "^5.1.1",
-    "doiuse": "^2.5.0",
     "fs-extra": "^2.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
     "gulp-connect-php": "^1.0.0",
-    "gulp-postcss": "^6.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.4.1",
-    "gulp-uglify": "^2.0.1",
-    "postcss-reporter": "^3.0.0",
-    "stylelint": "^7.9.0"
-  },
-  "dependencies": {
-    "body-parser": "^1.17.1",
-    "bootstrap": "3",
-    "cors": "^2.8.1",
-    "express": "^4.15.2",
-    "jquery": "^3.2.1",
-    "morgan": "^1.8.1",
-    "msgpack5": "^3.4.1",
-    "nodemon": "^1.11.0"
+    "gulp-uglify": "^2.0.1"
   }
 }

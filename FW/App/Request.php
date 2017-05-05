@@ -6,11 +6,6 @@ namespace FW\App;
 
 class Request
 {
-    const GET = 1;
-    const POST = 2;
-    const SERVER = 3;
-    const COOKIE = 4;
-
     private static $instance;
     private $jsonStorage;
 

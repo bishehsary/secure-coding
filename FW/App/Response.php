@@ -22,7 +22,7 @@ class Response
 
     public function contentType($contentType)
     {
-        $this->header('Content-Type', $contentType);
+        return $this->header('Content-Type', $contentType);
     }
 
     public function redirect($url)

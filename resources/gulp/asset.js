@@ -1,9 +1,6 @@
-let gulp = require('gulp'),
-    concat = require('gulp-concat'),
-    uglify = require('gulp-uglify'),
-    // htmlmin = require('gulp-htmlmin'),
-    // imageop = require('gulp-image-optimization'),
-    fse = require('fs-extra');
+const gulp = require('gulp');
+const concat = require('gulp-concat');
+const uglify = require('gulp-uglify');
 
 module.exports = function (dir, setting) {
 
@@ -54,30 +51,4 @@ module.exports = function (dir, setting) {
         watch: ['asset:watch'],
         tasks: ['asset:lib', 'asset:font', 'asset:image', 'asset:js']
     };
-
-    function minifyHtml(stream) {
-        return stream.pipe(htmlmin({
-            removeComments: true,
-            collapseWhitespace: true,
-            conservativeCollapse: true,
-            collapseBooleanAttributes: true,
-            keepClosingSlash: true
-        }))
-    }
-
-    function findInFileAndReplace(file, search, replace) {
-        try {
-            if (!fse.existsSync(file)) return;
-            let content = fse.readFileSync(file, {encoding: 'utf8'});
-            content = content.replace(search, replace);
-            fse.writeFileSync(file, content);
-        } catch (e) {
-            console.error(e.message);
-        }
-    }
-
-    function getDate() {
-        let d = new Date();
-        return `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${d.getHours()}:${d.getMinutes()}`;
-    }
 };

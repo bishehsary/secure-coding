@@ -1,7 +1,7 @@
 <?php
 /** @var \FW\App\View $this */
 $serverCode = $this->get('serverCode');
-$clientCode = $this->get('clientCode');
+$clientCode = \FW\Util\Util::removeTag($this->get('clientCode'), 'style');
 $link = $this->get('link');
 $next = $this->get('next');
 $prev = $this->get('prev');
