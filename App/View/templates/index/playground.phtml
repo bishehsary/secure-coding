@@ -1,5 +1,6 @@
 <?php
 /** @var \FW\App\View $this */
+$composer = $this->get('composer');
 $json = $this->get('json');
 ?>
 <div class="col-md-7">
@@ -11,6 +12,11 @@ $json = $this->get('json');
         </div>
         <div class="list-group-item">
             For Session Database we will be using <code>Redis@3.2.1</code> [<code>docker@toolbox</code>]
+        </div>
+        <div class="list-group-item">
+            We use Composer for PHP package management <br>
+            <code>composer.json</code> content<br><br>
+            <pre><code><?php echo $composer ?></code></pre>
         </div>
         <div class="list-group-item">
             We use NodeJs build tools for live coding and browser reloading <br>

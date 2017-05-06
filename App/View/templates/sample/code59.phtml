@@ -1,3 +1,40 @@
 <div class="container">
-    <h1>code59</h1>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Apache</legend>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <strong>httpd.conf</strong> <br>
+                    Find <code>Options Includes Indexes FollowSymLinks MultiViews</code> <br>
+                    Replace with <code>Options Includes FollowSymLinks MultiViews</code> <br>
+                    For Specific Directory:
+                    <pre><code>
+&lt;Directory /usr/local/apache2/htdocs/list-me>
+    Options +Indexes
+&lt;/Directory>
+                </code></pre>
+                </div>
+                <div class="list-group-item">
+                    <strong>.htaccess</strong>
+                    <pre><code>
+Options -Indexes
+                </code></pre>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Nginx</legend>
+            Syntax: <code>autoindex on | off;</code> <br>
+            Default: <code>autoindex off;</code> <br>
+            Context: <code>http, server, location</code> <br>
+            <strong>nginx.conf</strong>
+            <pre><code>
+location /list-me/ {
+    autoindex on;
+}
+                </code></pre>
+        </fieldset>
+    </div>
 </div>

@@ -33,7 +33,7 @@ class Request
         return $this->retrieve($_POST, $name, $defaultValue);
     }
 
-    function hasJson($name)
+    function hasXhr($name)
     {
         if (!isset($this->jsonStorage)) {
             $this->jsonStorage = json_decode(file_get_contents('php://input'), true);
@@ -41,7 +41,7 @@ class Request
         return isset($this->jsonStorage[$name]);
     }
 
-    function json($name = null, $defaultValue = null)
+    function xhr($name = null, $defaultValue = null)
     {
         if (!isset($this->jsonStorage)) {
             $this->jsonStorage = json_decode(file_get_contents('php://input'), true);
@@ -69,16 +69,21 @@ class Request
         return $this->retrieve($_COOKIE, $name, $defaultValue);
     }
 
-    function has($name)
+    function hasFile($name)
     {
-        return isset($_REQUEST[$name]);
+        return isset($_FILES[$name]);
+    }
+
+    function file($name = null)
+    {
+        return $this->retrieve($_FILES, $name, null);
     }
 
     private function retrieve($storage, $name, $defaultValue)
     {
         if (!isset($name)) return $storage;
         if (isset($storage[$name])) return $storage[$name];
-        return isset($defaultValue) ? $defaultValue : null;
+        return $defaultValue;
     }
 
     static function getInstance(): Request

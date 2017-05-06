@@ -83,7 +83,7 @@ class SessionController extends Controller
             if ($this->request->get('delete', 0)) {
                 $this->regenerateSession();
             } else {
-                $username = $this->request->json('username', '');
+                $username = $this->request->xhr('username', '');
                 if ($username) {
                     $this->tokenSession->set('user', ['username' => $username]);
                 }

@@ -16,8 +16,8 @@ gulp.task('browser-sync', ['php'], function () {
     browserSync({
         proxy: 'sc.io:8010',
         host: 'sc.io',
-        https: true,
-        port: 443,
+        // https: true,
+        port: 80,
         open: true,
         notify: false
     });

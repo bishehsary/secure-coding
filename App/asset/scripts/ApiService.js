@@ -49,14 +49,12 @@ class ApiService {
                 if (xhr.readyState === XMLHttpRequest.DONE) {
                     this._onAfterReceive(xhr);
                     if (xhr.status === 200) {
-                        // switch (xhr.responseType) {
-                        //     case 'json':
-                        let data = JSON.parse(xhr.responseText);
-                        data.error ? reject(new Error(data.error)) : resolve(data);
-                        // break;
-                        // default:
-                        //     resolve(xhr.responseText);
-                        // }
+                        try {
+                            let data = JSON.parse(xhr.responseText);
+                            data && data.error ? reject(new Error(data.error)) : resolve(data);
+                        } catch (e) {
+                            reject(xhr.responseText);
+                        }
                     } else {
                         reject(new Error(xhr.statusText));
                     }
@@ -81,17 +79,37 @@ class ApiService {
 
     /**
      *
-     * @param {string} endpoint
-     * @param {Object} data
+     * @param {String} endpoint
+     * @param {Object|ArrayBuffer|Blob|Document|FormData} data
      */
     post(endpoint, data) {
-        return this._xhr('POST', endpoint, JSON.stringify(data));
+        if (data.constructor.name === 'Object') {
+            data = ApiService.toFormData(data);
+        }
+        return this._xhr('POST', endpoint, data);
+    }
+
+    /**
+     *
+     * @param data
+     * @returns {FormData}
+     */
+    static toFormData(data) {
+        let fd = new FormData();
+        for (let keys = Object.keys(data), i = keys.length; i--;) {
+            fd.append(keys[i], data[keys[i]]);
+        }
+        return fd;
+    }
+
+    /**
+     *
+     * @returns {ApiService}
+     */
+    static getInstance() {
+        if (!ApiService._instance) {
+            ApiService._instance = new ApiService();
+        }
+        return ApiService._instance;
     }
 }
-
-ApiService.getInstance = function () {
-    if (!ApiService._instance) {
-        ApiService._instance = new ApiService();
-    }
-    return ApiService._instance;
-};

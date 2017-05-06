@@ -63,6 +63,7 @@ class Response
     {
         $this->contentHasBeenSent = true;
         echo $content;
+        flush();
     }
 
     static function getInstance(): Response

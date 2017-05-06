@@ -1,3 +1,117 @@
+<?php
+/** @var \FW\App\View $this */
+$directFiles = $this->get('directFiles');
+$apiFiles = $this->get('apiFiles');
+?>
 <div class="container">
-    <h1>code56</h1>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Ajax File Upload</legend>
+            <form method="post" class="col-md-4">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" name="name" id="name" value="Test" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="image">Profile Picture</label>
+                    <input type="file" name="image" id="image" accept="image/*">
+                </div>
+                <img id="preview" class="img-rounded img-responsive">
+                <div class="form-group">
+                    <button type="submit" name="upload" class="btn btn-primary">Upload Picture</button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    <br><br>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <legend>Investigation</legend>
+            <div class="list-group-item">So, What's Wrong here?
+                <ul>
+                    <li>Overwriting files with the same name</li>
+                    <li class="text-success">Generating random file name with zero collision [parameters]</li>
+                    <li>Very straight forward path mapping [name -> asset/upl/name]</li>
+                    <li class="text-success">Using an API to deliver file</li>
+                </ul>
+            </div>
+        </fieldset>
+    </div>
+    <br><br>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <legend>Direct Mapping</legend>
+            <ul id="files-list">
+                <?php foreach ($directFiles as $file) {
+                    echo "<li><a href='{$file[1]}' target='_blank'><img class='img-responsive img-thumbnail' src='{$file[1]}'></a></li>";
+                } ?>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Using API</legend>
+            <ul id="files-list-2">
+                <?php foreach ($apiFiles as $file) {
+                    $url = "chapter8/file/{$file}";
+                    echo "<li><a href='{$url}' target='_blank'><img class='img-responsive thumbnail' src='{$url}' alt='{$file}'></a></li>";
+                } ?>
+            </ul>
+        </fieldset>
+    </div>
 </div>
+
+<script>
+    const api = ApiService.getInstance();
+    const fileInput = document.querySelector('input[type=file]');
+    const form = document.querySelector('form');
+    const btn = document.querySelector('button[name=upload]');
+    const imgPreview = document.getElementById('preview');
+    // form submit handler
+    btn.addEventListener('click', e => {
+        e.preventDefault();
+        let files = fileInput.files;
+        if (!files.length) return false;
+        let fd = new FormData(form);
+        api.post('chapter8/upload', fd)
+            .then(res => {
+                if (res.path) {
+                    let item = document.createElement('li');
+                    item.innerHTML = `<a href="${res.path}">${files[0].name}</a>`;
+                    document.getElementById('files-list').appendChild(item);
+                }
+            })
+            .catch(err => console.error(err));
+        return false;
+    }, false);
+    // preview
+    fileInput.addEventListener('change', e => {
+        let files = fileInput.files;
+        if (files.length) {
+            let fd = new FileReader();
+            fd.addEventListener('load', e => {
+                imgPreview.setAttribute('src', e.target.result);
+            }, false);
+            fd.readAsDataURL(files[0]);
+        }
+    }, false);
+</script>
+
+<style>
+    #preview {
+        width: 256px;
+        height: auto;
+        margin: 20px auto;
+    }
+
+    #files-list li, #files-list-2 li {
+        list-style: none;
+        display: inline-block;
+        margin: 10px;
+    }
+
+    .img-responsive {
+        width: 128px;
+        height: auto;
+    }
+</style>

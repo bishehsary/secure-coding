@@ -24,6 +24,7 @@ class IndexController extends Controller
 
     function playgroundAction()
     {
+        $this->view->set('composer', file_get_contents($this->config->root . '/composer.json'));
         $this->view->set('json', file_get_contents($this->config->root . '/package.json'));
         $this->renderMater($this->view->render('index/playground'), 3);
     }
@@ -78,12 +79,12 @@ class IndexController extends Controller
 
     function progressAction()
     {
-        $action = $this->request->json('action', '');
+        $action = $this->request->post('action', '');
         $response = [];
         if ($action) {
             switch ($action) {
                 case 'complete':
-                    $id = +$this->request->json('id');
+                    $id = +$this->request->post('id');
                     $heading = new Heading();
                     $response['result'] = $heading->markAsDone($id);
                     break;
