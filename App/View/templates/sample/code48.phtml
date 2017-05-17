@@ -1,53 +1,81 @@
 <?php
 /** @var \FW\App\View $this */
-$error = $this->get('error');
-$user = $this->get('user');
+$error = $this->get('error', []);
+$errorMessage = '';
+if (array_search('movie', $error) !== false) {
+    $errorMessage = 'Wrong Movie input';
+} elseif (array_search('year', $error) !== false) {
+    $errorMessage = 'Wrong Year input';
+}
+$movies = $this->get('movies', []);
 ?>
 <div class="container">
-    <?php if (!$user || $error): ?>
-        <fieldset class="col-sm-6">
-            <legend>User Login Form</legend>
-            <?php echo $error ? "<p class='alert alert-danger'>{$error}</p>" : '' ?>
-            <form name="loginForm" action="?controller=chapter2&code=21" method="post">
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Fundamentals</legend>
+            <div class="list-group">
+                <div class="list-group-item">What should be validated?</div>
+                <div class="list-group-item">What are some of validation rules?</div>
+                <div class="list-group-item">Can you think of an algorithm?</div>
+                <div class="list-group-item">Client vs. Server side validation</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Select A movie</legend>
+            <?php echo $errorMessage ? "<p class='alert alert-danger'>{$errorMessage}</p>" : '' ?>
+            <form name="movieForm" action="?controller=chapter5&code=48" method="post">
                 <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" id="username" class="form-control">
+                    <label for="movie">Movie</label>
+                    <input type="text" name="movie" id="movie" class="form-control"
+                           value="<?php echo $this->get('movie', '') ?>">
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" name="password" id="password" class="form-control">
+                    <label for="year">Year</label>
+                    <input type="number" name="year" id="year" class="form-control" size="4"
+                           value="<?php echo $this->get('year', '') ?>">
                 </div>
                 <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary" name="login" value="1">Login</button>
+                    <button type="submit" class="btn btn-primary" name="search" value="1">Search</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 </div>
             </form>
         </fieldset>
-    <?php elseif ($user): ?>
-        <h1>Welcome <?php echo $user['username'] ?></h1>
-        <form action="?controller=chapter2&code=21" method="post">
-            <button type="submit" name="logout" value="1" class="btn btn-danger">Logout</button>
-        </form>
-    <?php endif; ?>
+    </div>
+    <br><br>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                </tr>
+                <?php foreach ($movies as $movie) {
+                    echo "<tr><td>{$movie['title']}</td><td>{$movie['release_year']}</td></tr>";
+                } ?>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
-    let form = document.querySelector('form[name=loginForm]');
-    let userInput = document.getElementById('username');
-    let passInput = document.getElementById('password');
+    let form = document.querySelector('form[name=movieForm]');
+    let movieInput = document.getElementById('movie');
+    let yearInput = document.getElementById('year');
     form.addEventListener('submit', event => {
-        let username = userInput.value;
-        let password = passInput.value;
-        userInput.parentElement.classList.remove('has-error');
-        passInput.parentElement.classList.remove('has-error');
+        let movie = movieInput.value;
+        let year = yearInput.value;
+        movieInput.parentElement.classList.remove('has-error');
+        yearInput.parentElement.classList.remove('has-error');
         let isValid = true;
-        if (8 < username.length || username.length < 4 || !/^\w[\w\d]+$/i.exec(username)) {
+        if (8 < movie.length || movie.length < 4 || !/^\w[\w\d]+$/i.exec(movie)) {
             isValid = false;
-            userInput.parentElement.classList.add('has-error');
+            movieInput.parentElement.classList.add('has-error');
         }
-        if (10 < password.length || password.length < 5) {
+        if (isNaN(year) || !/\d{4}/.test(year)) {
             isValid = false;
-            passInput.parentElement.classList.add('has-error');
+            yearInput.parentElement.classList.add('has-error');
         }
         if (!isValid) {
             event.preventDefault();

@@ -44,8 +44,8 @@ class App
         if (!$controllerName) $controllerName = 'index';
         if (!$actionName) $actionName = 'index';
         if (Acl::isAllowed($role, $controllerName, $actionName)) {
-            $this->controller = strtoupper($controllerName[0]) . substr($controllerName, 1);
-            $controllerPath = __DIR__ . "/../../App/Controller/{$this->controller}Controller.php";
+            $this->controller = ucfirst($controllerName);
+            $controllerPath = realpath(__DIR__ . "/../../App/Controller/{$this->controller}Controller.php");
             if (!file_exists($controllerPath)) {
                 return self::STATUS_NOT_FOUND;
             }

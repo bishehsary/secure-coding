@@ -1,3 +1,75 @@
+<?php
+/** @var \FW\App\View $this */
+$levels = $this->get('levels');
+?>
 <div class="container">
-    <h1>code69</h1>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <legend>Error vs. Exception</legend>
+            <div class="list-group">
+                <div class="list-group-item">What is the difference?</div>
+                <div class="list-group-item">What are error levels?</div>
+                <div class="list-group-item">
+                    <pre><code>
+    try {
+        // The part in which a predictable error might happen
+    } catch (Exception $e){
+        // The part in which we handle the error
+    } finally {
+        // The part that we always want to execute
+    }
+                        </code></pre>
+                </div>
+                <div class="list-group-item">What about <code>RunTimeException</code>?</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-8">
+            <legend>PHP</legend>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <pre><code>
+callable set_exception_handler ( callable $exception_handler )
+                        </code></pre>
+                    <pre><code>
+set_exception_handler(function (Exception $e) {
+    // code for handling uncaught exceptions
+});
+                            </code></pre>
+                </div>
+                <div class="list-group-item">
+                    <pre><code>
+mixed set_error_handler ( callable $error_handler [, int $error_types = E_ALL | E_STRICT ] )
+                        </code></pre>
+                    <pre><code>
+set_error_handler(function ($errno, $errstr, $errfile, $errline ,array $errcontex) {
+    // code for all errors - convert Error to Exception
+    throw new ErrorException($errstr, 0, $errno, $errfile, $errline);
+});
+                        </code></pre>
+                </div>
+                <div class="list-group-item">
+                    Error levels constants:
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Integer</th>
+                            <th>Constant</th>
+                            <th>Description</th>
+                        </tr>
+                        <?php foreach ($levels as $code => $name) {
+                            echo "<tr><td>{$code}</td><td><code>{$name[0]}</code></td><td>{$name[1]}</td></tr>";
+                        } ?>
+                    </table>
+
+                </div>
+                <div class="list-group-item">Setting / Getting error level
+                    <pre><code>int error_reporting ([ int $level])</code></pre>
+                </div>
+                <div class="list-group-item">Default value
+                    <code>E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED</code>
+                </div>
+            </div>
+        </fieldset>
+    </div>
 </div>

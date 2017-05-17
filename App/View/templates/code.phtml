@@ -51,6 +51,7 @@ $prev = $this->get('prev');
     });
     // next
     document.addEventListener('keydown', e => {
+        if (e.target.tagName.toLowerCase() === 'input') return false;
         if (e.keyCode === 39) {
             // right
             let next = document.getElementById('next-btn');

@@ -1,3 +1,64 @@
 <div class="container">
-    <h1>code70</h1>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <legend>Web Server Level</legend>
+            <div class="list-group">
+                <div class="list-group-item">Apache
+                    <pre><code>&lt;VirtualHost *:80>
+    # . . .
+    ErrorDocument 404 /custom_404.html
+    ErrorDocument 500 /custom_50x.html
+    ErrorDocument 502 /custom_50x.html
+    ErrorDocument 503 /custom_50x.html
+    ErrorDocument 504 /custom_50x.html
+    # . . .
+&lt;/VirtualHost></code></pre>
+                </div>
+            </div>
+            <div class="list-group">
+                <div class="list-group-item">Nginx
+                    <pre><code>server {
+    # . . .
+    error_page 404 /custom_404.html;
+    error_page 500 502 503 504 /custom_50x.html;
+    # . . .
+}                        </code></pre>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-7">
+            <legend>Framewrok Level</legend>
+            <div class="list-group">
+                <div class="list-group-item">
+                    <pre><code>abstract class Controller
+{
+    // . . .
+    public function notFoundPage($message = null)
+    {
+        $this->response->header('HTTP/1.1 404 Not Found');
+        $this->view->set('message', $message ? $message : '');
+        $this->view->html($this->view->render('not-found'));
+    }
+
+    public function unauthorizedPage($message = null)
+    {
+        $this->response->header('HTTP/1.1 401 Unauthorized');
+        $this->view->set('message', $message ? $message : '');
+        $this->view->html($this->view->render('unauthorized'));
+    }
+
+    public function errorPage($e = null)
+    {
+        $this->response->header('HTTP/1.1 500 Internal Server Error');
+        $this->view->set('error', $e ? $e : 'No details available');
+        $this->view->html($this->view->render('error'));
+    }
+    // . . .
+}                       </code></pre>
+                </div>
+            </div>
+        </fieldset>
+    </div>
 </div>

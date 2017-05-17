@@ -1,3 +1,37 @@
+<?php
+/** @var \FW\App\View $this */
+$codes = $this->get('codes');
+?>
 <div class="container">
-    <h1>code71</h1>
+    <div class="row">
+        <div class="col-md-7">
+            <table class="table table-bordered" id="codes-table">
+                <tr>
+                    <th>Response Group</th>
+                    <th>Status Code</th>
+                    <th>Description</th>
+                </tr>
+                <?php foreach ($codes as $code) {
+                    $isFirst = true;
+                    foreach ($code[2] as $key => $desc) {
+                        echo '<tr>';
+                        if ($isFirst) {
+                            $isFirst = false;
+                            $rowCount = count($code[2]);
+                            echo "<th rowspan='{$rowCount}'><h2 class='text-danger'>{$code[0]}</h2><br><h4>{$code[1]}</h4></th>";
+                        }
+                        echo "<td>{$key}</td><td>{$desc}</td>";
+                        echo '</tr>';
+                    }
+                } ?>
+
+            </table>
+        </div>
+    </div>
 </div>
+
+<style>
+    #codes-table th, #codes-table td {
+        vertical-align: middle;
+    }
+</style>

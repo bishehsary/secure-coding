@@ -94,7 +94,7 @@ abstract class Controller
     public function errorPage($e = null)
     {
         $this->response->header('HTTP/1.1 500 Internal Server Error');
-        $this->view->set('error', $e ? $e : 'No details available');
+        $this->view->set('message', $e ? $e : 'No details available');
         $this->view->html($this->view->render('error'));
     }
 

@@ -1,23 +1,47 @@
 <?php
 /** @var \FW\App\View $this */
 $block = $this->get('theme');
+$films = $this->get('films', []);
+$selectedCategory = $this->get('category', 0);
+$categories = $this->get('categories', []);
 ?>
 <div class="container">
-    <fieldset class="col-sm-2">
-        <form action="?controller=chapter5&code=46" method="post" name="pingForm">
-            <div class="form-group">
-                <label for="theme">Theme</label>
-                <select name="theme" id="theme" class="form-control">
-                    <option value="dark">Dark</option>
-                    <option value="light">Light</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <button type="submit" name="apply" class="btn btn-primary">Apply Theme</button>
-            </div>
-            <div class="form-group">
-                <?php echo $block; ?>
-            </div>
-        </form>
-    </fieldset>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Search Movies</legend>
+            <form action="?controller=chapter5&code=46" method="post" name="pingForm">
+                <div class="form-group">
+                    <label for="film">By Movie's Name</label>
+                    <input type="text" name="film" id="film" class="form-control"
+                           value="<?php echo $this->get('film', '') ?>">
+                </div>
+                <div class="form-group">
+                    <label for="category">OR by Category</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="0">All</option>
+                        <?php foreach ($categories as $category) {
+                            $selected = $category['category_id'] == $selectedCategory ? ' selected ' : '';
+                            echo "<option {$selected} value='{$category['category_id']}'>{$category['name']}</option>";
+                        } ?>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" name="search" class="btn btn-primary">Search</button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                </tr>
+                <?php foreach ($films as $film) {
+                    echo "<tr><td>{$film['title']}</td><td>{$film['release_year']}</td></tr>";
+                } ?>
+            </table>
+        </div>
+    </div>
 </div>

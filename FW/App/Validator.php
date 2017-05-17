@@ -21,7 +21,7 @@ class Validator
 
     /**
      * [
-     *  'username' => ['minlength'=> number, 'maxlength'=> number, 'match'=> regex],
+     *  'username' => ['minLength'=> number, 'maxLength'=> number, 'match'=> regex],
      *  'age' => ['min'=> number, 'max'=> number]
      * ]
      * @param array $rules
@@ -33,7 +33,8 @@ class Validator
 
     /**
      * @param $storage
-     * @return array|bool
+     * Returns names of failed rules in case of failure, or true if all rules are fulfilled
+     * @return string[]|bool
      */
     public function validate($storage)
     {
@@ -45,7 +46,7 @@ class Validator
                         if (!isset($errors[$fieldName])) {
                             $errors[$fieldName] = [];
                         }
-                        $errors[$fieldName][$ruleName] = false;
+                        $errors[$fieldName][] = $ruleName;
                     }
                 }
             }
@@ -74,6 +75,14 @@ class Validator
 
     private function isOfType($type, $value)
     {
+        switch ($type) {
+            case self::TYPE_INT:
+                return filter_var($value, FILTER_VALIDATE_INT);// is_int($value)
+            case self::TYPE_EMAIL:
+                return filter_var($value, FILTER_VALIDATE_EMAIL);
+            case self::TYPE_URL:
+                return filter_var($value, FILTER_VALIDATE_URL);
+        }
         return true;
     }
 }
