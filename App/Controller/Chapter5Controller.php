@@ -25,7 +25,7 @@ class Chapter5Controller extends Chapter
             ['Ctype', 'http://php.net/manual/en/ref.ctype.php']
         ]);
         //<code46>
-        $statement = $this->database()->query("SELECT category_id,`name` FROM category ORDER BY `name`");
+        $statement = $this->pdo()->query("SELECT category_id,`name` FROM category ORDER BY `name`");
         $categories = $statement->fetchAll(\PDO::FETCH_ASSOC);
         $this->view->set('categories', $categories);
         if ($this->request->hasPost('search')) {
@@ -55,7 +55,7 @@ class Chapter5Controller extends Chapter
             if (count($query) > 0) {
                 $query = join(' AND ', $query);
                 $query = "SELECT title,release_year FROM film {$join} WHERE {$query}";
-                $statement = $this->database()->query($query);
+                $statement = $this->pdo()->query($query);
                 $this->view->set('films', $statement->fetchAll(\PDO::FETCH_ASSOC));
                 $this->view->set('query', $query);
             }
@@ -66,7 +66,7 @@ class Chapter5Controller extends Chapter
 
     private function code46Before()
     {
-        $statement = $this->database()->query("SELECT category_id,`name` FROM category ORDER BY `name`");
+        $statement = $this->pdo()->query("SELECT category_id,`name` FROM category ORDER BY `name`");
         $categories = $statement->fetchAll(\PDO::FETCH_ASSOC);
         $this->view->set('categories', $categories);
         if ($this->request->hasPost('search')) {
@@ -91,7 +91,7 @@ class Chapter5Controller extends Chapter
             if (count($query) > 0) {
                 $query = join(' AND ', $query);
                 $query = "SELECT title,release_year FROM film {$join} WHERE {$query}";
-                $statement = $this->database()->query($query);
+                $statement = $this->pdo()->query($query);
 //                $query = "SELECT title,release_year FROM film {$join} WHERE {$query}";
 //                $statement = $this->database()->prepare($query);
 //                $statement->execute($values);
@@ -105,27 +105,30 @@ class Chapter5Controller extends Chapter
     protected function code47()// Sanitize with Blacklist
     {
         $this->getCode(__FILE__, 'code47');
-        $statement = $this->database()->query("SELECT category_id,`name` FROM category ORDER BY `name`");
-        $categories = $statement->fetchAll(\PDO::FETCH_ASSOC);
-        $this->view->set('categories', $categories);
+        $this->view->set('link', [
+            ['mysql', 'http://php.net/manual/en/function.mysql-real-escape-string.php'],
+            ['mysqli', 'http://php.net/manual/en/mysqli.real-escape-string.php'],
+            ['discussion', 'http://stackoverflow.com/questions/5741187/sql-injection-that-gets-around-mysql-real-escape-string']
+        ]);
         //<code47>
-        if ($this->request->hasPost('search')) {
-            $query = [];
-            $join = '';
-            $category = (int)$this->request->post('category');
-            if ($category && !preg_match("/\D/", $category)) {
-                $query[] = " category_id = {$category} ";
-                $join = ' LEFT JOIN film_category AS fc ON (fc.film_id=film.`film_id`) ';
-            }
-            if (count($query) > 0) {
-                $query = join(' AND ', $query);
-                $query = "SELECT title,release_year FROM film {$join} WHERE {$query}";
-                $statement = $this->database()->query($query);
-                $this->view->set('films', $statement->fetchAll(\PDO::FETCH_ASSOC));
-                $this->view->set('query', $query);
-            }
+        $mysqli = $this->mysqli();
+        $mysqli->set_charset('gbk');
+        $values = [
+            ['value' => "1' or 1=1"],
+            ['value' => '1" or 1=1'],
+            ['value' => '1\x27 or 1=1'],
+            ['value' => "縗' or 1=1"],
+            ['value' => "\xbf\x27 OR 1=1"],
+        ];
+        foreach ($values as $index => $value) {
+            $escape = $mysqli->real_escape_string($value['value']);
+            $result = $mysqli->query("SELECT * FROM actor WHERE actor_id='{$escape}'");
+            $values[$index]['escape'] = $escape;
+            $values[$index]['rows'] = $result->num_rows;
+            $result->close();
         }
         //</code47>
+        $this->view->set('values', $values);
         $this->view->set('result', $this->view->render('sample/code47'));
     }
 
@@ -155,7 +158,7 @@ class Chapter5Controller extends Chapter
             $validation = $validator->validate($this->request->post());
             $validation = $validation === true ? [] : array_keys($validation);
             if (empty($validation)) {
-                $statement = $this->database()->prepare("SELECT title,release_year FROM `film` WHERE `title` LIKE ? AND release_year>?");
+                $statement = $this->pdo()->prepare("SELECT title,release_year FROM `film` WHERE `title` LIKE ? AND release_year>?");
                 $statement->execute(["%{$movie}%", $year]);
                 $this->view->set('movies', $statement->fetchAll(\PDO::FETCH_ASSOC));
             } else {

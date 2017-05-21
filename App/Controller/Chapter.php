@@ -9,7 +9,17 @@ use FW\App\Database;
 
 abstract class Chapter extends Controller
 {
-    private static $db;
+    private static $pdo;
+    private static $mysqli;
+    private $dbConfig = [
+        'dbms' => 'mysql',
+        'database' => 'sakila',
+        'host' => 'localhost',
+        'port' => 3306,
+        'username' => 'root',
+        'password' => '',
+        'generateSchema' => false
+    ];
 
     function indexAction()
     {
@@ -46,22 +56,29 @@ abstract class Chapter extends Controller
         $this->view->html($this->view->render('code'));
     }
 
-    protected function database()
+    /**
+     * @return \PDO
+     */
+    protected function pdo()
     {
         $key = 'sakila';
-        if (!self::$db) {
-            Database::init([
-                'dbms' => 'mysql',
-                'database' => 'sakila',
-                'host' => 'localhost',
-                'port' => 3306,
-                'username' => 'root',
-                'password' => '',
-                'generateSchema' => false
-            ], $key);
-            self::$db = Database::getInstance($key);
+        if (!self::$pdo) {
+            Database::init($this->dbConfig, $key);
+            self::$pdo = Database::getInstance($key);
         }
-        return self::$db;
+        return self::$pdo;
+    }
+
+    /**
+     * @return \mysqli
+     */
+    protected function mysqli()
+    {
+        $dbConfig = $this->dbConfig;
+        if (!self::$mysqli) {
+            self::$mysqli = new \mysqli($dbConfig['host'], $dbConfig['username'], null, $dbConfig['database']);
+        }
+        return self::$mysqli;
     }
 
     protected function getCode($file, $tplName)

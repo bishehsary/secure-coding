@@ -20,7 +20,7 @@ class Chapter3Controller extends Chapter
         $this->getCode(__FILE__, 'code27');
         $id = 100;
         $this->view->set('deleteLink', $this->url('chapter3') . "?code=27&film=");
-        $db = $this->database();
+        $db = $this->pdo();
         //<code27>
         $movieId = $this->request->get('film');
         if ($movieId) {

@@ -1,40 +1,32 @@
 <?php
 /** @var \FW\App\View $this */
-$block = $this->get('theme');
-$films = $this->get('films', []);
-$selectedCategory = $this->get('category', 0);
-$categories = $this->get('categories', []);
+$values = $this->get('values', []);
 ?>
 <div class="container">
     <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Search Movies</legend>
-            <form action="?controller=chapter5&code=47" method="post" name="pingForm">
-                <div class="form-group">
-                    <label for="category">By Category</label>
-                    <select name="category" id="category" class="form-control">
-                        <option value="0">All</option>
-                        <?php foreach ($categories as $category) {
-                            $selected = $category['category_id'] == $selectedCategory ? ' selected ' : '';
-                            echo "<option {$selected} value='{$category['category_id']}'>{$category['name']}</option>";
-                        } ?>
-                    </select>
+        <fieldset class="col-md-8">
+            <legend>The Infamous <code>mysql_real_escape_string</code></legend>
+            <div class="list-group">
+                <div class="list-group-item">Definition: <br>
+                    <code>
+                        string mysql_real_escape_string (string $unescaped_string [, resource $link_identifier = NULL])
+                    </code>
                 </div>
-                <div class="form-group">
-                    <button type="submit" name="search" class="btn btn-primary">Search</button>
-                </div>
-            </form>
+                <div class="list-group-item">What does it do?</div>
+                <div class="list-group-item">How does it work?</div>
+            </div>
         </fieldset>
     </div>
     <div class="row">
         <div class="col-md-6">
             <table class="table table-bordered">
                 <tr>
-                    <th>Title</th>
-                    <th>Year</th>
+                    <th>Value</th>
+                    <th>Escaped</th>
+                    <th>Count</th>
                 </tr>
-                <?php foreach ($films as $film) {
-                    echo "<tr><td>{$film['title']}</td><td>{$film['release_year']}</td></tr>";
+                <?php foreach ($values as $index => $value) {
+                    echo "<tr><td>{$value['value']}</td><td>{$value['escape']}</td><td>{$value['rows']}</td></tr>";
                 } ?>
             </table>
         </div>
