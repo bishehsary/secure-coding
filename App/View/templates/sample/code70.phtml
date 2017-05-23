@@ -1,10 +1,9 @@
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-7">
-            <legend>Web Server Level</legend>
-            <div class="list-group">
-                <div class="list-group-item">Apache
-                    <pre><code>&lt;VirtualHost *:80>
+<div class="row">
+    <fieldset class="col-md-7">
+        <legend>Web Server Level</legend>
+        <div class="list-group">
+            <div class="list-group-item">Apache
+                <pre><code>&lt;VirtualHost *:80>
     # . . .
     ErrorDocument 404 /custom_404.html
     ErrorDocument 500 /custom_50x.html
@@ -13,25 +12,25 @@
     ErrorDocument 504 /custom_50x.html
     # . . .
 &lt;/VirtualHost></code></pre>
-                </div>
             </div>
-            <div class="list-group">
-                <div class="list-group-item">Nginx
-                    <pre><code>server {
+        </div>
+        <div class="list-group">
+            <div class="list-group-item">Nginx
+                <pre><code>server {
     # . . .
     error_page 404 /custom_404.html;
     error_page 500 502 503 504 /custom_50x.html;
     # . . .
 }                        </code></pre>
-                </div>
             </div>
-        </fieldset>
-    </div>
-    <div class="row">
-        <fieldset class="col-md-7">
-            <legend>Framewrok Level</legend>
-            <div class="list-group">
-                <div class="list-group-item">
+        </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-7">
+        <legend>Framewrok Level</legend>
+        <div class="list-group">
+            <div class="list-group-item">
                     <pre><code>abstract class Controller
 {
     // . . .
@@ -57,8 +56,7 @@
     }
     // . . .
 }                       </code></pre>
-                </div>
             </div>
-        </fieldset>
-    </div>
+        </div>
+    </fieldset>
 </div>

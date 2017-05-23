@@ -16,8 +16,7 @@ class Chapter9Controller extends Chapter
         // If there are repeated sequences in encrypted data, an attacker could assume that the corresponding sequences
         // in the message were also identical. The IV prevents the appearance of corresponding duplicate character
         // sequences in the ciphertext
-        $errorReporting = error_reporting();
-        error_reporting(0);
+        $this->beQuiet(false);
         //<code60>
         $algorithms = openssl_get_cipher_methods();
         $key = 'H6l97Ez9N57ciyDyZPIGbBi679C7AVv6';
@@ -32,7 +31,6 @@ class Chapter9Controller extends Chapter
             $result[$algorithm] = [$ivLength, $cipher, $plain];
         }
         //</code60>
-        error_reporting($errorReporting);
         $this->view->set('algorithms', $algorithms);
         $this->view->set('ciphers', $result);
         $this->view->set('result', $this->view->render('sample/code60'));

@@ -2,33 +2,31 @@
 /** @var \FW\App\View $this */
 $values = $this->get('values', []);
 ?>
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-8">
-            <legend>The Infamous <code>mysql_real_escape_string</code></legend>
-            <div class="list-group">
-                <div class="list-group-item">Definition: <br>
-                    <code>
-                        string mysql_real_escape_string (string $unescaped_string [, resource $link_identifier = NULL])
-                    </code>
-                </div>
-                <div class="list-group-item">What does it do?</div>
-                <div class="list-group-item">How does it work?</div>
+<div class="row">
+    <fieldset class="col-md-8">
+        <legend>The Infamous <code>mysql_real_escape_string</code></legend>
+        <div class="list-group">
+            <div class="list-group-item">Definition: <br>
+                <code>
+                    string mysql_real_escape_string (string $unescaped_string [, resource $link_identifier = NULL])
+                </code>
             </div>
-        </fieldset>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-bordered">
-                <tr>
-                    <th>Value</th>
-                    <th>Escaped</th>
-                    <th>Count</th>
-                </tr>
-                <?php foreach ($values as $index => $value) {
-                    echo "<tr><td>{$value['value']}</td><td>{$value['escape']}</td><td>{$value['rows']}</td></tr>";
-                } ?>
-            </table>
+            <div class="list-group-item">What does it do?</div>
+            <div class="list-group-item">How does it work?</div>
         </div>
+    </fieldset>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <tr>
+                <th>Value</th>
+                <th>Escaped</th>
+                <th>Count</th>
+            </tr>
+            <?php foreach ($values as $index => $value) {
+                echo "<tr><td>{$value['value']}</td><td>{$value['escape']}</td><td>{$value['rows']}</td></tr>";
+            } ?>
+        </table>
     </div>
 </div>

@@ -5,33 +5,39 @@ $basicAuth = $this->get('basicAuth');
 $digestAuthUrl = $this->get('digestAuthUrl');
 $digestAuth = $this->get('digestAuth');
 ?>
-<div class="container">
-    <fieldset class="row">
+<div class="row">
+    <fieldset class="col-md-6">
         <legend>Authentication Systems</legend>
-        <ul class="list-group col-md-6">
+        <ul class="list-group">
             <li class="list-group-item">Username|Password (Shared Secret | One Factor)</li>
             <li class="list-group-item">Two/Multi Factor Authentication (OTP, Location, Past Behaviour)</li>
             <li class="list-group-item">Single Sign On (SSO)</li>
         </ul>
     </fieldset>
-    <fieldset class="row">
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
         <legend>Identity Management</legend>
-        <ul class="list-group col-md-6">
+        <ul class="list-group">
             <li class="list-group-item">Security Assertion Markup Language (SAML) is mostly used for SSO</li>
             <li class="list-group-item">Fast IDentity Online(FIDO)</li>
             <li class="list-group-item">Open Identity (OpenId)</li>
         </ul>
     </fieldset>
-    <fieldset class="row">
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
         <legend>Authenticating over HTTP</legend>
-        <ul class="list-group col-md-6">
+        <ul class="list-group">
             <li class="list-group-item">HTTP is stateless</li>
             <li class="list-group-item">Token Based</li>
         </ul>
     </fieldset>
-    <fieldset class="row">
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
         <legend>HTTP Authentication Method</legend>
-        <ul class="list-group col-md-6">
+        <ul class="list-group">
             <li class="list-group-item">
                 <a href="<?php echo $basicAuthUrl ?>">Basic</a>
                 <?php echo $basicAuth ? "<span class='label label-success pull-right'>{$basicAuth}</span>" : '' ?>

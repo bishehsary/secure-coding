@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use FW\App\Acl;
+use FW\Util\Util;
 
 class Chapter3Controller extends Chapter
 {
@@ -19,7 +20,7 @@ class Chapter3Controller extends Chapter
     {
         $this->getCode(__FILE__, 'code27');
         $id = 100;
-        $this->view->set('deleteLink', $this->url('chapter3') . "?code=27&film=");
+        $this->view->set('deleteLink', Util::genUrl('chapter3') . "?code=27&film=");
         $db = $this->pdo();
         //<code27>
         $movieId = $this->request->get('film');

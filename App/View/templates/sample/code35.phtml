@@ -1,10 +1,9 @@
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-8">
-            <legend>Types of Role Manager</legend>
-            <div class="list-group">
-                <div class="list-group-item">Static <br><br>
-                    <pre><code>
+<div class="row">
+    <fieldset class="col-md-8">
+        <legend>Types of Role Manager</legend>
+        <div class="list-group">
+            <div class="list-group-item">Static <br><br>
+                <pre><code>
     // creating user role
     Acl::addRole('user');
     Acl::allow('user', 'index', 'list');
@@ -14,47 +13,47 @@
     Acl::addRole('admin');
     Acl::allow('admin', '*', '*');
                         </code></pre>
-                </div>
-                <div class="list-group-item">Dynamic <br><br>
-                    <form method="post">
-                        <table class="table table-bordered" id="role-table">
-                            <tr>
-                                <th>Role</th>
-                                <th>Resource</th>
-                                <th>Permissions</th>
-                            </tr>
-                            <tr>
-                                <td>User</td>
-                                <td>Index</td>
-                                <td>
-                                    <label><input type="checkbox">All</label>
-                                    <label><input type="checkbox">Create</label>
-                                    <label><input type="checkbox" checked>List</label>
-                                    <label><input type="checkbox">Edit</label>
-                                    <label><input type="checkbox">Delete</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>User</td>
-                                <td>Account</td>
-                                <td>
-                                    <label><input type="checkbox">All</label>
-                                    <label><input type="checkbox" checked>Create</label>
-                                    <label><input type="checkbox" checked>List</label>
-                                    <label><input type="checkbox" checked>Edit</label>
-                                    <label><input type="checkbox">Delete</label>
-                                </td>
-                            </tr>
-                        </table>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
             </div>
-        </fieldset>
-    </div>
+            <div class="list-group-item">Dynamic <br><br>
+                <form method="post">
+                    <table class="table table-bordered" id="role-table">
+                        <tr>
+                            <th>Role</th>
+                            <th>Resource</th>
+                            <th>Permissions</th>
+                        </tr>
+                        <tr>
+                            <td>User</td>
+                            <td>Index</td>
+                            <td>
+                                <label><input type="checkbox">All</label>
+                                <label><input type="checkbox">Create</label>
+                                <label><input type="checkbox" checked>List</label>
+                                <label><input type="checkbox">Edit</label>
+                                <label><input type="checkbox">Delete</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>User</td>
+                            <td>Account</td>
+                            <td>
+                                <label><input type="checkbox">All</label>
+                                <label><input type="checkbox" checked>Create</label>
+                                <label><input type="checkbox" checked>List</label>
+                                <label><input type="checkbox" checked>Edit</label>
+                                <label><input type="checkbox">Delete</label>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </fieldset>
 </div>
+
 <style>
     #role-table td > label {
         display: inline-block;

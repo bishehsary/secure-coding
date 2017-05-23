@@ -5,7 +5,6 @@ $root = dirname(dirname(__DIR__));
 
 FW\App\Config::init([
     'mode' => \FW\App\App::MODE_DEVELOPMENT,
-    'seo' => true,
     'root' => $root,
     'server' => [
         'protocol' => 'http',

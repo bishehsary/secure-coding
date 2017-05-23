@@ -2,9 +2,13 @@
 /** @var \FW\App\View $this */
 $xss = $this->get('xss');
 ?>
-<div class="container">
-    <p>
-        The value of <code class="inline-code">$_GET['xss']</code>:
-        <?php echo $xss ?>
-    </p>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <div class="list-group-item">
+                The value of <code class="inline-code">$_GET['xss']</code>:
+                <?php echo $xss ?>
+            </div>
+        </div>
+    </div>
 </div>

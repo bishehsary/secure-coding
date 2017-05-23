@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Util\TokenBasedSession;
 use FW\App\Config;
 use FW\App\Controller;
+use FW\Util\Util;
 
 class SessionController extends Controller
 {
@@ -56,8 +57,8 @@ class SessionController extends Controller
 
     function indexAction()
     {
-        $this->view->set('cookie', $this->url('session/cookie'));
-        $this->view->set('ajax', $this->url('session/ajax'));
+        $this->view->set('cookie', Util::genUrl('session/cookie'));
+        $this->view->set('ajax', Util::genUrl('session/ajax'));
         $this->view->html($this->view->render('session/index'));
     }
 
@@ -71,8 +72,8 @@ class SessionController extends Controller
             $username = $this->request->post('username', '');
             $this->tokenSession->set('user', ['username' => $username]);
         }
-        $this->view->set('page', $this->url('session/cookie'));
-        $this->view->set('ajax', $this->url('session/ajax'));
+        $this->view->set('page', Util::genUrl('session/cookie'));
+        $this->view->set('ajax', Util::genUrl('session/ajax'));
         $this->view->set('user', $this->tokenSession->get('user'));
         $this->view->html($this->view->render('session/cookie'));
     }
@@ -90,8 +91,8 @@ class SessionController extends Controller
             }
             $this->view->json(['user' => $this->tokenSession->get('user')]);
         } else {
-            $this->view->set('page', $this->url('session/ajax'));
-            $this->view->set('cookie', $this->url('session/cookie'));
+            $this->view->set('page', Util::genUrl('session/ajax'));
+            $this->view->set('cookie', Util::genUrl('session/cookie'));
             $this->view->html($this->view->render('session/ajax'));
         }
     }

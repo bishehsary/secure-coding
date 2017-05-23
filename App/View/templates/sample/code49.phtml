@@ -4,35 +4,34 @@ $xss = htmlentities($this->get('xss'));
 $escapes = $this->get('escape');
 var_dump($escapes);
 ?>
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Reasoning</legend>
-            <div class="list-group">
-                <div class="list-group-item">Why should we escape output?</div>
-                <div class="list-group-item">Which characters should we escape?</div>
-                <div class="list-group-item">PHP filtering functions:
-                    <ul>
-                        <li><code>htmlspecialchars</code>: Convert special characters to HTML entities</li>
-                        <li><code>htmlentities</code>: Convert all applicable characters to HTML entities</li>
-                    </ul>
-                </div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Reasoning</legend>
+        <div class="list-group">
+            <div class="list-group-item">Why should we escape output?</div>
+            <div class="list-group-item">Which characters should we escape?</div>
+            <div class="list-group-item">Errors/Exceptions</div>
+            <div class="list-group-item">PHP filtering functions:
+                <ul>
+                    <li><code>htmlspecialchars</code>: Convert special characters to HTML entities</li>
+                    <li><code>htmlentities</code>: Convert all applicable characters to HTML entities</li>
+                </ul>
             </div>
-        </fieldset>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <pre><code><?php echo $xss ?></code></pre>
-            <table class="table table-bordered">
-                <tr>
-                    <th>Code</th>
-                    <th>Result</th>
-                </tr>
-                <?php foreach ($escapes as $func => $escape) {
-                    echo "<tr><td>{$func}</td><td><code>{$escape}</code></td></tr>";
-                }
-                ?>
-            </table>
         </div>
+    </fieldset>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <pre><code><?php echo $xss ?></code></pre>
+        <table class="table table-bordered">
+            <tr>
+                <th>Code</th>
+                <th>Result</th>
+            </tr>
+            <?php foreach ($escapes as $func => $escape) {
+                echo "<tr><td>{$func}</td><td><code>{$escape}</code></td></tr>";
+            }
+            ?>
+        </table>
     </div>
 </div>

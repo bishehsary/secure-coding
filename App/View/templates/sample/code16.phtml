@@ -1,14 +1,7 @@
-<style>
-    .headers-list li > span:first-child {
-        display: inline-block;
-        width: 200px;
-        font-weight: bold;
-        white-space: nowrap;
-    }
-</style>
-
-<div class="container">
-    <ul id="placeholder" class="headers-list"></ul>
+<div class="row">
+    <div class="col-md-6">
+        <ul id="placeholder" class="headers-list list-group"></ul>
+    </div>
 </div>
 
 <script>
@@ -18,8 +11,17 @@
             let headers = response.headers.keys();
             let html = '';
             for (let header of headers) {
-                html += `<li><span>${header}</span><span>${response.headers.get(header)}</span></li>`;
+                html += `<li class="list-group-item"><span>${header}</span><span>${response.headers.get(header)}</span></li>`;
             }
             placeholder.innerHTML = html;
         })
 </script>
+
+<style>
+    .headers-list li > span:first-child {
+        display: inline-block;
+        width: 200px;
+        font-weight: bold;
+        white-space: nowrap;
+    }
+</style>

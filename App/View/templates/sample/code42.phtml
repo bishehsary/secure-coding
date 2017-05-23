@@ -2,28 +2,26 @@
 /** @var \FW\App\View $this */
 $cookies = $this->get('cookie');
 ?>
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend><code>setcookie()</code> parameters:</legend>
-            <table class="table table-bordered">
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend><code>setcookie()</code> parameters:</legend>
+        <table class="table table-bordered">
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Mandatory</th>
+                <th>Default Value</th>
+            </tr>
+            <?php foreach ($cookies as $cookie): ?>
                 <tr>
-                    <th>Name</th>
-                    <th>Type</th>
-                    <th>Mandatory</th>
-                    <th>Default Value</th>
+                    <td><code><?php echo $cookie[1] ?></code></td>
+                    <td><code><?php echo $cookie[0] ?></code></td>
+                    <td>
+                        <span class="glyphicon glyphicon-<?php echo $cookie[2] ? 'ok text-success' : 'remove text-danger' ?>"></span>
+                    </td>
+                    <td><?php echo $cookie[3] === null ? '' : "<code>{$cookie[3]}</code>" ?></td>
                 </tr>
-                <?php foreach ($cookies as $cookie): ?>
-                    <tr>
-                        <td><code><?php echo $cookie[1] ?></code></td>
-                        <td><code><?php echo $cookie[0] ?></code></td>
-                        <td>
-                            <span class="glyphicon glyphicon-<?php echo $cookie[2] ? 'ok text-success' : 'remove text-danger' ?>"></span>
-                        </td>
-                        <td><?php echo $cookie[3] === null ? '' : "<code>{$cookie[3]}</code>" ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        </fieldset>
-    </div>
+            <?php endforeach; ?>
+        </table>
+    </fieldset>
 </div>

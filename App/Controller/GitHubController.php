@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use FW\App\Controller;
+use FW\Util\Util;
 use GuzzleHttp\Client;
 
 class GitHubController extends Controller
@@ -23,7 +24,7 @@ class GitHubController extends Controller
             ]);
             $data = json_decode($res->getBody()->getContents(), true);
             $this->session->set('gitHubToken', $data['access_token']);
-            $this->response->redirect($this->url('chapter2') . "&code=25");
+            $this->response->redirect(Util::genUrl('chapter2') . "&code=25");
         } else {
             $this->view->text('Key does not match');
         }

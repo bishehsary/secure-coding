@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 use FW\App\Controller;
+use FW\Util\Util;
 
 class AccountController extends Controller
 {
@@ -19,7 +20,7 @@ class AccountController extends Controller
         if ($login) {
             if ($this->request->post('password') == 'adm!nPass') {
                 $this->session->set('user', ['role' => 'admin']);
-                $this->response->redirect($this->url($this->request->get('controller'), $this->request->get('action')));
+                $this->response->redirect(Util::genUrl($this->request->get('controller'), $this->request->get('action')));
                 return;
             }
         }
@@ -29,6 +30,22 @@ class AccountController extends Controller
     function logoutAction()
     {
         $this->session->remove('user');
-        $this->response->redirect($this->url());
+        $this->response->redirect(Util::genUrl());
+    }
+
+    function reloginAction()
+    {
+        $redirectUrl = $this->request->get('url');
+        $urlParts = parse_url($redirectUrl);
+        $connector = isset($urlParts['query']) ? '&' : '?';
+        if ($this->request->hasPost('login')) {
+            $this->response->redirect("{$redirectUrl}{$connector}redirect=true");
+//            if ($urlParts['host'] == 'sc.io') {
+//            } else {
+//                $this->notFoundPage('Invalid redirect url');
+//            }
+        } else {
+            $this->view->html($this->view->render('account/relogin'));
+        }
     }
 }

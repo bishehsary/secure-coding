@@ -9,53 +9,51 @@ if (array_search('movie', $error) !== false) {
 }
 $movies = $this->get('movies', []);
 ?>
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Fundamentals</legend>
-            <div class="list-group">
-                <div class="list-group-item">What should be validated?</div>
-                <div class="list-group-item">What are some of validation rules?</div>
-                <div class="list-group-item">Can you think of an algorithm?</div>
-                <div class="list-group-item">Client vs. Server side validation</div>
-            </div>
-        </fieldset>
-    </div>
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Select A movie</legend>
-            <?php echo $errorMessage ? "<p class='alert alert-danger'>{$errorMessage}</p>" : '' ?>
-            <form name="movieForm" action="?controller=chapter5&code=48" method="post">
-                <div class="form-group">
-                    <label for="movie">Movie</label>
-                    <input type="text" name="movie" id="movie" class="form-control"
-                           value="<?php echo $this->get('movie', '') ?>">
-                </div>
-                <div class="form-group">
-                    <label for="year">Year</label>
-                    <input type="number" name="year" id="year" class="form-control" size="4"
-                           value="<?php echo $this->get('year', '') ?>">
-                </div>
-                <div class="form-group text-right">
-                    <button type="submit" class="btn btn-primary" name="search" value="1">Search</button>
-                    <button type="reset" class="btn btn-default">Reset</button>
-                </div>
-            </form>
-        </fieldset>
-    </div>
-    <br><br>
-    <div class="row">
-        <div class="col-md-6">
-            <table class="table table-bordered">
-                <tr>
-                    <th>Title</th>
-                    <th>Year</th>
-                </tr>
-                <?php foreach ($movies as $movie) {
-                    echo "<tr><td>{$movie['title']}</td><td>{$movie['release_year']}</td></tr>";
-                } ?>
-            </table>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Fundamentals</legend>
+        <div class="list-group">
+            <div class="list-group-item">What should be validated?</div>
+            <div class="list-group-item">What are some of validation rules?</div>
+            <div class="list-group-item">Can you think of an algorithm?</div>
+            <div class="list-group-item">Client vs. Server side validation</div>
         </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Select A movie</legend>
+        <?php echo $errorMessage ? "<p class='alert alert-danger'>{$errorMessage}</p>" : '' ?>
+        <form name="movieForm" action="?controller=chapter5&code=48" method="post">
+            <div class="form-group">
+                <label for="movie">Movie</label>
+                <input type="text" name="movie" id="movie" class="form-control"
+                       value="<?php echo $this->get('movie', '') ?>">
+            </div>
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input type="number" name="year" id="year" class="form-control" size="4"
+                       value="<?php echo $this->get('year', '') ?>">
+            </div>
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-primary" name="search" value="1">Search</button>
+                <button type="reset" class="btn btn-default">Reset</button>
+            </div>
+        </form>
+    </fieldset>
+</div>
+<br><br>
+<div class="row">
+    <div class="col-md-6">
+        <table class="table table-bordered">
+            <tr>
+                <th>Title</th>
+                <th>Year</th>
+            </tr>
+            <?php foreach ($movies as $movie) {
+                echo "<tr><td>{$movie['title']}</td><td>{$movie['release_year']}</td></tr>";
+            } ?>
+        </table>
     </div>
 </div>
 

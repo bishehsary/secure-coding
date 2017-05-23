@@ -34,15 +34,9 @@ class App
 
     function run($role)
     {
-        $controllerName = $_GET['controller'] ?? '';
-        $actionName = $_GET['action'] ?? '';
-        if ($this->config->seo) {
-            preg_match("/\/?(?P<controller>[a-z0-9]*)(\/?(?P<action>[a-z0-9]*))/", $_SERVER['REQUEST_URI'], $match);
-            $controllerName = isset($match['controller']) && $match['controller'] ? $match['controller'] : $controllerName;
-            $actionName = isset($match['action']) && $match['action'] ? $match['action'] : $actionName;
-        }
-        if (!$controllerName) $controllerName = 'index';
-        if (!$actionName) $actionName = 'index';
+        $urlParts = explode('/', trim(parse_url($_SERVER['REQUEST_URI'])['path'], '/'));
+        $controllerName = $urlParts[0] ?: 'index';
+        $actionName = isset($urlParts[1]) && $urlParts[1] ? $urlParts[1] : 'index';
         if (Acl::isAllowed($role, $controllerName, $actionName)) {
             $this->controller = ucfirst($controllerName);
             $controllerPath = realpath(__DIR__ . "/../../App/Controller/{$this->controller}Controller.php");

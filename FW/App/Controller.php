@@ -16,6 +16,8 @@ abstract class Controller
     protected $response;
     /** @var  string */
     protected $action;
+    /** @var bool */
+    protected $scream = true;
 
     function __construct()
     {
@@ -25,10 +27,16 @@ abstract class Controller
         $this->response = Response::getInstance();
         $this->view = new View();
         $this->updateUserSession();
+        $this->registerHandlers();
     }
 
     protected function init()
     {
+    }
+
+    protected function beQuiet($mode = true)
+    {
+        $this->scream = $mode;
     }
 
     private function updateUserSession()
@@ -44,6 +52,26 @@ abstract class Controller
                 $this->view->set('user', $user);
             }
         }
+    }
+
+    private function registerHandlers()
+    {
+        set_exception_handler(function ($e) {
+            if ($this->scream) {
+                $this->errorPage($e);
+                exit();
+            }
+        });
+        set_error_handler(function ($code, $message, $file, $line) {
+            if ($this->scream) {
+                $this->errorPage(join('<br/>', [
+                    "Code: {$code}",
+                    "Message: {$message}",
+                    "File: {$file}",
+                    "Line: {$line}"]));
+                exit();
+            }
+        });
     }
 
     function process($action = '')
@@ -63,17 +91,12 @@ abstract class Controller
         }
     }
 
-    protected function url($controller = '', $action = '')
+    protected function url($controller = '', $action = '', $query = '')
     {
-        if ($this->config->seo) {
-            $url = '';
-            if ($controller) $url .= "/{$controller}";
-            if ($action) $url .= "/{$action}";
-        } else {
-            $url = '?';
-            if ($controller) $url .= "controller={$controller}";
-            if ($action) $url .= ($controller ? '&' : '') . "action={$action}";
-        }
+        $url = '';
+        if ($controller) $url .= "/{$controller}";
+        if ($action) $url .= "/{$action}";
+        if ($query) $url .= "?{$query}";
         return $url;
     }
 
@@ -81,21 +104,21 @@ abstract class Controller
     {
         $this->response->header('HTTP/1.1 404 Not Found');
         $this->view->set('message', $message ? $message : '');
-        $this->view->html($this->view->render('not-found'));
+        $this->view->html($this->view->render('error/not-found'));
     }
 
     public function unauthorizedPage($message = null)
     {
         $this->response->header('HTTP/1.1 401 Unauthorized');
         $this->view->set('message', $message ? $message : '');
-        $this->view->html($this->view->render('unauthorized'));
+        $this->view->html($this->view->render('error/unauthorized'));
     }
 
     public function errorPage($e = null)
     {
         $this->response->header('HTTP/1.1 500 Internal Server Error');
         $this->view->set('message', $e ? $e : 'No details available');
-        $this->view->html($this->view->render('error'));
+        $this->view->html($this->view->render('error/error'));
     }
 
     abstract function indexAction();

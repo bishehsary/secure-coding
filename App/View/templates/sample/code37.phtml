@@ -2,56 +2,57 @@
 /** @var \FW\App\View $this */
 $sessionLink = $this->get('session');
 ?>
-<div class="container">
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Definition</legend>
-            <div class="list-group">
-                <div class="list-group-item">What is Session?</div>
-                <div class="list-group-item">Why is Session used?</div>
-                <div class="list-group-item">How to implement Session?</div>
-            </div>
-        </fieldset>
-    </div>
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Server Side Techniques</legend>
-            <div class="list-group">
-                <div class="list-group-item">Using PHP <code>session-*</code> functions & <code>$_SESSION</code></div>
-                <div class="list-group-item">Implementing your own system
-                    <ul>
-                        <li>Using File System</li>
-                        <li>Using Database
-                            <ul>
-                                <li>Application Database</li>
-                                <li>Another Database
-                                    <ul>
-                                        <li>Same DBMS</li>
-                                        <li>Redis</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </fieldset>
-    </div>
-    <div class="row">
-        <fieldset class="col-md-6">
-            <legend>Transfer Techniques</legend>
-            <div class="list-group">
-                <div class="list-group-item">Cookie</div>
-                <div class="list-group-item">Token
-                    <ul>
-                        <li>Header (<code>X-AUTH-TOKEN</code>/<code>USER-AUTH-TOKEN</code>)</li>
-                        <li>Content Body (Hidden form element)</li>
-                    </ul>
-                </div>
-            </div>
-        </fieldset>
-    </div>
 
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Definition</legend>
+        <div class="list-group">
+            <div class="list-group-item">What is Session?</div>
+            <div class="list-group-item">Why is Session used?</div>
+            <div class="list-group-item">How to implement Session?</div>
+        </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Server Side Techniques</legend>
+        <div class="list-group">
+            <div class="list-group-item">Using PHP <code>session-*</code> functions & <code>$_SESSION</code></div>
+            <div class="list-group-item">Implementing your own system
+                <ul>
+                    <li>Using File System</li>
+                    <li>Using Database
+                        <ul>
+                            <li>Application Database</li>
+                            <li>Another Database
+                                <ul>
+                                    <li>Same DBMS</li>
+                                    <li>Redis</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Transfer Techniques</legend>
+        <div class="list-group">
+            <div class="list-group-item">Cookie</div>
+            <div class="list-group-item">Token
+                <ul>
+                    <li>Header (<code>X-AUTH-TOKEN</code>/<code>USER-AUTH-TOKEN</code>)</li>
+                    <li>Content Body (Hidden form element)</li>
+                </ul>
+            </div>
+        </div>
+    </fieldset>
+</div>
+
+<div class="row">
     <p class="text-right col-md-6">
         <a class="text-danger" href="<?php echo $sessionLink ?>" target="_blank">Session Play Ground</a>
     </p>

@@ -1,3 +1,20 @@
-<div class="container">
-    <h1>code55</h1>
+<?php
+/** @var \FW\App\View $this */
+$password = $this->get('password');
+?>
+<div class="row">
+    <div class="col-md-6">
+        <?php if ($password): ?>
+            <div class="alert alert-info">Your password is: <?php echo $password ?></div>
+        <?php endif; ?>
+        <form method="post">
+            <div class="form-group">
+                <label for="password">Enter your passphrase:</label>
+                <input type="password" name="password" id="password" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" name="login" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
 </div>

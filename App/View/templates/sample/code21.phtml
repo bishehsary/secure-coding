@@ -4,9 +4,9 @@ $error = $this->get('error');
 $user = $this->get('user');
 $formAction = $this->get('form');
 ?>
-<div class="container">
-    <?php if (!$user || $error): ?>
-        <fieldset class="col-sm-6">
+<div class="row">
+    <?php if (!$user || $error) { ?>
+        <fieldset class="col-md-6">
             <legend>User Login Form</legend>
             <?php echo $error ? "<p class='alert alert-danger'>{$error}</p>" : '' ?>
             <form name="loginForm" action="<?php echo $formAction ?>" method="post">
@@ -18,16 +18,17 @@ $formAction = $this->get('form');
                     <label for="password">Password</label>
                     <input type="password" name="password" id="password" class="form-control">
                 </div>
+                <br><br>
                 <div class="form-group text-right">
                     <button type="submit" class="btn btn-primary" name="login" value="1">Login</button>
                     <button type="reset" class="btn btn-default">Reset</button>
                 </div>
             </form>
         </fieldset>
-    <?php elseif ($user): ?>
+    <?php } elseif ($user) { ?>
         <h1>Welcome <?php echo $user['username'] ?></h1>
         <form action="?controller=chapter2&code=21" method="post">
             <button type="submit" name="logout" value="1" class="btn btn-danger">Logout</button>
         </form>
-    <?php endif; ?>
+    <?php } ?>
 </div>

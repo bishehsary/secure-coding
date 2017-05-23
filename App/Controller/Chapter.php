@@ -6,6 +6,7 @@ namespace App\Controller;
 use App\Model\Heading;
 use FW\App\Controller;
 use FW\App\Database;
+use FW\Util\Util;
 
 abstract class Chapter extends Controller
 {
@@ -47,10 +48,10 @@ abstract class Chapter extends Controller
             }
         }
         if ($nextId) {
-            $this->view->set('next', $this->url("chapter{$parent->id}") . "?code={$nextId}");
+            $this->view->set('next', Util::genUrl("chapter{$parent->id}") . "?code={$nextId}");
         }
         if ($prevId) {
-            $this->view->set('prev', $this->url("chapter{$parent->id}") . "?code={$prevId}");
+            $this->view->set('prev', Util::genUrl("chapter{$parent->id}") . "?code={$prevId}");
         }
         // rendering view
         $this->view->html($this->view->render('code'));

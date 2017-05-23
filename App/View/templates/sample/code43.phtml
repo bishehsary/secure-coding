@@ -2,40 +2,38 @@
 /** @var \FW\App\View $this */
 
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="list-group">
-                <div class="list-group-item list-group-item-success">
-                    Setting Cookie: <span class="badge">Expires in 6 hours</span>
-                    <pre><code>setcookie('firstCookie', 'firstCookieValue', time() + 6 * 3600);</code></pre>
-                </div>
-                <div class="list-group-item list-group-item-danger">
-                    Removing Cookie:
-                    <pre><code>$_COOKIE['firstCookie'] = 'firstCookieValue';</code></pre>
-                </div>
-                <div class="list-group-item list-group-item-success">
-                    Removing Cookie:
-                    <pre><code>setcookie('firstCookie', 'firstCookieValue', time() - 3600);</code></pre>
-                </div>
-                <div class="list-group-item list-group-item-danger">
-                    Removing Cookie:
-                    <pre><code>unset $_COOKIE['firstCookie'];</code></pre>
-                </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <div class="list-group-item list-group-item-success">
+                Setting Cookie: <span class="badge">Expires in 6 hours</span>
+                <pre><code>setcookie('firstCookie', 'firstCookieValue', time() + 6 * 3600);</code></pre>
+            </div>
+            <div class="list-group-item list-group-item-danger">
+                Removing Cookie:
+                <pre><code>$_COOKIE['firstCookie'] = 'firstCookieValue';</code></pre>
+            </div>
+            <div class="list-group-item list-group-item-success">
+                Removing Cookie:
+                <pre><code>setcookie('firstCookie', 'firstCookieValue', time() - 3600);</code></pre>
+            </div>
+            <div class="list-group-item list-group-item-danger">
+                Removing Cookie:
+                <pre><code>unset $_COOKIE['firstCookie'];</code></pre>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-7">
-            Client Cookie:
-            <pre><code id="cookie"></code></pre>
-            <form method="post">
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-primary" name="renew">Set Cookie</button>
-                    <button type="submit" class="btn btn-danger" name="expire">Expire Cookie</button>
-                </div>
-            </form>
-        </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        Client Cookie:
+        <pre><code id="cookie"></code></pre>
+        <form method="post">
+            <div class="btn-group">
+                <button type="submit" class="btn btn-primary" name="renew">Set Cookie</button>
+                <button type="submit" class="btn btn-danger" name="expire">Expire Cookie</button>
+            </div>
+        </form>
     </div>
 </div>
 

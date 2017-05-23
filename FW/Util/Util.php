@@ -6,6 +6,15 @@ namespace FW\Util;
 
 class Util
 {
+    public static function genUrl($controller = '', $action = '', $query = '')
+    {
+        $url = $_SERVER['HTTP_HOST'];
+        if ($controller) $url .= "/{$controller}";
+        if ($action) $url .= "/{$action}";
+        if ($query) $url .= "?{$query}";
+        return $url;
+    }
+
     public static function removeTag($code, $tag)
     {
         $filtered = self::removeInBetween($code, "<{$tag}>", "</{$tag}>");

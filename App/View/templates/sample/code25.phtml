@@ -3,20 +3,22 @@
 $token = $this->get('token');
 $response = $this->get('response');
 ?>
-<div class="container">
-    <?php if ($token): ?>
-        <div class="well">
-            GitHub Access Token: <strong class="label label-info"><?php echo $token ?></strong>
-        </div>
-        <pre><code><?php echo $response ?></code></pre>
-        <form action="?controller=chapter2&code=25" method="post">
-            <button type="submit" class="btn btn-danger" name="clearToken">Clear Token</button>
-        </form>
-    <?php else: ?>
-        <form action="?controller=chapter2&code=25" method="post">
-            <button type="submit" class="btn btn-primary" name="authenticate" value="github">
-                GitHub Authentication using OAuth
-            </button>
-        </form>
-    <?php endif; ?>
+<div class="row">
+    <div class="col-md-6">
+        <?php if ($token): ?>
+            <div class="well">
+                GitHub Access Token: <strong class="label label-info"><?php echo $token ?></strong>
+            </div>
+            <pre><code><?php echo $response ?></code></pre>
+            <form action="?controller=chapter2&code=25" method="post">
+                <button type="submit" class="btn btn-danger" name="clearToken">Clear Token</button>
+            </form>
+        <?php else: ?>
+            <form action="?controller=chapter2&code=25" method="post">
+                <button type="submit" class="btn btn-primary" name="authenticate" value="github">
+                    GitHub Authentication using OAuth
+                </button>
+            </form>
+        <?php endif; ?>
+    </div>
 </div>

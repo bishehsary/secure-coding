@@ -1,3 +1,23 @@
-<div class="container">
-    <h1>code54</h1>
+<?php
+/** @var \FW\App\View $this */
+$isLoggedIn = $this->get('isLoggedIn', false);
+?>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group">
+            <div class="list-group-item">What is OpenRedirect?</div>
+            <div class="list-group-item">When we might use it?</div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <?php if ($isLoggedIn): ?>
+            <p class="alert text-danger">TOP SECRET</p>
+        <?php else: ?>
+            <a href="http://sc.io/account/relogin?url=http://sc.io/chapter7?code=54">
+                You need to login to view this content
+            </a>
+        <?php endif; ?>
+    </div>
 </div>

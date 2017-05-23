@@ -5,29 +5,26 @@ $movies = $this->get('movies');
 $deleteLink = $this->get('deleteLink');
 $deleted = $this->get('deleted');
 ?>
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <?php echo $deleted ? "<div class='alert alert-success'>Your film has been deleted successfully</div>" : '' ?>
-            <h3><?php echo "{$actor['first_name']} {$actor['last_name']}" ?></h3>
-            <table class="table table-bordered">
+<div class="row">
+    <div class="col-md-6">
+        <?php echo $deleted ? "<div class='alert alert-success'>Your film has been deleted successfully</div>" : '' ?>
+        <h3><?php echo "{$actor['first_name']} {$actor['last_name']}" ?></h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>Movie</th>
+                <th>Year</th>
+                <th><span class="glyphicon glyphicon-console"></span></th>
+            </tr>
+            <?php foreach ($movies as $movie): ?>
                 <tr>
-                    <th>Movie</th>
-                    <th>Year</th>
-                    <th><span class="glyphicon glyphicon-console"></span></th>
+                    <td><?php echo $movie['title'] ?></td>
+                    <td><?php echo $movie['release_year'] ?></td>
+                    <td>
+                        <a href="<?php echo "{$deleteLink}{$movie['film_id']}" ?>"
+                           class="glyphicon glyphicon-remove text-danger"></a>
+                    </td>
                 </tr>
-                <?php foreach ($movies as $movie): ?>
-                    <tr>
-                        <td><?php echo $movie['title'] ?></td>
-                        <td><?php echo $movie['release_year'] ?></td>
-                        <td>
-                            <a href="<?php echo "{$deleteLink}{$movie['film_id']}" ?>"
-                               class="glyphicon glyphicon-remove text-danger"></a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            </table>
-        </div>
+            <?php endforeach; ?>
+        </table>
     </div>
-
 </div>

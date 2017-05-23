@@ -13,7 +13,9 @@ class Chapter8Controller extends Chapter
     protected function init()
     {
         $this->uploadDirectory = "{$this->config->root}/asset/upl";
-        @mkdir($this->uploadDirectory);
+        if (!file_exists($this->uploadDirectory)) {
+            mkdir($this->uploadDirectory);
+        }
     }
 
     protected function code56()// Virtual path mapping
