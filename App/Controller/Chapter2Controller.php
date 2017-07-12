@@ -56,7 +56,7 @@ class Chapter2Controller extends Chapter
         $this->getCode(__FILE__, 'code21');
         $this->view->set('form', Util::genUrl('chapter2') . '?code=21');
         //<code21>
-        if ($this->request->post('login')) {
+        if ($this->request->hasPost('login')) {
             $username = $this->request->post('username');
             $password = $this->request->post('password');
             // validating username and password (later)
@@ -73,7 +73,7 @@ class Chapter2Controller extends Chapter
                 // enumeration attack possibility
                 $this->view->set('error', 'Wrong username/password combination');
             }
-        } elseif ($this->request->post('logout')) {
+        } elseif ($this->request->hasPost('logout')) {
             $this->session->destroy();
             // watch out!
             $this->view->set('user', null);
@@ -94,7 +94,8 @@ class Chapter2Controller extends Chapter
     protected function code23()// CAPTCHA Mechanism
     {
         $this->getCode(__FILE__, 'code23');
-        $this->view->set('form', Util::genUrl('chapter2') . '?code=23&capcha=1');
+        $this->view->set('capchaImg', Util::genUrl('chapter2') . '?code=23&capcha=1');
+        $this->view->set('form', Util::genUrl('chapter2') . '?code=23');
         //<code23>
         if ($this->request->get('capcha')) {
             $capcha = rand(1111, 9999);

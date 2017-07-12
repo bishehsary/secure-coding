@@ -46,7 +46,7 @@ class Chapter9Controller extends Chapter
         ]);
         $this->view->set('commands', [
             ["Generating Key Pair", "openssl genrsa -out privkey.pem 1024"],
-            ['Extracting Public Key', 'openssl rsa -in key.pem -pubout -out pubkey.pem']
+            ['Extracting Public Key', 'openssl rsa -in privkey.pem -pubout -out pubkey.pem']
         ]);
         //<code61>
         // todo: uncomment extension=php_openssl.dll

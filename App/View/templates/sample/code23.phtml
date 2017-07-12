@@ -3,16 +3,17 @@
 $error = $this->get('error');
 $message = $this->get('message');
 $formAction = $this->get('form');
+$capchaImg = $this->get('capchaImg');
 ?>
 <div class="row">
     <fieldset class="col-sm-4">
-        <form action="?controller=chapter2&code=23" method="post">
+        <form action="<?php echo $formAction ?>" method="post">
             <?php echo $error ? "<p class='alert alert-danger'>{$error}</p>" : '' ?>
             <?php echo $message ? "<p class='alert alert-success'>{$message}</p>" : '' ?>
             <div class="form-group">
                 <div class="input-group">
                     <span class="input-group-addon">
-                        <img src="<?php echo $formAction ?>" alt="Capcha">
+                        <img src="<?php echo $capchaImg ?>" alt="Capcha">
                     </span>
                     <input type="text" name="capcha" class="form-control" placeholder="Capcha" maxlength="4">
                 </div>

@@ -2,6 +2,7 @@
 
 use FW\App\App;
 use FW\App\Config;
+use FW\App\Session;
 
 $loader = require __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/App/config/config.php';
@@ -9,7 +10,7 @@ require __DIR__ . '/App/config/config.php';
 $config = Config::getInstance();
 $app = new App($config);
 
-$user = \FW\App\Session::getInstance()->get('user');
+$user = Session::getInstance()->get('user');
 $role = $user && isset($user['role']) ? $user['role'] : 'guest';
 
 $appStatus = $app->run($role);

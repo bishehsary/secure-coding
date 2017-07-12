@@ -24,6 +24,7 @@ class Chapter5Controller extends Chapter
         $this->view->set('link', [
             ['Ctype', 'http://php.net/manual/en/ref.ctype.php']
         ]);
+        $this->view->set('form', $this->url('chapter5', null, 'code=46'));
         //<code46>
         $statement = $this->pdo()->query("SELECT category_id,`name` FROM category ORDER BY `name`");
         $categories = $statement->fetchAll(\PDO::FETCH_ASSOC);

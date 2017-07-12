@@ -14,7 +14,7 @@ FW\App\Config::init([
     ],
     'database' => [
         'dbms' => 'mysql',
-        'host' => 'localhost',
+        'host' => '192.168.99.100',
         'database' => 'coding',
         'username' => 'root',
         'password' => '',
