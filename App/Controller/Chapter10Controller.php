@@ -15,7 +15,20 @@ class Chapter10Controller extends Chapter
     protected function code64()// Security in parsing of XML
     {
         $this->getCode(__FILE__, 'code64');
+        $this->view->set('link', [
+            ['XML Security', 'https://www.owasp.org/index.php/XML_Security_Cheat_Sheet']
+        ]);
+        $this->view->set('form', $this->url('chapter10', null, 'code=64'));
         //<code64>
+        $url = $this->request->post('url');
+        if ($url) {
+            $xmlString = file_get_contents($url);
+            $xml = simplexml_load_string($xmlString);
+            $this->view->set('xml', [
+                'title' => $xml->channel->title,
+                'desc' => htmlentities($xml->channel->description),
+            ]);
+        }
         //</code64>
         $this->view->set('result', $this->view->render('sample/code64'));
     }

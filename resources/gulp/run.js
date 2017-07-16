@@ -7,20 +7,22 @@ const root = path.join(__dirname, '../..');
 const delay = 1000;
 let reload = browserSync.reload;
 let timer;
+const useHttps = false;
+const browserSyncConfig = {
+    proxy: 'sc.io:8010',
+    host: 'sc.io',
+    https: useHttps,
+    port: useHttps ? 443 : 80,
+    open: true,
+    notify: false
+};
 
 gulp.task('php', function () {
     php.server({base: root, port: 8010, keepalive: true});
 });
 
 gulp.task('browser-sync', ['php'], function () {
-    browserSync({
-        proxy: 'sc.io:8010',
-        host: 'sc.io',
-        // https: true,
-        port: 80,
-        open: true,
-        notify: false
-    });
+    browserSync(browserSyncConfig);
 });
 
 gulp.task('reload', () => {

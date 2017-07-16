@@ -113,20 +113,27 @@ class Chapter5Controller extends Chapter
         ]);
         //<code47>
         $mysqli = $this->mysqli();
-        $mysqli->set_charset('gbk');
+        $mysqli->set_charset('utf8');
         $values = [
             ['value' => "1' or 1=1"],
             ['value' => '1" or 1=1'],
             ['value' => '1\x27 or 1=1'],
             ['value' => "縗' or 1=1"],
-            ['value' => "\xbf\x27 OR 1=1"],
+            ['value' => "\xbf\x27 OR 1=1/*"],
+            ['value' => "1 or 1=1"],
         ];
         foreach ($values as $index => $value) {
             $escape = $mysqli->real_escape_string($value['value']);
-            $result = $mysqli->query("SELECT * FROM actor WHERE actor_id='{$escape}'");
+            $query = "SELECT * FROM actor WHERE actor_id={$escape}";
+            $result = $mysqli->query($query);
             $values[$index]['escape'] = $escape;
-            $values[$index]['rows'] = $result->num_rows;
-            $result->close();
+            $values[$index]['query'] = $query;
+            if ($result === false) {
+                $values[$index]['rows'] = 'false';
+            } else {
+                $values[$index]['rows'] = $result->num_rows;
+                $result->close();
+            }
         }
         //</code47>
         $this->view->set('values', $values);
@@ -136,27 +143,28 @@ class Chapter5Controller extends Chapter
     protected function code48()// Implement Validator
     {
         $this->getCode(__FILE__, 'code48');
+        $this->view->set('form', $this->url('chapter5', null, 'code=48'));
         //<code48>
         if ($this->request->post('search')) {
             $nextYear = date('Y') + 1;
             $movie = $this->request->post('movie');
             $year = (int)$this->request->post('year');
-//            $validation = [];
-//            if ($movie && strlen($movie) >= 4 && strlen($movie) <= 8 && preg_match("/^\w[\w\d]+$/i", $movie)) {
-//                $this->view->set('movie', $movie);
-//            } else {
-//                $validation[] = 'movie';
-//            }
-//            if (is_int($year) && $year >= 1900 && $year < $nextYear) {
-//                $this->view->set('year', $year);
-//            } else {
-//                $validation[] = 'year';
-//            }
-            $validator = new Validator([
-                ['movie' => ['minLength' => 4, 'maxLength' => 7, 'match' => "/^\w[\w\d]+$/i"]],
-                ['year' => ['type' => Validator::TYPE_INT, 'min' => 1900, 'max' => $nextYear]]
-            ]);
-            $validation = $validator->validate($this->request->post());
+            $validation = [];
+            if ($movie && strlen($movie) >= 4 && strlen($movie) <= 8 && preg_match("/^\w[\w\d]+$/i", $movie)) {
+                $this->view->set('movie', $movie);
+            } else {
+                $validation[] = 'movie';
+            }
+            if (is_int($year) && $year >= 1900 && $year < $nextYear) {
+                $this->view->set('year', $year);
+            } else {
+                $validation[] = 'year';
+            }
+//            $validator = new Validator([
+//                ['movie' => ['minLength' => 4, 'maxLength' => 7, 'match' => "/^\w[\w\d]+$/i"]],
+//                ['year' => ['type' => Validator::TYPE_INT, 'min' => 1900, 'max' => $nextYear]]
+//            ]);
+//            $validation = $validator->validate($this->request->post());
             $validation = $validation === true ? [] : array_keys($validation);
             if (empty($validation)) {
                 $statement = $this->pdo()->prepare("SELECT title,release_year FROM `film` WHERE `title` LIKE ? AND release_year>?");

@@ -1,5 +1,37 @@
+<?php
+/** @var $this \FW\App\View */
+$form = $this->get('form');
+$xml = $this->get('xml');
+?>
 <div class="container">
     <div class="row">
-
+        <fieldset class="col-md-6">
+            <legend>Source of XML</legend>
+            <div class="list-group">
+                <div class="list-group-item">RSS</div>
+                <div class="list-group-item">XML Data</div>
+            </div>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Parse XML</legend>
+            <form action="<?php echo $form ?>" method="post">
+                <div class="form-group">
+                    <label for="url">XML Source</label>
+                    <input type="url" name="url" id="url" class="form-control" value="http://www.feedforall.com/sample.xml">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Parse</button>
+                </div>
+            </form>
+        </fieldset>
+    </div>
+    <div class="row">
+        <fieldset class="col-md-6">
+            <legend>Parsed XML Data</legend>
+            <h2><?php echo $xml['title']?></h2>
+            <p><?php echo $xml['desc']?></p>
+        </fieldset>
     </div>
 </div>

@@ -57,7 +57,7 @@ $cookiePageUrl = $this->get('cookie');
         api.get('session/ajax?ajax=1').then(content => {
             fetchBtn.removeAttribute('disabled');
             document.getElementById('header').innerHTML = `X-AUTH-TOKEN: ${localStorage.getItem('token')}`;
-            document.getElementById('ajax-session').innerHTML = content;
+            document.getElementById('ajax-session').innerHTML = JSON.stringify(content);
         });
     }, false);
     // updating username

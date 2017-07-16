@@ -1,5 +1,6 @@
 <?php
 /** @var \FW\App\View $this */
+$form = $this->get('form');
 $error = $this->get('error', []);
 $errorMessage = '';
 if (array_search('movie', $error) !== false) {
@@ -24,7 +25,7 @@ $movies = $this->get('movies', []);
     <fieldset class="col-md-6">
         <legend>Select A movie</legend>
         <?php echo $errorMessage ? "<p class='alert alert-danger'>{$errorMessage}</p>" : '' ?>
-        <form name="movieForm" action="?controller=chapter5&code=48" method="post">
+        <form name="movieForm" action="<?php echo $form ?>" method="post">
             <div class="form-group">
                 <label for="movie">Movie</label>
                 <input type="text" name="movie" id="movie" class="form-control"

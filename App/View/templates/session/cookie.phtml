@@ -16,7 +16,7 @@ $user = $this->get('user');
                 <h3>Cookie Values:</h3>
                 <pre><code id="cookie"></code></pre>
                 <h5>User value from Session:</h5>
-                <pre><code><?php echo json_encode($user) ?></code></pre>
+                <pre><code><?php echo json_encode($user, JSON_PRETTY_PRINT) ?></code></pre>
                 <br><br>
                 <form action="<?php echo $pageUrl ?>" method="post">
                     <div class="form-group">

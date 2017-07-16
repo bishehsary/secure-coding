@@ -67,7 +67,7 @@ class Chapter2Controller extends Chapter
                 $this->session->set('user', $user);
                 $this->view->set('user', $user);
                 // redirect if required by business
-                // $this->response->redirect(Util::genUrl());
+                // $this->response->redirect($this->url());
                 // return;
             } else {
                 // enumeration attack possibility
@@ -94,7 +94,7 @@ class Chapter2Controller extends Chapter
     protected function code23()// CAPTCHA Mechanism
     {
         $this->getCode(__FILE__, 'code23');
-        $this->view->set('capchaImg', Util::genUrl('chapter2') . '?code=23&capcha=1');
+        $this->view->set('capchaImg', $this->url('chapter2', null, 'code=23&capcha=1'));
         $this->view->set('form', Util::genUrl('chapter2') . '?code=23');
         //<code23>
         if ($this->request->get('capcha')) {
@@ -122,7 +122,7 @@ class Chapter2Controller extends Chapter
     protected function code24()// Mitigating brute force attacks
     {
         $this->getCode(__FILE__, 'code24');
-        $this->view->set('form', Util::genUrl('chapter2') . '?code=24');
+        $this->view->set('form', $this->url('chapter2', null, 'code=24'));
         // DDOS attack
         //<code24>
         $ip = $this->request->server('REMOTE_ADDR');
@@ -156,6 +156,7 @@ class Chapter2Controller extends Chapter
             ['openid.net', 'http://openid.net/connect/'],
             ['OAuth for GitHub', 'https://developer.github.com/v3/oauth/']
         ]);
+        $this->view->set('form', $this->url('chapter2', null, 'code=25'));
         $this->getCode(__FILE__, 'code25');
         //<code25>
         if ($this->request->post('authenticate') == 'github') {

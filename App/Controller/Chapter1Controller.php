@@ -12,7 +12,7 @@ class Chapter1Controller extends Chapter
         $this->getCode(__FILE__, 'code13');
         $this->view->set('xss', $this->request->get('xss', ''));
         //<code13>
-        // $this->response->header('X-XSS-Protection', '1; mode=block');
+        //$this->response->header('X-XSS-Protection', '1; mode=block');
         //</code13>
         $this->view->set('result', $this->view->render('sample/code13'));
     }
@@ -25,9 +25,9 @@ class Chapter1Controller extends Chapter
         ]);
         $this->getCode(__FILE__, 'code14');
         //<code14>
-        // session_set_cookie_params(3 * 3600, '/', null, false, false);
+        // session_set_cookie_params(3 * 3600, '/', null, true, false);
         setcookie('cookieName', 'cookieValue', null, null, null, false, false);
-        setcookie('secureCookieName', 'secureCookieValue', null, null, null, true, false);
+        setcookie('secureCookieName', 'secureCookieValue', null, null, null, true, true);
         //</code14>
         $this->view->set('result', $this->view->render('sample/code14'));
     }
@@ -42,7 +42,8 @@ class Chapter1Controller extends Chapter
         // only for this variable
         //<code15>
         // session_set_cookie_params(3 * 3600, '/', null, false, true);
-        // setcookie('cookieName', 'cookieNewValue', null, null, null, false, true);
+        setcookie('cookieName', 'cookieValue', null, null, null, false, false);
+        setcookie('httpOnlyCookieName', 'httpOnlyCookieValue', null, null, null, false, true);
         //</code15>
         $this->view->set('result', $this->view->render('sample/code15'));
     }
@@ -101,7 +102,6 @@ class Chapter1Controller extends Chapter
         //<code19>
         // $this->response->header('X-Content-Type-Options', 'nosniff');
         // $this->response->header('X-Frame-Options', 'SAMEORIGIN');
-        // $this->view->html('<iframe src="http://sc.io/secode"></iframe>');
         // $this->response->header('Strict-Transport-Security', 'max-age=31536000');
         // $this->response->header('Content-Security-Policy', "default-src 'self' 'unsafe-inline'");
         //</code19>

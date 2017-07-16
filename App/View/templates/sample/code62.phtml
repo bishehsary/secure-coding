@@ -2,10 +2,11 @@
 /** @var \FW\App\View $this */
 $pass = $this->get('password');
 $hash = $this->get('hashedPassword');
+$form = $this->get('form');
 ?>
 <div class="row">
     <fieldset class="col-sm-4">
-        <form action="?controller=chapter9&code=62" method="post">
+        <form action="<?php echo $form ?>" method="post">
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="text" name="password" id="password" class="form-control" value="<?php echo $pass ?: '' ?>">

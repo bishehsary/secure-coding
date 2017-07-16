@@ -26,6 +26,7 @@ class SessionController extends Controller
         if ($this->isCookieBased || (!$this->isCookieBased && $this->isAjax)) {
             $this->tokenSession = new TokenBasedSession(Config::getInstance()->security['sessionHost']);
             $storage = $this->isCookieBased ? $_COOKIE : $_SERVER;
+            // obtaining token
             $token = $storage[$this->isCookieBased ? self::TokenKeyName : self::ServerTokenName] ?? null;
             // checking session validation
             if ($token) {
@@ -57,8 +58,8 @@ class SessionController extends Controller
 
     function indexAction()
     {
-        $this->view->set('cookie', Util::genUrl('session/cookie'));
-        $this->view->set('ajax', Util::genUrl('session/ajax'));
+        $this->view->set('cookie', $this->url('session', 'cookie'));
+        $this->view->set('ajax', $this->url('session', 'ajax'));
         $this->view->html($this->view->render('session/index'));
     }
 
@@ -72,8 +73,8 @@ class SessionController extends Controller
             $username = $this->request->post('username', '');
             $this->tokenSession->set('user', ['username' => $username]);
         }
-        $this->view->set('page', Util::genUrl('session/cookie'));
-        $this->view->set('ajax', Util::genUrl('session/ajax'));
+        $this->view->set('page', $this->url('session','cookie'));
+        $this->view->set('ajax', $this->url('session','ajax'));
         $this->view->set('user', $this->tokenSession->get('user'));
         $this->view->html($this->view->render('session/cookie'));
     }
@@ -84,7 +85,7 @@ class SessionController extends Controller
             if ($this->request->get('delete', 0)) {
                 $this->regenerateSession();
             } else {
-                $username = $this->request->xhr('username', '');
+                $username = $this->request->post('username', '');
                 if ($username) {
                     $this->tokenSession->set('user', ['username' => $username]);
                 }

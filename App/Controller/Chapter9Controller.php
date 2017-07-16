@@ -72,6 +72,7 @@ class Chapter9Controller extends Chapter
     protected function code62()// Hashing
     {
         $this->getCode(__FILE__, 'code62');
+        $this->view->set('form', $this->url('chapter9', null, 'code=62'));
         // DOS attach on hashing
         //<code62>
         $salt = 'SomethingRnd0m';

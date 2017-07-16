@@ -57,9 +57,6 @@ class Chapter8Controller extends Chapter
 
     function fileAction()
     {
-//        $this->response->header('X-Content-Type-Options', 'nosniff');
-//        $file = 'App/config/config.php';
-//        $this->response->contentType('image/jpg');
         $path = pathinfo($this->request->server('REQUEST_URI'));
         if ($path['filename']) {
             $file = "{$this->uploadDirectory}/{$path['filename']}.jpg";
@@ -110,7 +107,7 @@ class Chapter8Controller extends Chapter
             $file = "{$this->uploadDirectory}/{$fileName}";
             $fileUrl = "{$this->uploadUrl}/{$fileName}";
             $type = $uplFile['type'];
-//            $type = mime_content_type($uplFile['tmp_name']);
+            $type = mime_content_type($uplFile['tmp_name']);
             if ($type == 'image/jpeg' /*&& $path['extension'] == 'jpg'*/) {
                 move_uploaded_file($uplFile['tmp_name'], $file);
                 $this->view->set('file', $fileUrl);

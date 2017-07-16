@@ -17,15 +17,16 @@ $values = $this->get('values', []);
     </fieldset>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <table class="table table-bordered">
             <tr>
                 <th>Value</th>
                 <th>Escaped</th>
+                <th>Query</th>
                 <th>Count</th>
             </tr>
             <?php foreach ($values as $index => $value) {
-                echo "<tr><td>{$value['value']}</td><td>{$value['escape']}</td><td>{$value['rows']}</td></tr>";
+                echo "<tr><td>{$value['value']}</td><td>{$value['escape']}</td><td>{$value['query']}</td><td>{$value['rows']}</td></tr>";
             } ?>
         </table>
     </div>

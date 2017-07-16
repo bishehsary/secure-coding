@@ -77,7 +77,7 @@ class Chapter4Controller extends Chapter
         $this->view->set('cookie', [
             ['string', '$name', true, null],
             ['string', '$value', false, '""'],
-            ['int', '$expire', false, '""'],
+            ['int', '$expire', false, '0'],
             ['string', '$path', false, '""'],
             ['string', '$domain', false, '""'],
             ['bool', '$secure', false, 'false'],

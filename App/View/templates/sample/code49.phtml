@@ -2,7 +2,7 @@
 /** @var \FW\App\View $this */
 $xss = htmlentities($this->get('xss'));
 $escapes = $this->get('escape');
-var_dump($escapes);
+
 ?>
 <div class="row">
     <fieldset class="col-md-6">
@@ -10,7 +10,7 @@ var_dump($escapes);
         <div class="list-group">
             <div class="list-group-item">Why should we escape output?</div>
             <div class="list-group-item">Which characters should we escape?</div>
-            <div class="list-group-item">Errors/Exceptions</div>
+            <div class="list-group-item">Check output of Errors/Exceptions</div>
             <div class="list-group-item">PHP filtering functions:
                 <ul>
                     <li><code>htmlspecialchars</code>: Convert special characters to HTML entities</li>
@@ -20,6 +20,7 @@ var_dump($escapes);
         </div>
     </fieldset>
 </div>
+<?php var_dump($escapes); ?>
 <div class="row">
     <div class="col-md-6">
         <pre><code><?php echo $xss ?></code></pre>

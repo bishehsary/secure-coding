@@ -32,6 +32,6 @@ FW\App\Config::init([
         'client' => 'ec5b78bac564363dd6aa',
         'secret' => '318ea2381a55b3a4c77a16f13104767e934b736e',
         'state' => 'o9y3oVfrfg9jbJ3g998br69zUyHiz1o7',
-        'redirect' => 'http://sc.io/?controller=gitHub'
+        'redirect' => 'http://sc.io/gitHub'
     ]
 ]);

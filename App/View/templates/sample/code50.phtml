@@ -1,9 +1,27 @@
 <div class="row">
-    <fieldset class="col-md-6">
+    <fieldset class="col-md-8">
         <legend>The Infamous XSS</legend>
         <div class="list-group">
-            <div class="list-group-item">Where does it come from?</div>
-            <div class="list-group-item"></div>
+            <div class="list-group-item">Where does it sit?
+                <ul>
+                    <li>
+                        <img src=null onerror="javascript:alert('onerror callback')" style="position: absolute;top:-10000px;"/>
+                    </li>
+                    <li>
+                        <a onmouseover="javascript:alert('onmouseover')">Over here</a>
+                    </li>
+                    <li>
+                        <img src=""><script>alert("malformed tag")</script>">
+                    </li>
+                    <li>
+                        <img src=null onerror="&#106;&#97;&#118;&#97;&#115;&#99;&#114;&#105;&#112;&#116;&#58;&#97;&#108;&#101;&#114;&#116;&#40;&#39;&#104;&#116;&#109;&#108;&#32;&#99;&#104;&#97;&#114;&#115;&#101;&#116;&#39;&#41;">
+                    </li>
+                    <li>
+                        <img src=null onerror="javascript:String.fromCharCode(97, 108, 101, 114, 116, 40, 39, 99, 104, 97, 114, 32, 99, 111, 100, 101, 39, 41)"/>
+                    </li>
+                </ul>
+            </div>
+            <div class="list-group-item">Also be cautious about case sensitive filters</div>
         </div>
     </fieldset>
 </div>

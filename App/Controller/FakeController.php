@@ -19,7 +19,7 @@ class FakeController extends Chapter
 
     function frameAction()
     {
-        $this->view->html('<iframe src="http://sc.io/secode"></iframe>');
+        $this->view->html('<iframe src="http://sc.io"></iframe>');
     }
 
     function redirectAction()
