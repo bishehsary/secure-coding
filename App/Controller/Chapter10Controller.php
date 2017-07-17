@@ -43,6 +43,9 @@ class Chapter10Controller extends Chapter
 
     protected function code66()// AJAX technologies overview
     {
+        $this->view->set('link', [
+            ['XMLHttpRequest', 'https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest']
+        ]);
         $this->getCode(__FILE__, 'code66');
         //<code66>
         //</code66>
@@ -51,6 +54,9 @@ class Chapter10Controller extends Chapter
 
     protected function code67()// AJAX attack trends and common attacks
     {
+        $this->view->set('link', [
+            ['Ajax Vulnerability', 'https://www.owasp.org/index.php/Testing_for_AJAX_Vulnerabilities_(OWASP-AJ-001)']
+        ]);
         $this->getCode(__FILE__, 'code67');
         //<code67>
         //</code67>

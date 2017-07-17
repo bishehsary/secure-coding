@@ -1,3 +1,69 @@
-<div class="container">
-    <h1>code72</h1>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Execution modes</legend>
+        <div class="list-group">
+            <div class="list-group-item">Development</div>
+            <div class="list-group-item">Test</div>
+            <div class="list-group-item">Production</div>
+        </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Programming view</legend>
+        <div class="list-group">
+            <div class="list-group-item">Distributed vs. Centralized <span class="badge">pros/cons</span></div>
+        </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Error handling hierarchy</legend>
+        <div class="list-group">
+            <div class="list-group-item">Application Level Error Handling
+                <pre><code>
+if ($this->config->mode == App::MODE_PRODUCTION) {
+    ini_set('display_errors', 'Off');
+    error_reporting(E_ALL);
+    ini_set('error_log', '/path/to/logfile');
+}
+                    </code></pre>
+            </div>
+            <div class="list-group-item">Page Level Error Event Handling
+                <pre><code>
+set_exception_handler(function ($e) {
+    if ($this->scream) {
+        $this->errorPage($e);
+        exit();
+    }
+});
+set_error_handler(function ($code, $message, $file, $line) {
+    if ($this->scream) {
+        $this->errorPage(join('&lt;br/>', [
+            "Code: {$code}",
+            "Message: {$message}",
+            "File: {$file}",
+            "Line: {$line}"]));
+        exit();
+    }
+});
+                    </code></pre>
+            </div>
+            <div class="list-group-item">Code Level Error Handling
+                <pre><code>
+try {
+    $this->action = $action;
+    $method = "{$action}Action";
+    if (method_exists($this, $method)) {
+        $this->$method();
+    } else {
+        $this->notFoundPage("Error at Controller::process({$action}) Method [$method] does not exist");
+    }
+} catch (\Exception $e) {
+    $this->errorPage($e);
+}
+                    </code></pre>
+            </div>
+        </div>
+    </fieldset>
 </div>

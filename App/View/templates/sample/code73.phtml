@@ -1,9 +1,47 @@
+<?php
+/** @var $this \FW\App\View */
+$form = $this->get('form');
+?>
 <div class="row">
     <fieldset class="col-md-6">
+        <legend>Design decision</legend>
         <div class="list-group">
             <div class="list-group-item">What should we keep track of?</div>
             <div class="list-group-item">All actions vs. Critical actions</div>
             <div class="list-group-item">Keep track of modified fields</div>
         </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Implementation</legend>
+        <div class="list-group">
+            <div class="list-group-item">Event Types
+                <ul>
+                    <li>Error</li>
+                    <li>Warning</li>
+                    <li>Login</li>
+                    <li>Update</li>
+                    <li>Delete</li>
+                    <li>...</li>
+                </ul>
+            </div>
+            <div class="list-group-item">All actions vs. Critical actions</div>
+            <div class="list-group-item">Keep track of modified fields</div>
+        </div>
+    </fieldset>
+</div>
+<div class="row">
+    <fieldset class="col-md-6">
+        <legend>Sample form</legend>
+        <form action="<?php echo $form ?>" method="post">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <button type="submit" name="log" class="btn btn-primary">Update</button>
+            </div>
+        </form>
     </fieldset>
 </div>

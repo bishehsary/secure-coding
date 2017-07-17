@@ -27,7 +27,7 @@ class Chapter1Controller extends Chapter
         //<code14>
         // session_set_cookie_params(3 * 3600, '/', null, true, false);
         setcookie('cookieName', 'cookieValue', null, null, null, false, false);
-        setcookie('secureCookieName', 'secureCookieValue', null, null, null, true, true);
+        setcookie('secureCookieName', 'secureCookieValue', null, null, null, true, false);
         //</code14>
         $this->view->set('result', $this->view->render('sample/code14'));
     }

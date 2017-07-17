@@ -75,6 +75,9 @@ class Chapter11Controller extends Chapter
 
     protected function code72()// Error handling strategies
     {
+        $this->view->set('link',[
+            ['ASP.NET Error Handling','https://docs.microsoft.com/en-us/aspnet/web-forms/overview/getting-started/getting-started-with-aspnet-45-web-forms/aspnet-error-handling']
+        ]);
         $this->getCode(__FILE__, 'code72');
         //<code72>
         //</code72>
