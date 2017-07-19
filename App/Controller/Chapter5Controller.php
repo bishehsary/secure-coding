@@ -161,8 +161,8 @@ class Chapter5Controller extends Chapter
                 $validation[] = 'year';
             }
 //            $validator = new Validator([
-//                ['movie' => ['minLength' => 4, 'maxLength' => 7, 'match' => "/^\w[\w\d]+$/i"]],
-//                ['year' => ['type' => Validator::TYPE_INT, 'min' => 1900, 'max' => $nextYear]]
+//                'movie' => ['minLength' => 4, 'maxLength' => 7, 'match' => "/^\w[\w\d]+$/i"],
+//                'year' => ['type' => Validator::TYPE_INT, 'min' => 1900, 'max' => $nextYear]
 //            ]);
 //            $validation = $validator->validate($this->request->post());
             $validation = $validation === true ? [] : array_keys($validation);

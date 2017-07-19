@@ -39,15 +39,13 @@ class Validator
     public function validate($storage)
     {
         $errors = [];
-        foreach ($this->rules as $ruleSet) {
-            foreach ($ruleSet as $fieldName => $rules) {
-                foreach ($rules as $ruleName => $ruleValue) {
-                    if (!$this->isValid($ruleName, $ruleValue, $storage[$fieldName])) {
-                        if (!isset($errors[$fieldName])) {
-                            $errors[$fieldName] = [];
-                        }
-                        $errors[$fieldName][] = $ruleName;
+        foreach ($this->rules as $fieldName => $rules) {
+            foreach ($rules as $ruleName => $ruleValue) {
+                if (!$this->isValid($ruleName, $ruleValue, $storage[$fieldName])) {
+                    if (!isset($errors[$fieldName])) {
+                        $errors[$fieldName] = [];
                     }
+                    $errors[$fieldName][] = $ruleName;
                 }
             }
         }
