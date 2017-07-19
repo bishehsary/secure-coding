@@ -37,7 +37,7 @@ class TokenBasedSession
                 return self::Err_TOKEN;
             }
             // key does not exist || last visit time is not set
-            if (!$this->data || ($this->data && !isset($this->data['visit']))) {
+            if (!isset($this->data['visit'])) {
                 return self::Err_EXPIRY;
             }
             // session timeout

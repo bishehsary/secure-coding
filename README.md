@@ -73,3 +73,13 @@
 - Auditing & Logging (DEV541.3, DEV544.3)
 	- Event message structure
 	- Logging best practices
+
+# Setting up
+- Install composer
+- Install nodeJs
+- Install PHP
+- Open CMD and go to root directory of cloned project
+- Type `composer install`  and press enter
+- Type `npm install` and press enter
+- Type `npm run serve` and press enter
+- Wait for browser to load your project
