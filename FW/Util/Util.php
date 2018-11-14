@@ -12,7 +12,7 @@ class Util
         if ($controller) $url .= "/{$controller}";
         if ($action) $url .= "/{$action}";
         if ($query) $url .= "?{$query}";
-        return $url;
+        return "http://{$url}";
     }
 
     public static function removeTag($code, $tag)

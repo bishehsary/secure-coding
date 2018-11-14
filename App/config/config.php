@@ -14,7 +14,7 @@ FW\App\Config::init([
     ],
     'database' => [
         'dbms' => 'mysql',
-        'host' => '192.168.99.100',
+        'host' => '127.0.0.1',
         'database' => 'coding',
         'username' => 'root',
         'password' => '',
@@ -25,12 +25,12 @@ FW\App\Config::init([
     ],
     'security' => [
         'sessionKey' => 'X-AUTH-TOKEN',
-        'sessionHost' => '192.168.99.100',
+        'sessionHost' => 'localhost',
         'sessionTimeout' => 3600
     ],
     'gitHub' => [
         'client' => 'ec5b78bac564363dd6aa',
-        'secret' => '318ea2381a55b3a4c77a16f13104767e934b736e',
+        'secret' => '85168874cf3f097568f2080a53877c01cdfab2b0',
         'state' => 'o9y3oVfrfg9jbJ3g998br69zUyHiz1o7',
         'redirect' => 'http://sc.io/gitHub'
     ]

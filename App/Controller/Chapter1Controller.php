@@ -12,7 +12,7 @@ class Chapter1Controller extends Chapter
         $this->getCode(__FILE__, 'code13');
         $this->view->set('xss', $this->request->get('xss', ''));
         //<code13>
-        //$this->response->header('X-XSS-Protection', '1; mode=block');
+        $this->response->header('X-XSS-Protection', '1; mode=block');
         //</code13>
         $this->view->set('result', $this->view->render('sample/code13'));
     }

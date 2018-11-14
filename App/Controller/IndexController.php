@@ -55,7 +55,8 @@ class IndexController extends Controller
 
     function iniAction()
     {
-        $iniFile = "C:/php7.1.7-vc14-nts/x64/php.ini";
+        // $iniFile = "C:/php7.1.7-vc14-nts/x64/php.ini";
+        $iniFile = "/usr/local/etc/php/7.2/php.ini";
         $this->view->set('ini', htmlentities(file_get_contents($iniFile)));
         $this->renderMater($this->view->render('index/ini'), 6);
     }

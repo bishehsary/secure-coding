@@ -21,7 +21,7 @@ class GitHubController extends Controller
             $res = $client->request('POST', 'https://github.com/login/oauth/access_token', [
                 'body' => "client_id={$gitHub['client']}&client_secret={$gitHub['secret']}&code={$code}&redirect_uri={$gitHub['redirect']}&state=${gitHub['state']}",
                 'headers' => ['Accept' => 'application/json']
-            ]);
+                ]);
             $data = json_decode($res->getBody()->getContents(), true);
             $this->session->set('gitHubToken', $data['access_token']);
             $this->response->redirect($this->url('chapter2', null, 'code=25'));

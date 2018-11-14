@@ -2,13 +2,14 @@
 /** @var \FW\App\View $this */
 $composer = $this->get('composer');
 $json = $this->get('json');
+$phpVersion = phpversion();
 ?>
 <div class="col-md-7">
     <div class="list-group">
-        <div class="list-group-item">As you've been told our server side language is <code>PHP 7.1.7 (X64, VC14, NTS)</code></div>
+        <div class="list-group-item">As you've been told our server side language is <code>PHP <?php echo $phpVersion ?></code></div>
         <div class="list-group-item">The framework is build specifically for this course</div>
         <div class="list-group-item">
-            The DBMS we are using is <code>MySQL@5.7.18</code> [<code>docker</code>]
+            The DBMS we are using is <code>MySQL@5.7.22</code> [<code>docker</code>]
         </div>
         <div class="list-group-item">
             For Session Database we will be using <code>Redis@3.2.1</code> [<code>docker</code>]

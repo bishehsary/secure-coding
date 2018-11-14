@@ -4,6 +4,21 @@ $ini = $this->get('ini');
 ?>
 <div class="container">
     <br>
+
+    <pre><code>
+[xdebug]
+
+xdebug.default_enable=1
+
+xdebug.remote_enable=1
+xdebug.remote_handler=dbgp
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+xdebug.remote_autostart=1
+ 
+zend_extension="/usr/local/Cellar/php/7.2.7/pecl/20170718/xdebug.so"
+    </code></pre>
+    <br>
     <div class="btn-group">
         <button class="btn btn-default" id="comment">Remove Commented Lines</button>
     </div>

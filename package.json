@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Secure Coding",
   "scripts": {
-    "dev": "gulp",
+    "start": "gulp",
     "build": "gulp deploy",
     "serve": "gulp --gulpfile resources/gulp/run.js",
     "test": "php vendor/phpunit/phpunit/phpunit --configuration phpunit.xml Test"
